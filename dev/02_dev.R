@@ -24,7 +24,7 @@ golem::add_module(name = "mapa_principal", with_test = TRUE) # Name of the modul
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
-golem::add_fct("helpers", with_test = TRUE)
+golem::add_fct("procesamiento", with_test = TRUE)
 golem::add_utils("helpers", with_test = TRUE)
 
 ## External resources
