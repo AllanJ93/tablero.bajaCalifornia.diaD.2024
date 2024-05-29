@@ -39,6 +39,9 @@ golem::add_sass_file("custom")
 usethis::use_data_raw(name = "cartografia", open = FALSE)
 usethis::use_data_raw(name = "muestra", open = FALSE)
 usethis::use_data_raw(name = "base_cuestionario_apertura", open = FALSE)
+usethis::use_data_raw(name = "base_cuestionario_encuesta_salida", open = FALSE)
+usethis::use_data_raw(name = "base_cuestionario_cierre", open = FALSE)
+usethis::use_data_raw(name = "base_cuestionario_conteo_rapido", open = FALSE)
 
 ## Tests ----
 ## Add one line by test you want to create
