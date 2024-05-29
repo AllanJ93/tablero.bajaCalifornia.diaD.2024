@@ -2,16 +2,14 @@
 #'
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
-#' @import shiny
+#' @import shiny shinydashboard bslib
 #' @noRd
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    fluidPage(
-      h1("tablero.bajaCalifornia.diaD.2024")
-    )
+    mod_mapa_principal_ui("mapa_principal_1")
   )
 }
 

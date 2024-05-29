@@ -1,0 +1,19 @@
+---
+title: "tablero_bajaCalifornia_diaD_2024"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tablero_bajaCalifornia_diaD_2024}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(tablero.bajaCalifornia.diaD.2024)
+```

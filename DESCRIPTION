@@ -5,20 +5,35 @@ Authors@R:
     person("firstname", "lastname", , "your@email.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
+URL: https://github.com/AllanJ93/tablero.bajaCalifornia.diaD.2024
+BugReports: 
+    https://github.com/AllanJ93/tablero.bajaCalifornia.diaD.2024/issues
+Depends: 
+    R (>= 2.10)
 Imports: 
+    bsicons (>= 0.1.2),
+    bslib (>= 0.7.0),
     config (>= 0.3.2),
+    dplyr (>= 1.1.4),
     golem (>= 0.4.1),
-    shiny (>= 1.8.1.1)
+    highcharter (>= 0.9.4),
+    leaflet (>= 2.2.2),
+    sf,
+    shiny (>= 1.8.1.1),
+    shinycssloaders (>= 1.0.0),
+    shinydashboard (>= 0.7.2),
+    shinyjs (>= 2.1.0),
+    shinyWidgets (>= 0.8.0),
+    tidyr (>= 1.3.1)
 Suggests: 
     knitr,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 RoxygenNote: 7.2.3
-VignetteBuilder: knitr
-URL: https://github.com/AllanJ93/tablero.bajaCalifornia.diaD.2024
-BugReports: https://github.com/AllanJ93/tablero.bajaCalifornia.diaD.2024/issues
