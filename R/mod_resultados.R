@@ -18,7 +18,7 @@ mod_resultados_ui <- function(id){
       shinyWidgets::progressBar(
         title = "Presencia en casillas de la muestra",
         id = "enc_hechas",
-        value = bd_apertura |>
+        value = bd_encuesta_salida |>
           filter(status %in% c("Reportada")) |>
           distinct(id) |> nrow(),
         display_pct = T,
@@ -32,12 +32,12 @@ mod_resultados_ui <- function(id){
         display_pct = T,
         striped = T,
         total = round((muestra_shp |>
-                   as_tibble() |>
-          left_join(bd_encuesta_salida |>
-                      distinct(id, status), by = "id") |>
-          filter(status == "Reportada") |>
-          summarise(sum(lstd_nm)) |>
-            pull())/5),
+                         as_tibble() |>
+                         left_join(bd_encuesta_salida |>
+                                     distinct(id, status), by = "id") |>
+                         filter(status == "Reportada") |>
+                         summarise(sum(lstd_nm)) |>
+                         pull())/5),
         status = "success"),
       bslib::layout_columns(
         shinycssloaders::withSpinner(highchartOutput(ns("tendencia_resultados"))),
@@ -78,16 +78,11 @@ mod_resultados_server <- function(id){
         colores <- c("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f")
 
         bd_resultados <-
-          tibble(respuesta = c("Julieta Ramírez Padilla y Armando Ayala por MORENA",
-                               "No sabe / No contesta",
-                               "Ninguno",
-                               "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde",
-                               "Gustavo Sánchez Vázquez y Guadalupe Gutiérrez Fregoso por PAN-PRI-PRD",
-                               "Jaime Bonilla y Janeth Tapia por el PT",
-                               "David Saúl Guakil y Argelia Núñez por Movimiento Ciudadano",
-                               "Otro candidato no registrato"),
-                 media = c(0.46, 0.11, 0.12, 0.1, 0.09, 0.08, 0.05, 0.03)) |>
-          mutate(media = media*100)
+          bd_encuesta_salida |>
+          count(voto_candidato_sen) |>
+          mutate(pct = round((n/sum(n))*100)) |>
+          rename(respuesta = voto_candidato_sen,
+                 media = pct)
 
         g <-
           highchart() |>
@@ -98,13 +93,14 @@ mod_resultados_server <- function(id){
                    tickInterval = 10,
                    labels = list(format = "{value}%"),
                    style = list(fontSize = "18px")) |>
-          hc_add_series(name = "PCT",
+          hc_add_series(name = "Porcentaje de votos estimados",
                         data = bd_resultados$media,
                         type = "bar",
                         # color = colores,
                         zIndex = 1,
                         stacking = "normal") |>
-          hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}%", style = list(fontSize = "24px"))), align = "right") |>
+          hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}%", style = list(fontSize = "18px"))),
+                         align = "right") |>
           hc_legend(itemStyle = list(fontSize = "24px", reversed = TRUE))
 
         return(g)
