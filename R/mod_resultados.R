@@ -31,13 +31,14 @@ mod_resultados_ui <- function(id){
         value = nrow(bd_encuesta_salida),
         display_pct = T,
         striped = T,
-        total = round((muestra_shp |>
-                         as_tibble() |>
-                         left_join(bd_encuesta_salida |>
-                                     distinct(id, status), by = "id") |>
-                         filter(status == "Reportada") |>
-                         summarise(sum(lstd_nm)) |>
-                         pull())/5),
+        # total = round((muestra_shp |>
+        #                  as_tibble() |>
+        #                  left_join(bd_encuesta_salida |>
+        #                              distinct(id, status), by = "id") |>
+        #                  filter(status == "Reportada") |>
+        #                  summarise(sum(lstd_nm)) |>
+        #                  pull())/5),
+        total = 10000,
         status = "success"),
       bslib::layout_columns(
         shinycssloaders::withSpinner(highchartOutput(ns("tendencia_resultados"))),
@@ -47,12 +48,7 @@ mod_resultados_ui <- function(id){
     bslib::card(
       full_screen = F,
       bslib::layout_columns(
-        bslib::value_box(
-          title = "Casillas óptimas",
-          value = textOutput(outputId = ns("faltantes_totales")),
-          bsicons::bs_icon(name = "clock"),
-          showcase_layout = "top right",
-          theme = value_box_theme(bg = "green")),
+        shinycssloaders::withSpinner(highchartOutput(ns("llegada_info"))),
         bslib::value_box(
           title = "Casillas no óptimas",
           value = textOutput(outputId = ns("excedentes_totales")),
@@ -79,9 +75,9 @@ mod_resultados_server <- function(id){
 
         bd_resultados <-
           bd_encuesta_salida |>
-          count(voto_candidato_sen) |>
+          count(voto_sen_candidato) |>
           mutate(pct = round((n/sum(n))*100)) |>
-          rename(respuesta = voto_candidato_sen,
+          rename(respuesta = voto_sen_candidato,
                  media = pct)
 
         g <-
@@ -111,14 +107,24 @@ mod_resultados_server <- function(id){
       renderHighchart({
 
         bd_tendencia <-
-          tibble(fecha = seq.Date(from = lubridate::today(),
-                                  to = lubridate::today() + 3,
-                                  by = "day"),
-                 resultado = 100*(0.5))
+          bd_encuesta_salida |>
+          count(hora = lubridate::floor_date(Date, "hours"), voto_sen_candidato) |>
+          group_by(hora) |>
+          tidyr::complete(voto_sen_candidato = unique(bd_encuesta_salida$voto_sen_candidato),
+                          fill = list(n = 0)) |>
+          ungroup() |>
+          mutate(tot = sum(n), .by = c(hora)) |>
+          mutate(n_acum = cumsum(n),
+                 tot_acum = cumsum(tot), .by = c(voto_sen_candidato),
+                 movil = n_acum/tot_acum) |>
+          filter(grepl(pattern = "Hank", x = voto_sen_candidato)) |>
+          mutate(movil = round(movil*100)) |>
+          rename(fecha = hora,
+                 resultado = movil)
 
         g <-
           highchart() |>
-          hc_xAxis(categories = bd_tendencia$fecha,
+          hc_xAxis(categories = format(bd_tendencia$fecha, "%I %p"),
                    labels = list(style = list(fontSize = "18px"))) |>
           hc_yAxis(min = 0,
                    max = 100,
@@ -127,6 +133,27 @@ mod_resultados_server <- function(id){
                    style = list(fontSize = "18px")) |>
           hc_add_series(name = "Intención de voto", data = bd_tendencia$resultado, type = "line", color = "green") |>
           hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}%", style = list(fontSize = "24px"))), align = "right")
+
+        return(g)
+
+      })
+
+    output$llegada_info <-
+      renderHighchart({
+
+        bd_informacion <-
+          bd_encuesta_salida |>
+          count(hora = lubridate::floor_date(Date, "hours")) |>
+          mutate(acum = cumsum(n))
+
+        g <-
+          highchart() |>
+          hc_xAxis(categories = format(bd_informacion$hora, "%I %p"),
+                   labels = list(style = list(fontSize = "18px"))) |>
+          hc_yAxis(labels = list(style = list(fontSize = "18px"))) |>
+          hc_add_series(name = "Entrevistas",
+                        data = bd_informacion$acum, type = "line",
+                        color = "red", zIndex = 1)
 
         return(g)
 
@@ -147,8 +174,6 @@ mod_resultados_server <- function(id){
       return(res)
 
     })
-
-
 
   })
 }

@@ -13,36 +13,61 @@
 
 # Base a partir de la muestra
 
-casillas_simuladas <-
-  muestra_shp |>
-  as_tibble() |>
-  select(id) |>
-  sample_n(size = n()*0.87) |>
-  pull()
+# casillas_simuladas <-
+#   muestra_shp |>
+#   as_tibble() |>
+#   select(id) |>
+#   sample_n(size = n()*0.87) |>
+#   pull()
+#
+# cuotas_simulacion <-
+#   muestra_shp |>
+#   as_tibble() |>
+#   filter(id %in% casillas_simuladas) |>
+#   mutate(muestra = round((lstd_nm/5)*0.74)) |>
+#   select(id, muestra)
+#
+# bd_simulada_encuesta_salida <-
+#   purrr::map2_df(.x = cuotas_simulacion$id,
+#                  .y = round((cuotas_simulacion$muestra)*0.2),
+#                  .f = ~ tibble(id = rep(.x, .y),
+#                                voto_candidato_sen = sample(x = c("Julieta Ramírez Padilla y Armando Ayala por MORENA",
+#                                                                  "No sabe / No contesta",
+#                                                                  "Ninguno",
+#                                                                  "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde",
+#                                                                  "Gustavo Sánchez Vázquez y Guadalupe Gutiérrez Fregoso por PAN-PRI-PRD",
+#                                                                  "Jaime Bonilla y Janeth Tapia por el PT",
+#                                                                  "David Saúl Guakil y Argelia Núñez por Movimiento Ciudadano",
+#                                                                  "Otro candidato no registrato"),
+#                                                            size = .y,
+#                                                            replace = T))) |>
+#   mutate(status = "Reportada")
+#
+# bd_encuesta_salida <- bd_simulada_encuesta_salida
 
-cuotas_simulacion <-
-  muestra_shp |>
-  as_tibble() |>
-  filter(id %in% casillas_simuladas) |>
-  mutate(muestra = round((lstd_nm/5)*0.74)) |>
-  select(id, muestra)
+# Base simulada con diseno muestral
+
+bd_muestra <-
+  readr::read_csv(file = "./data-raw/muestra_weigth.csv")
+
+bd_datos_recibiods <-
+  readr::read_csv(file = "./data-raw/sim_enc_sal_1.csv")
+
+# Genera una secuencia de tiempos espaciados cada 10 minutos
+fecha <- as.Date("2023-02-02")
+inicio <- lubridate::ymd_hms(paste(fecha, "08:0:00"))
+fin <- lubridate::ymd_hms(paste(fecha, "19:00:00"))
+secuencia_tiempos <- seq(from = inicio, to = fin, by = "10 mins")
 
 bd_simulada_encuesta_salida <-
-  purrr::map2_df(.x = cuotas_simulacion$id,
-                 .y = round((cuotas_simulacion$muestra)*0.2),
-                 .f = ~ tibble(id = rep(.x, .y),
-                               voto_candidato_sen = sample(x = c("Julieta Ramírez Padilla y Armando Ayala por MORENA",
-                                                                 "No sabe / No contesta",
-                                                                 "Ninguno",
-                                                                 "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde",
-                                                                 "Gustavo Sánchez Vázquez y Guadalupe Gutiérrez Fregoso por PAN-PRI-PRD",
-                                                                 "Jaime Bonilla y Janeth Tapia por el PT",
-                                                                 "David Saúl Guakil y Argelia Núñez por Movimiento Ciudadano",
-                                                                 "Otro candidato no registrato"),
-                                                           size = .y,
-                                                           replace = T))) |>
-  mutate(status = "Reportada")
+  union_datos_x_muestra(datos_recibidos = bd_datos_recibiods,
+                        muestra_ori = bd_muestra) |>
+  mutate(status = "Reportada") |>
+  rename(geometria = geometry) |>
+  mutate(Date = sample(x = secuencia_tiempos, size = n(), replace = T))
+
 
 bd_encuesta_salida <- bd_simulada_encuesta_salida
 
 usethis::use_data(bd_encuesta_salida, overwrite = TRUE)
+
