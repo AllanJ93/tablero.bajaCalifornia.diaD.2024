@@ -5,72 +5,38 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @noRd
-#' @import dplyr leaflet highcharter sf
+#' @import dplyr leaflet highcharter sf gt
 #' @importFrom shiny NS tagList
 
 mod_mapa_principal_ui <- function(id){
   ns <- NS(id)
-  bslib::page_navbar(
-    shinyjs::useShinyjs(),
-    title = "Elecciones 2024 - Baja California",
-    bslib::nav_spacer(),
-    bslib::nav_panel(
-      title = "Mapa",
-      bslib::card(
-        full_screen = T,
-        card_header("Mapa principal"),
-        layout_sidebar(
-          sidebar = sidebar(
-            title = "Menú",
-            open = "open",
-            id = "control_mapa",
-            # h6("Equipo"),
-            selectInput(inputId = "equipo_input",
-                        label = "Equipo",
-                        choices = c("Todos",
-                                    sort(unique(bd_equipos$equipo)))
-            ),
+  bslib::nav_panel(
+    title = "Mapa",
+    bslib::card(
+      full_screen = T,
+      card_header("Mapa principal"),
+      layout_sidebar(
+        sidebar = sidebar(
+          title = "Menú",
+          open = "open",
+          id = "control_mapa",
+          width = "400px",
+          selectInput(inputId = ns("equipo_input"),
+                      label = "Equipo",
+                      choices = c("Todos",
+                                  sort(unique(bd_equipos$equipo)))
           ),
-          leafletOutput(ns("mapa_principal"))
-        )
-      ),
-      icon = icon("map")
+          gt_output(ns("faltantes"))
+        ),
+        shinyWidgets::prettyRadioButtons(inline = T,
+                                         inputId = ns("cuestionario_input"),
+                                         label = "Cuestionario",
+                                         choices = c("Apertura", "Encuesta de salida", "Cierre", "Conteo rápido")
+        ),
+        leafletOutput(ns("mapa_principal"))
+      )
     ),
-    bslib::nav_panel(
-      title = "Resultados",
-      bslib::card(
-        full_screen = F,
-        card_header("Resultados de la encuesta de salida"),
-        max_height = "600px",
-        shinyWidgets::progressBar(
-          title = "Presencia en casillas de la muestra",
-          id = "enc_hechas",
-          value = bd_campo_simulada |>
-            filter(status %in% c("Abierta")) |>
-            distinct(id) |> nrow(),
-          display_pct = T,
-          striped = T,
-          total = 125,
-          status = "success"),
-        shinycssloaders::withSpinner(highchartOutput(ns("resultados_voto_candidato"))),
-      ),
-      bslib::card(
-        full_screen = F,
-        card_header("Segunda tarjeta"),
-        bslib::value_box(
-          title = "Casillas óptimas",
-          value = textOutput(outputId = "faltantes_totales"),
-          bsicons::bs_icon(name = "clock"),
-          showcase_layout = "top right",
-          theme = value_box_theme(bg = "green")),
-        bslib::value_box(
-          title = "Casillas no óptimas",
-          value = textOutput(outputId = "excedentes_totales"),
-          bsicons::bs_icon(name = "exclamation-triangle"),
-          showcase_layout = "top right",
-          theme = value_box_theme(bg = "orange"))),
-      icon = icon("line-chart")
-    )
+    icon = icon("map")
   )
 }
 
@@ -81,6 +47,56 @@ mod_mapa_principal_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
+    shp_casillas_react <-
+      reactive({
+        input$cuestionario_input
+
+        muestra_shp %>%
+          {
+            if(input$cuestionario_input == "Apertura"){
+              left_join(., bd_apertura)
+            }
+            else if(input$cuestionario_input == "Cierre") {
+              left_join(., bd_cierre)
+            }
+            else if(input$cuestionario_input == "Encuesta de salida") {
+              left_join(., bd_encuesta_salida)
+            }
+            else if(input$cuestionario_input == "Conteo rápido") {
+              left_join(., bd_conteo_rapido)
+            }
+          } %>%
+          mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
+                 municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
+          left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
+
+      })
+
+    casillas_abiertas <-
+      reactive({
+      input$equipo_input
+
+      if(input$equipo_input == "Todos") {
+        shp_casillas_react() |>
+          as_tibble() |>
+          filter(status != "Reportada") |>
+          count(equipo, status) |>
+          tidyr::pivot_wider(names_from = status, values_from = n) |>
+          arrange(desc(`Sin reportar`)) |>
+          rename(Equipo = equipo,
+                 'Casillas sin reportar' = 'Sin reportar')
+      }
+      else {
+        shp_casillas_react() |>
+          as_tibble() |>
+          filter(equipo == input$equipo_input) |>
+          filter(status == "Sin reportar") |>
+          select(Casilla = id,
+                 Status = status,
+                 Municipio = municipio)
+      }
+    })
+
     output$mapa_principal <-
       leaflet::renderLeaflet({
 
@@ -88,22 +104,9 @@ mod_mapa_principal_server <- function(id){
           leaflet::colorFactor(palette = topo.colors(n_distinct(bd_equipos$equipo)),
                                domain = unique(bd_equipos$equipo))
 
-        # pal_estatus_casillas <-
-        #   leaflet::colorFactor(palette = topo.colors(n_distinct(bd_campo_simulada$status)),
-        #                        domain = unique(bd_campo_simulada$status))
-
-        shp_casillas <-
-          muestra_shp |>
-          left_join(bd_campo_simulada) |>
-          mutate(status = tidyr::replace_na(replace = "Sin reportar", status)) |>
-          group_by(status) |>
-          mutate(totales_status = paste(status, n())) |>
-          mutate(municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
-          left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
-
-        pal_estatus_casillas <-
-          leaflet::colorFactor(palette = c("green", "red", "orange", "gray70"),
-                               domain = unique(shp_casillas$totales_status))
+        pal_status_casillas <-
+          leaflet::colorFactor(palette = c("green", "gray70"),
+                               domain = unique(shp_casillas_react()$status))
 
         mun_shp |>
           left_join(bd_equipos, by = "NOMBRE") |>
@@ -120,66 +123,37 @@ mod_mapa_principal_server <- function(id){
                     values = ~equipo,
                     position = "topright") |>
           addCircleMarkers(
-            data = shp_casillas,
+            data = shp_casillas_react(),
             stroke = F,
-            color = ~pal_estatus_casillas(totales_status),
+            color = ~pal_status_casillas(status),
             fillOpacity = 1,
             group = "Status de casillas",
-            label = paste("Casilla: ", shp_casillas$id),
-            popup = paste(paste0("Municipio: ", gsub(pattern = "[0-9].", replacement = "", x = shp_casillas$municip)),
-                          paste("Sección: ", shp_casillas$seccion),
-                          paste("Tipo casilla: ", shp_casillas$tp_csll),
-                          paste("Status: ", shp_casillas$status),
-                          paste("Equipo: ", shp_casillas$equipo),
+            label = paste("Casilla: ", shp_casillas_react()$id),
+            popup = paste(paste0("Municipio: ", gsub(pattern = "[0-9].", replacement = "", x = shp_casillas_react()$municip)),
+                          paste("Sección: ", shp_casillas_react()$seccion),
+                          paste("Tipo casilla: ", shp_casillas_react()$tp_csll),
+                          paste("Status: ", shp_casillas_react()$status),
+                          paste("Equipo: ", shp_casillas_react()$equipo),
                           sep = "<br>")) |>
           addLegend(title = "Status de casillas",
-                    na.label = "Sin status",
-                    data = shp_casillas,
-                    pal = pal_estatus_casillas,
-                    values = ~ totales_status,
+                    na.label = "Sin reportar",
+                    data = shp_casillas_react(),
+                    pal = pal_status_casillas,
+                    values = ~ status,
                     position = "bottomright")
 
       })
 
-    output$resultados_voto_candidato <- renderHighchart({
+    proxy_mapa_principal <- leafletProxy("mapa_principal")
 
-      # browser()
-
-      colores <- c("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f")
-
-      bd_resultados <-
-        tibble(respuesta = c("Julieta Ramírez Padilla y Armando Ayala por MORENA",
-                             "No sabe / No contesta",
-                             "Ninguno",
-                             "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde",
-                             "Gustavo Sánchez Vázquez y Guadalupe Gutiérrez Fregoso por PAN-PRI-PRD",
-                             "Jaime Bonilla y Janeth Tapia por el PT",
-                             "David Saúl Guakil y Argelia Núñez por Movimiento Ciudadano",
-                             "Otro candidato no registrato"),
-               media = c(0.46, 0.11, 0.12, 0.1, 0.09, 0.08, 0.05, 0.03)) |>
-        mutate(media = media*100)
-
-      g <-
-        highchart() |>
-        hc_xAxis(categories = bd_resultados$respuesta,
-                 labels = list(style = list(fontSize = "18px"))) |>
-        hc_yAxis(min = 0,
-                 max = 100,
-                 tickInterval = 10,
-                 labels = list(format = "{value}%"),
-                 style = list(fontSize = "18px")) |>
-        hc_add_series(name = "PCT",
-                      data = bd_resultados$media,
-                      type = "bar",
-                      # color = colores,
-                      zIndex = 1,
-                      stacking = "normal") |>
-        hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}%", style = list(fontSize = "24px"))), align = "right") |>
-        hc_legend(itemStyle = list(fontSize = "24px", reversed = TRUE))
-
-      return(g)
-
-    })
+    output$faltantes <-
+      render_gt({
+        casillas_abiertas() %>%
+          gt()
+        # tab_header(title = md(glue::glue("**Cluster {isolate(input$cluster)}**")),
+        #            subtitle = glue::glue("Cuota: {balance_cluster()$cuota}   Hecho: {balance_cluster()$hecho}   Faltan: {balance_cluster()$faltan}")) |>
+        # tab_spanner(label = "Entrevistas faltanes por edad y sexo", columns = c(Edad, Hombre, Mujer))
+      })
 
   })
 }

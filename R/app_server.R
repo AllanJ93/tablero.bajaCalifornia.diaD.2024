@@ -7,4 +7,5 @@
 app_server <- function(input, output, session) {
   # Your application server logic
   mod_mapa_principal_server("mapa_principal_1")
+  mod_resultados_server("resultados_1")
 }

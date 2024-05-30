@@ -9,7 +9,15 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    mod_mapa_principal_ui("mapa_principal_1")
+    bslib::page_navbar(
+      shinyjs::useShinyjs(),
+      title = "Elecciones 2024 - Baja California",
+      bslib::nav_spacer(),
+      mod_mapa_principal_ui("mapa_principal_1"),
+      mod_resultados_ui("resultados_1")
+    )
+
+    # mod_mapa_principal_ui("mapa_principal_1")
   )
 }
 

@@ -3,6 +3,7 @@
 export(run_app)
 import(bslib)
 import(dplyr)
+import(gt)
 import(highcharter)
 import(leaflet)
 import(sf)

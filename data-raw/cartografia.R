@@ -1,7 +1,8 @@
 ## code to prepare `cartografia` dataset goes here
 
 mun_shp <-
-  sf::read_sf("H:/Shared drives/Morant Consultores/Insumos/INE/SHP/2023/02 BAJA CALIFORNIA/MUNICIPIO.shp")
+  sf::read_sf("H:/Shared drives/Morant Consultores/Insumos/INE/SHP/2023/02 BAJA CALIFORNIA/MUNICIPIO.shp") |>
+  sf::st_transform(crs = sf::st_crs(4326))
 
 usethis::use_data(mun_shp, overwrite = TRUE)
 
