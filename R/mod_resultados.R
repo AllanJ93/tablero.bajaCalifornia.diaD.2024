@@ -153,7 +153,8 @@ mod_resultados_server <- function(id){
           hc_yAxis(labels = list(style = list(fontSize = "18px"))) |>
           hc_add_series(name = "Entrevistas",
                         data = bd_informacion$acum, type = "line",
-                        color = "red", zIndex = 1)
+                        color = "red", zIndex = 1) |>
+          hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}", style = list(fontSize = "24px"))), align = "right")
 
         return(g)
 

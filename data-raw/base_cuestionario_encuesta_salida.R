@@ -66,8 +66,16 @@ bd_simulada_encuesta_salida <-
   rename(geometria = geometry) |>
   mutate(Date = sample(x = secuencia_tiempos, size = n(), replace = T))
 
+# Estrucutra base final
 
-bd_encuesta_salida <- bd_simulada_encuesta_salida
+bd_encuesta_salida_survey <-
+  openxlsx2::read_xlsx(file = "data-raw/bd_encuesta_salida_surveytogo.xlsx", na.strings = "-1") |>
+  as_tibble() |>
+  mutate(id = paste0(seccion, tipo_casilla),
+         status = "Reportada") |>
+  # rename(voto_sen_candidato = voto_sen_candidato_O1)
+
+bd_encuesta_salida <- bd_encuesta_salida_survey
 
 usethis::use_data(bd_encuesta_salida, overwrite = TRUE)
 

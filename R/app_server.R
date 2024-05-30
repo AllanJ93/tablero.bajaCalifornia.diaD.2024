@@ -6,6 +6,7 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
+  # bd_apertura
   mod_mapa_principal_server("mapa_principal_1")
-  mod_resultados_server("resultados_1")
+  mod_resultados_server("resultados_1", bd_apertura)
 }

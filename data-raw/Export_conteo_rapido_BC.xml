@@ -1,0 +1,1393 @@
+<?xml version="1.0" standalone="yes"?>
+<ExportSettings_ColsOrderByID>
+  <xs:schema id="ExportSettings_ColsOrderByID" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="ExportSettings_ColsOrderByID" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Props">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ProviderName" type="xs:string" default="" />
+                <xs:element name="StudioVersion" type="xs:string" default="" />
+                <xs:element name="Date" type="xs:boolean" default="true" />
+                <xs:element name="DateInterviewTimezone" type="xs:boolean" default="true" />
+                <xs:element name="SubjectNum" type="xs:boolean" default="true" />
+                <xs:element name="SurveyorName" type="xs:boolean" default="true" />
+                <xs:element name="SubjectName" type="xs:boolean" default="true" />
+                <xs:element name="UserUnique" type="xs:boolean" default="true" />
+                <xs:element name="Duration" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleDate" type="xs:string" default="ColTitleDate" />
+                <xs:element name="ColTitleDateInterviewTimezone" type="xs:string" default="ColTitleDateInterviewTimezone" />
+                <xs:element name="ColTitleSubjectNum" type="xs:string" default="ColTitleSubjectNum" />
+                <xs:element name="ColTitleSurveyorName" type="xs:string" default="ColTitleSurveyorName" />
+                <xs:element name="ColTitleSubjectName" type="xs:string" default="ColTitleSubjectName" />
+                <xs:element name="ColTitleUserUnique" type="xs:string" default="ColTitleUserUnique" />
+                <xs:element name="ColTitleDuration" type="xs:string" default="ColTitleDuration" />
+                <xs:element name="IncludeFiltered" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleFormat" type="xs:string" default="" minOccurs="0" />
+                <xs:element name="IgnoreIsNull" type="xs:boolean" default="false" minOccurs="0" />
+                <xs:element name="Filtered" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleFiltered" type="xs:string" default="ColTitleFiltered" />
+                <xs:element name="Canceled" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleCanceled" type="xs:string" default="ColTitleCanceled" />
+                <xs:element name="Upload" type="xs:boolean" default="true" />
+                <xs:element name="SubjectData" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleUpload" type="xs:string" default="ColTitleUpload" />
+                <xs:element name="ColTitleSubjectData" type="xs:string" default="ColTitleSubjectData" />
+                <xs:element name="ReviewTime" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleReviewTime" type="xs:string" default="ColTitleReviewTime" />
+                <xs:element name="ReviewerComment" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleReviewerComment" type="xs:string" default="ColTitleReviewerComment" />
+                <xs:element name="ExceededQuota" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleExceededQuota" type="xs:string" default="ColTitleExceededQuota" />
+                <xs:element name="SurveyorComment" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleSurveyorComment" type="xs:string" default="ColTitleSurveyorComment" />
+                <xs:element name="DeleteResultsAfterExport" type="xs:boolean" default="false" />
+                <xs:element name="DoNotExportTextQuestions" type="xs:boolean" default="false" />
+                <xs:element name="DoNotExportOtherSpecify" type="xs:boolean" default="false" />
+                <xs:element name="ExportOnlyResultsWithAttachments" type="xs:boolean" default="false" />
+                <xs:element name="ExportOnlyQAChapters" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsUseCustomCats" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsCustomTopFormat" type="xs:string" default="False" />
+                <xs:element name="DimensionsCustomChapterFormat" type="xs:string" default="False" />
+                <xs:element name="DimensionsDefaultLanguageName" type="xs:string" default="False" />
+                <xs:element name="DimensionsCustomAnsFormat" type="xs:string" default="False" />
+                <xs:element name="QuantumExtSubjectID" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapExtData" type="xs:string" default="False" />
+                <xs:element name="QuantumMapExportMultiChoiceAsSeperate" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapExportAllowMultiTopicsCoding" type="xs:boolean" default="false" />
+                <xs:element name="QuantumNoMultiPunch" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapUse1ToMax0ToMax" type="xs:boolean" default="false" />
+                <xs:element name="QuantumUseSequentialID" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapFillWithDefaults" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapCreatedFromPreviousMap" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapPreviousMapPath" type="xs:string" default="" />
+                <xs:element name="QuantumMapSingleCardExport" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapExportDateQuestions" type="xs:boolean" default="false" />
+                <xs:element name="QuantumMapAssingColumnsListSource" type="xs:boolean" default="false" />
+                <xs:element name="NeverExportAsText" type="xs:boolean" default="false" />
+                <xs:element name="WordExportAllVariableData" type="xs:boolean" default="false" />
+                <xs:element name="WordExportIncludeFullChapterTitle" type="xs:boolean" default="false" />
+                <xs:element name="SPSSIncludeQuestionTextTopicLabel" type="xs:boolean" default="false" />
+                <xs:element name="SPSSHugeStringLength" type="xs:int" default="-1" />
+                <xs:element name="SPSSCustomHugeStringLength" type="xs:boolean" default="false" />
+                <xs:element name="SPSSIncludeQuestionTextAnswerLabel" type="xs:boolean" default="false" />
+                <xs:element name="SPSSReverseAnswerTopicLabel" type="xs:boolean" default="false" />
+                <xs:element name="SPSSExportDatesOldStyle" type="xs:boolean" default="false" />
+                <xs:element name="SPSSReverseIterationLabel" type="xs:boolean" default="false" />
+                <xs:element name="SPSSDoNotUseCompression" type="xs:boolean" default="false" />
+                <xs:element name="SPSSUseMaxStringForOtherSpec" type="xs:boolean" default="false" />
+                <xs:element name="SPSSDoNotUseNewWriteFormat" type="xs:boolean" default="false" />
+                <xs:element name="SPSSUseDateTimeVarInExtraCol" type="xs:boolean" default="true" />
+                <xs:element name="SPSSDoNotAddFileAttributes" type="xs:boolean" default="false" />
+                <xs:element name="SPSSRemoveIllegalChars" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsExportDefaultFields" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsExportLegacyOtherSpec" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsDurationsAsTotalMinutes" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsExportCreateBlocks" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsExportDoNotCreateMap" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsDoNotReferenceSharedLists" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsIgnoreScaleOtherSpec" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsExportCodings" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsUseScaleDescAsName" type="xs:boolean" default="false" />
+                <xs:element name="TripleSMetaDataFormat" type="xs:int" default="0" />
+                <xs:element name="TripleSDontExportCheckedUnchecked" type="xs:boolean" default="false" />
+                <xs:element name="FixedFileMapName" type="xs:string" default="" />
+                <xs:element name="DimensionsExportContext" type="xs:int" default="0" />
+                <xs:element name="SPSSUseReportTextForCategorialLabels" type="xs:boolean" default="false" />
+                <xs:element name="OverrideChapterMaxExportLimit" type="xs:boolean" default="false" />
+                <xs:element name="DontCreateEmptyColumns" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsMDDFile" type="xs:string" default="False" />
+                <xs:element name="DimensionsExportVdata" type="xs:boolean" default="false" />
+                <xs:element name="DimensionsCreateMDD" type="xs:boolean" default="false" />
+                <xs:element name="UseSimpleIterationNames" type="xs:boolean" default="false" />
+                <xs:element name="NeverSeperateAmericans" type="xs:boolean" default="false" />
+                <xs:element name="AlwaysSeperateMultiSelect" type="xs:boolean" default="false" />
+                <xs:element name="TabulationExport" type="xs:boolean" default="false" />
+                <xs:element name="AlwaysUseMultiSelectDefaultValues" type="xs:boolean" default="false" />
+                <xs:element name="ExportAsText" type="xs:boolean" default="false" />
+                <xs:element name="SwapRowsCols" type="xs:boolean" default="false" />
+                <xs:element name="OverrideAttachmentFiles" type="xs:boolean" default="true" />
+                <xs:element name="IncludeNotCompleted" type="xs:boolean" default="false" />
+                <xs:element name="FromStatus" type="xs:string" default="" />
+                <xs:element name="SubjectIDs" type="xs:string" default="" />
+                <xs:element name="SurveyVersions" type="xs:string" default="" />
+                <xs:element name="IgnoreCorruptSubjects" type="xs:boolean" default="false" />
+                <xs:element name="ExportFixedFileMapToExcel" type="xs:boolean" default="true" />
+                <xs:element name="ASCIIExpandSingleChoiceVars" type="xs:boolean" default="true" />
+                <xs:element name="ASCIIRemoveTopicAnswerPrefix" type="xs:boolean" default="false" />
+                <xs:element name="FixedFileMapReplaceNewLine" type="xs:boolean" default="true" />
+                <xs:element name="CorruptSubjectsListPath" type="xs:string" default="" />
+                <xs:element name="FilterExpression" type="xs:string" default="" />
+                <xs:element name="MoveToStatus" type="xs:int" default="0" />
+                <xs:element name="ExportSubjectMode" type="xs:int" default="0" />
+                <xs:element name="XsltFileName" type="xs:string" default="" />
+                <xs:element name="WordRTL" type="xs:boolean" default="false" />
+                <xs:element name="IncludeTitlePage" type="xs:boolean" default="true" />
+                <xs:element name="SeparateWordFiles" type="xs:boolean" default="false" />
+                <xs:element name="HideNullAnswers" type="xs:boolean" default="false" />
+                <xs:element name="FromSubjectData" type="xs:string" default="" />
+                <xs:element name="ToSubjectData" type="xs:string" default="" />
+                <xs:element name="WithQAResponsibleList" type="xs:boolean" default="false" />
+                <xs:element name="FlatChapterHierarchy" type="xs:boolean" default="false" />
+                <xs:element name="ShowOtherSpecSeparately" type="xs:boolean" default="false" />
+                <xs:element name="ExportFullAnswers" type="xs:boolean" default="false" />
+                <xs:element name="XMLExpandMultiSelect" type="xs:boolean" default="false" />
+                <xs:element name="XMLNoAttachments" type="xs:boolean" default="false" />
+                <xs:element name="KeepFileName" type="xs:boolean" default="false" />
+                <xs:element name="NoAnswerData" type="xs:boolean" default="false" />
+                <xs:element name="XMLShowMissingCode" type="xs:boolean" default="false" />
+                <xs:element name="XMLShowOpenEnededFromList" type="xs:boolean" default="false" />
+                <xs:element name="XMLDurationsAsTotalMinutes" type="xs:boolean" default="true" />
+                <xs:element name="XMLIncludeQuestionDurationAndVisits" type="xs:boolean" default="false" />
+                <xs:element name="ExportComments" type="xs:boolean" default="false" />
+                <xs:element name="QuestionAttachmentsInAnswers" type="xs:boolean" default="false" />
+                <xs:element name="UseAttachmentNameAsLink" type="xs:boolean" default="false" />
+                <xs:element name="EmbbedImages" type="xs:boolean" default="false" />
+                <xs:element name="EmbbedImageHeight" type="xs:int" default="0" />
+                <xs:element name="EmbbedImageWidth" type="xs:int" default="0" />
+                <xs:element name="IsHebrew" type="xs:boolean" default="false" />
+                <xs:element name="TextType" type="xs:int" default="0" />
+                <xs:element name="ResultsInFile" type="xs:int" default="20" />
+                <xs:element name="ExportLandID" type="xs:int" default="-1" />
+                <xs:element name="XMLSbjFieldNames" type="xs:boolean" default="false" />
+                <xs:element name="XMLSbjFieldsAsExtra" type="xs:boolean" default="false" />
+                <xs:element name="ExcelMapFileNameForQuantum" type="xs:string" default="" />
+                <xs:element name="TripleSDataFormat" type="xs:string" default="" />
+                <xs:element name="TripleSExistingMetadataFilename" type="xs:string" default="" />
+                <xs:element name="AccessExportOtherSpec" type="xs:int" default="0" />
+                <xs:element name="ExcelTreatDecimalsAsNumbers" type="xs:boolean" default="false" />
+                <xs:element name="ExcelTreatDecimalWithCommasAsNumbers" type="xs:boolean" default="false" />
+                <xs:element name="ExcelSurveyExportAllEntranceRule" type="xs:boolean" default="false" />
+                <xs:element name="ExportAnswerTimeStamp" type="xs:boolean" default="false" />
+                <xs:element name="ExportAnswerDuration" type="xs:boolean" default="false" />
+                <xs:element name="ExportGDPRVars" type="xs:boolean" default="false" />
+                <xs:element name="ExportAnswerVisits" type="xs:boolean" default="false" />
+                <xs:element name="OverrideMissingValue" type="xs:boolean" default="false" />
+                <xs:element name="MissingValue" type="xs:string" default="" />
+                <xs:element name="OverrideMissingValueExtra" type="xs:boolean" default="false" />
+                <xs:element name="MissingValueExtra" type="xs:string" default="" />
+                <xs:element name="OverrideOptionsCountValue" type="xs:int" default="-1" />
+                <xs:element name="StatusNameLanguage" type="xs:string" default="" />
+                <xs:element name="VariableNames" type="xs:string" default="" />
+                <xs:element name="SimpleExportIncludeSurveyHeader" type="xs:boolean" default="false" />
+                <xs:element name="SimpleExportIncludeAnswerOptions" type="xs:boolean" default="false" />
+                <xs:element name="UsersIDs" type="xs:string" default="" />
+                <xs:element name="GroupIDs" type="xs:string" default="" />
+                <xs:element name="IncludeInterviewTimeZoneCols" type="xs:boolean" default="false" />
+                <xs:element name="ExportUTF8WithBOM" type="xs:boolean" default="true" />
+                <xs:element name="DateFilterEnabled" type="xs:boolean" default="false" />
+                <xs:element name="DateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="DateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="UploadDateFilterEnabled" type="xs:boolean" default="false" />
+                <xs:element name="UploadDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="UploadDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="VisitStartDateFilterEnabled" type="xs:boolean" default="false" />
+                <xs:element name="VisitStartDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="VisitStartDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="VisitEndDateFilterEnabled" type="xs:boolean" default="false" />
+                <xs:element name="RoundsFilter" type="xs:string" default="False" />
+                <xs:element name="VisitEndDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="VisitEndDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="LastModifiedDateFilterEnabled" type="xs:boolean" default="false" />
+                <xs:element name="LastModifiedDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="LastModifiedDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="LastModifiedMediaDateFilterEnabled" type="xs:boolean" default="false" />
+                <xs:element name="LastModifiedMediaDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="LastModifiedMediaDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="MediaUploadedDateFilterEnabled" type="xs:boolean" default="false" />
+                <xs:element name="MediaUploadedDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="MediaUploadedDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="Completed" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleCompleted" type="xs:string" default="ColTitleCompleted" />
+                <xs:element name="StopQuestion" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleStopQuestion" type="xs:string" default="ColTitleStopQuestion" />
+                <xs:element name="SubjectMode" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleSubjectMode" type="xs:string" default="ColTitleSubjectMode" />
+                <xs:element name="Longitude" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleLongitude" type="xs:string" default="ColTitleLongitude" />
+                <xs:element name="Latitude" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleLatitude" type="xs:string" default="ColTitleLatitude" />
+                <xs:element name="Status" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleStatus" type="xs:string" default="ColTitleStatus" />
+                <xs:element name="ParentSubjectID" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleParentSubjectID" type="xs:string" default="ColTitleParentSubjectID" />
+                <xs:element name="OrigUTCMins" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleOrigUTCMins" type="xs:string" default="ColTitleOrigUTCMins" />
+                <xs:element name="QAScore" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleQAScore" type="xs:string" default="ColTitleQAScore" />
+                <xs:element name="FreeScenarioName" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleFreeScenarioName" type="xs:string" default="ColTitleFreeScenarioName" />
+                <xs:element name="RunBeforeAfterExport" type="xs:string" default="" />
+                <xs:element name="ReplaceCodingsWithValue" type="xs:boolean" default="false" />
+                <xs:element name="ExtRefNum" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleExtRefNum" type="xs:string" default="ColTitleExtRefNum" />
+                <xs:element name="VisitStart" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleVisitStart" type="xs:string" default="ColTitleVisitStart" />
+                <xs:element name="VisitEnd" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleVisitEnd" type="xs:string" default="ColTitleVisitEnd" />
+                <xs:element name="VisitStartInterviewTimezone" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleVisitStartInterviewTimezone" type="xs:string" default="ColTitleVisitStartInterviewTimezone" />
+                <xs:element name="VisitEndInterviewTimezone" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleVisitEndInterviewTimezone" type="xs:string" default="ColTitleVisitEndInterviewTimezone" />
+                <xs:element name="UploadInterviewTimeZone" type="xs:boolean" default="true" />
+                <xs:element name="ColTitleUploadInterviewTimeZone" type="xs:string" default="ColTitleUploadInterviewTimeZone" />
+                <xs:element name="RunningIndex" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleRunningIndex" type="xs:string" default="ColTitleRunningIndex" />
+                <xs:element name="SurveyDeviceIndex" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSurveyDeviceIndex" type="xs:string" default="ColTitleSurveyDeviceIndex" />
+                <xs:element name="DeviceIndex" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleDeviceIndex" type="xs:string" default="ColTitleDeviceIndex" />
+                <xs:element name="TaskID" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleTaskID" type="xs:string" default="ColTitleTaskID" />
+                <xs:element name="LocationID" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleLocationID" type="xs:string" default="ColTitleLocationID" />
+                <xs:element name="LocationName" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleLocationName" type="xs:string" default="ColTitleLocationName" />
+                <xs:element name="SurveyVersion" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSurveyVersion" type="xs:string" default="ColTitleSurveyVersion" />
+                <xs:element name="ClientSTGVersion" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleClientSTGVersion" type="xs:string" default="ColTitleClientSTGVersion" />
+                <xs:element name="SID" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSID" type="xs:string" default="ColTitleSID" />
+                <xs:element name="FlagsModifiedAfterCompleted" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsModifiedAfterCompleted" type="xs:string" default="ColTitleFlagsModifiedAfterCompleted" />
+                <xs:element name="FlagsStoppedAndContinued" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsStoppedAndContinued" type="xs:string" default="ColTitleFlagsStoppedAndContinued" />
+                <xs:element name="FlagsStopWithoutSave" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsStopWithoutSave" type="xs:string" default="ColTitleFlagsStopWithoutSave" />
+                <xs:element name="FlagsVersionChangedMidRun" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsVersionChangedMidRun" type="xs:string" default="ColTitleFlagsVersionChangedMidRun" />
+                <xs:element name="FlagsWasSetAsComplete" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsWasSetAsComplete" type="xs:string" default="ColTitleFlagsWasSetAsComplete" />
+                <xs:element name="FlagByScript" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsByScript" type="xs:string" default="ColTitleFlagsByScript" />
+                <xs:element name="FlagByDuration" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsByDuration" type="xs:string" default="ColTitleFlagsByDuration" />
+                <xs:element name="FlagByReview" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsByReview" type="xs:string" default="ColTitleFlagsByReview" />
+                <xs:element name="FlagByNoGps" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsByNoGps" type="xs:string" default="ColTitleFlagsByNoGps" />
+                <xs:element name="FlagByFakeGPS" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsByFakeGPS" type="xs:string" default="ColTitleFlagsByFakeGPS" />
+                <xs:element name="FlagStraightLining" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsStraightLining" type="xs:string" default="ColTitleFlagsStraightLining" />
+                <xs:element name="FlagShortOpenEnededAnswer" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsShortOpenEnededAnswer" type="xs:string" default="ColTitleFlagsShortOpenEnededAnswer" />
+                <xs:element name="FlagTooManySessions" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsTooManySessions" type="xs:string" default="ColTitleFlagsTooManySessions" />
+                <xs:element name="FlagOddHours" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsOddHours" type="xs:string" default="ColTitleFlagsOddHours" />
+                <xs:element name="FlaggedByRuntimeScriptError" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByRuntimeScriptError" type="xs:string" default="ColTitleFlaggedByRuntimeScriptError" />
+                <xs:element name="FlaggedByRuntimeScriptErrorComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByRuntimeScriptErrorComment" type="xs:string" default="ColTitleFlaggedByRuntimeScriptErrorComment" />
+                <xs:element name="FlaggedByGPSTimeDifferenceDate" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSTimeDifferenceDate" type="xs:string" default="ColTitleFlaggedByGPSTimeDifferenceDate" />
+                <xs:element name="FlaggedByGPSTimeDifferenceDateComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSTimeDifferenceDateComment" type="xs:string" default="ColTitleFlaggedByGPSTimeDifferenceDateComment" />
+                <xs:element name="FlaggedByGPSTimeDifferenceStale" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSTimeDifferenceStale" type="xs:string" default="ColTitleFlaggedByGPSTimeDifferenceStale" />
+                <xs:element name="FlaggedByGPSTimeDifferenceStaleComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSTimeDifferenceStaleComment" type="xs:string" default="ColTitleFlaggedByGPSTimeDifferenceStaleComment" />
+                <xs:element name="FlaggedByGPSServicesOff" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSServicesOff" type="xs:string" default="ColTitleFlaggedByGPSServicesOff" />
+                <xs:element name="FlaggedByNoSilentRecordings" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByNoSilentRecordings" type="xs:string" default="ColTitleFlaggedByNoSilentRecordings" />
+                <xs:element name="FlaggedByDeviceRooted" type="xs:boolean" default="false" />
+                <xs:element name="FlaggedByDeviceRootedComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByDeviceRooted" type="xs:string" default="ColTitleFlaggedByDeviceRooted" />
+                <xs:element name="ColTitleFlaggedByDeviceRootedComment" type="xs:string" default="ColTitleFlaggedByDeviceRootedComment" />
+                <xs:element name="FlaggedByBacktracking" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByBacktracking" type="xs:string" default="ColTitleFlaggedByBacktracking" />
+                <xs:element name="FlaggedByBacktrackingComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByBacktrackingComment" type="xs:string" default="ColTitleFlaggedByBacktrackingComment" />
+                <xs:element name="FlaggedByGPSCapturedAtEnd" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSCapturedAtEnd" type="xs:string" default="ColTitleFlaggedByGPSCapturedAtEnd" />
+                <xs:element name="FlaggedByGPSCapturedAtEndComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSCapturedAtEndComment" type="xs:string" default="ColTitleFlaggedByGPSCapturedAtEndComment" />
+                <xs:element name="FlaggedByPartialRacing" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByPartialRacing" type="xs:string" default="ColTitleFlaggedByPartialRacing" />
+                <xs:element name="FlaggedByPartialRacingComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByPartialRacingComment" type="xs:string" default="ColTitleFlaggedByPartialRacingComment" />
+                <xs:element name="FlaggedByQuestionTakingTooLong" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByQuestionTakingTooLong" type="xs:string" default="ColTitleFlaggedByQuestionTakingTooLong" />
+                <xs:element name="FlaggedByQuestionTakingTooLongComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByQuestionTakingTooLongComment" type="xs:string" default="ColTitleFlaggedByQuestionTakingTooLongComment" />
+                <xs:element name="FlaggedByClockChanged" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByClockChanged" type="xs:string" default="ColTitleFlaggedByClockChanged" />
+                <xs:element name="FlaggedByClockChangedComment" type="xs:string" default="False" />
+                <xs:element name="ColTitleFlaggedByClockChangedComment" type="xs:string" default="ColTitleFlaggedByClockChangedComment" />
+                <xs:element name="FlagByAnswerCode" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsByAnswerCode" type="xs:string" default="ColTitleFlagsByAnswerCode" />
+                <xs:element name="FlaggedByScriptComment" type="xs:string" default="" />
+                <xs:element name="ColTitleFlaggedByScriptComment" type="xs:string" default="ColTitleFlaggedByScriptComment" />
+                <xs:element name="FlaggedByReviewComment" type="xs:string" default="" />
+                <xs:element name="ColTitleFlaggedByReviewComment" type="xs:string" default="ColTitleFlaggedByReviewComment" />
+                <xs:element name="FlaggedByFakeGPSComment" type="xs:string" default="" />
+                <xs:element name="ColTitleFlaggedByFakeGPSComment" type="xs:string" default="ColTitleFlaggedByFakeGPSComment" />
+                <xs:element name="FlaggedByShortOpenEnededAnswerComment" type="xs:string" default="" />
+                <xs:element name="ColTitleFlaggedByShortOpenEnededAnswerComment" type="xs:string" default="ColTitleFlaggedByShortOpenEnededAnswerComment" />
+                <xs:element name="FlaggedByStaightLiningComment" type="xs:string" default="" />
+                <xs:element name="ColTitleFlaggedByStraightLiningComment" type="xs:string" default="ColTitleFlaggedByStraightLiningComment" />
+                <xs:element name="Version" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleVersion" type="xs:string" default="-1" />
+                <xs:element name="FlagsWasUploadedByOtherSurveyor" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsWasUploadedByOtherSurveyor" type="xs:string" default="-1" />
+                <xs:element name="FlagsAttachmentsFullyUploaded" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlagsAttachmentsFullyUploaded" type="xs:string" default="-1" />
+                <xs:element name="ReviewerName" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleReviewerName" type="xs:string" default="-1" />
+                <xs:element name="DeviceNewID" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleDeviceNewID" type="xs:string" default="-1" />
+                <xs:element name="ClientDuration" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleClientDuration" type="xs:string" default="-1" />
+                <xs:element name="DeviceIMEI" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleDeviceIMEI" type="xs:string" default="-1" />
+                <xs:element name="SimID" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSimID" type="xs:string" default="-1" />
+                <xs:element name="QualityControlFlag" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleQualityControlFlag" type="xs:string" default="-1" />
+                <xs:element name="QualityControlComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleQualityControlComment" type="xs:string" default="-1" />
+                <xs:element name="SurveyID" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSurveyID" type="xs:string" default="-1" />
+                <xs:element name="SurveyName" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSurveyName" type="xs:string" default="-1" />
+                <xs:element name="LastModifiedTime" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleLastModifiedTime" type="xs:string" default="-1" minOccurs="0" />
+                <xs:element name="LastModifiedMediaTime" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleLastModifiedMediaTime" type="xs:string" default="-1" minOccurs="0" />
+                <xs:element name="MediaUploadedTime" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleMediaUploadedTime" type="xs:string" default="-1" minOccurs="0" />
+                <xs:element name="SupervisorState" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSupervisorState" type="xs:string" default="-1" />
+                <xs:element name="SupervisorComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSupervisorComment" type="xs:string" default="-1" />
+                <xs:element name="BatteryLevel" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleBatteryLevel" type="xs:string" default="-1" />
+                <xs:element name="DeviceModel" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleDeviceModel" type="xs:string" default="-1" />
+                <xs:element name="HasSilentRecordingAudio" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleHasSilentRecordingAudio" type="xs:string" default="-1" />
+                <xs:element name="ClockChangedMidRun" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleClockChangedMidRun" type="xs:string" default="-1" />
+                <xs:element name="AttemptsPerCompletedInterview" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleAttemptsPerCompletedInterview" type="xs:string" default="-1" />
+                <xs:element name="AdherenceToMethodology" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleAdherenceToMethodology" type="xs:string" default="-1" />
+                <xs:element name="LastModifiedUserName" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleLastModifiedUserName" type="xs:string" default="-1" />
+                <xs:element name="CustomData1" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData1" type="xs:string" default="-1" />
+                <xs:element name="CustomData2" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData2" type="xs:string" default="-1" />
+                <xs:element name="CustomData3" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData3" type="xs:string" default="-1" />
+                <xs:element name="CustomData4" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData4" type="xs:string" default="-1" />
+                <xs:element name="CustomData5" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData5" type="xs:string" default="-1" />
+                <xs:element name="CustomData6" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData6" type="xs:string" default="-1" />
+                <xs:element name="CustomDataInt1" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt1" type="xs:string" default="-1" />
+                <xs:element name="CustomDataInt2" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt2" type="xs:string" default="-1" />
+                <xs:element name="CustomDataInt3" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt3" type="xs:string" default="-1" />
+                <xs:element name="CustomDataInt4" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt4" type="xs:string" default="-1" />
+                <xs:element name="CustomDataInt5" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt5" type="xs:string" default="-1" />
+                <xs:element name="CustomDataInt6" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt6" type="xs:string" default="-1" />
+                <xs:element name="InterviewStopComment" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleInterviewStopComment" type="xs:string" default="-1" />
+                <xs:element name="TrackedAnswerCodeNum" type="xs:int" default="-1" />
+                <xs:element name="ColTitleTrackedAnswerCodeNum" type="xs:string" default="-1" />
+                <xs:element name="TrackedAnswerCodePercent" type="xs:double" default="-1" />
+                <xs:element name="ColTitleTrackedAnswerCodePercent" type="xs:string" default="-1" />
+                <xs:element name="OriginalUserName" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleOriginalUserName" type="xs:string" default="-1" />
+                <xs:element name="ExternalUserID" type="xs:string" default="" />
+                <xs:element name="ColTitleExternalUserID" type="xs:string" default="" />
+                <xs:element name="Flags2IsUploadAfterStopped" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlags2IsUploadAfterStopped" type="xs:string" default="ColTitleFlags2IsUploadAfterStopped" />
+                <xs:element name="Flags2WasCanceled" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlags2WasCanceled" type="xs:string" default="ColTitleFlags2WasCanceled" />
+                <xs:element name="CustomDataPII1" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataPII1" type="xs:string" default="-1" />
+                <xs:element name="CustomDataPII2" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataPII2" type="xs:string" default="-1" />
+                <xs:element name="CustomDataPII3" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataPII3" type="xs:string" default="-1" />
+                <xs:element name="CustomDataPIIInt1" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataPIIInt1" type="xs:string" default="-1" />
+                <xs:element name="CustomDataPIIInt2" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataPIIInt2" type="xs:string" default="-1" />
+                <xs:element name="CustomDataPIIInt3" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataPIIInt3" type="xs:string" default="-1" />
+                <xs:element name="CustomData7" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData7" type="xs:string" default="ColTitleCustomData7" />
+                <xs:element name="CustomData8" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData8" type="xs:string" default="ColTitleCustomData8" />
+                <xs:element name="CustomData9" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData9" type="xs:string" default="ColTitleCustomData9" />
+                <xs:element name="CustomData10" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData10" type="xs:string" default="ColTitleCustomData10" />
+                <xs:element name="CustomData11" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData11" type="xs:string" default="ColTitleCustomData11" />
+                <xs:element name="CustomData12" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomData12" type="xs:string" default="ColTitleCustomData12" />
+                <xs:element name="CustomDataInt7" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt7" type="xs:string" default="ColTitleCustomDataInt7" />
+                <xs:element name="CustomDataInt8" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt8" type="xs:string" default="ColTitleCustomDataInt8" />
+                <xs:element name="CustomDataInt9" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt9" type="xs:string" default="ColTitleCustomDataInt9" />
+                <xs:element name="CustomDataInt10" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt10" type="xs:string" default="ColTitleCustomDataInt10" />
+                <xs:element name="CustomDataInt11" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt11" type="xs:string" default="ColTitleCustomDataInt11" />
+                <xs:element name="CustomDataInt12" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleCustomDataInt12" type="xs:string" default="ColTitleCustomDataInt12" />
+                <xs:element name="SurveyorUserID" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleSurveyorUserID" type="xs:string" default="ColTitleSurveyorUserID" />
+                <xs:element name="IdleDuration" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleIdleDuration" type="xs:string" default="ColTitleIdleDuration" />
+                <xs:element name="NumberOfSessions" type="xs:boolean" default="false" minOccurs="0" />
+                <xs:element name="ColTitleNumberOfSessions" type="xs:string" default="ColTitleNumberOfSessions" />
+                <xs:element name="LastUsedLanguage" type="xs:boolean" default="false" minOccurs="0" />
+                <xs:element name="ColTitleLastUsedLanguage" type="xs:string" default="ColTitleLastUsedLanguage" />
+                <xs:element name="DeviceType" type="xs:boolean" default="false" minOccurs="0" />
+                <xs:element name="ColTitleDeviceType" type="xs:string" default="ColTitleDeviceType" />
+                <xs:element name="FlaggedByGpsAccuracy" type="xs:boolean" default="false" />
+                <xs:element name="ColTitleFlaggedByGPSAccuracy" type="xs:string" default="ColTitleFlaggedByGPSAccuracy" />
+                <xs:element name="FlaggedByGpsAccuracyComment" type="xs:boolean" default="false" minOccurs="0" />
+                <xs:element name="ColTitleFlaggedByGPSAccuracyComment" type="xs:string" default="ColTitleFlaggedByGPSAccuracyComment" />
+                <xs:element name="MetersFromLastInterview" type="xs:boolean" default="false" minOccurs="0" />
+                <xs:element name="ColTitleMetersFromLastInterview" type="xs:string" default="ColTitleMetersFromLastInterview" />
+                <xs:element name="SecondsFromLastInterview" type="xs:boolean" default="false" minOccurs="0" />
+                <xs:element name="ColTitleSecondsFromLastInterview" type="xs:string" default="ColTitleSecondsFromLastInterview" />
+                <xs:element name="ASCIIMapVariableMatchingMode" type="xs:int" default="0" />
+                <xs:element name="XMLValidateData" type="xs:boolean" default="false" />
+                <xs:element name="ExcelExportAllDataAsText" type="xs:boolean" default="true" />
+                <xs:element name="ASCIIReplaceMTMSSeparatorWithUnderscore" type="xs:boolean" default="false" />
+                <xs:element name="ExcelSurveyExportIncludeAnswerCodings" type="xs:boolean" default="false" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="SubjStoreFieldPairs">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="StoreFieldName" type="xs:string" default="" />
+                <xs:element name="DisplayColumnName" type="xs:string" default="" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="LocationFieldPairs">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="StoreFieldName" type="xs:string" default="" />
+                <xs:element name="DisplayColumnName" type="xs:string" default="" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ColsArray">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Idx" type="xs:string" default="-1,-1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="AdvancedExportColumns">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="QID" type="xs:int" default="-1" />
+                <xs:element name="TID" type="xs:int" default="-1" />
+                <xs:element name="AID" type="xs:int" default="-1" />
+                <xs:element name="ASV" type="xs:boolean" default="false" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Props>
+    <ProviderName>Microsoft Excel 2007 Provider</ProviderName>
+    <StudioVersion>1.32.661.0</StudioVersion>
+    <Date>true</Date>
+    <DateInterviewTimezone>true</DateInterviewTimezone>
+    <SubjectNum>true</SubjectNum>
+    <SurveyorName>true</SurveyorName>
+    <SubjectName>true</SubjectName>
+    <UserUnique>true</UserUnique>
+    <Duration>true</Duration>
+    <ColTitleDate>Date</ColTitleDate>
+    <ColTitleDateInterviewTimezone>InterviewTimeDate</ColTitleDateInterviewTimezone>
+    <ColTitleSubjectNum>SbjNum</ColTitleSubjectNum>
+    <ColTitleSurveyorName>Srvyr</ColTitleSurveyorName>
+    <ColTitleSubjectName>SbjNam</ColTitleSubjectName>
+    <ColTitleUserUnique>UsrUnq</ColTitleUserUnique>
+    <ColTitleDuration>Duration</ColTitleDuration>
+    <IncludeFiltered>false</IncludeFiltered>
+    <ColTitleFormat />
+    <IgnoreIsNull>false</IgnoreIsNull>
+    <Filtered>true</Filtered>
+    <ColTitleFiltered>Filter</ColTitleFiltered>
+    <Canceled>true</Canceled>
+    <ColTitleCanceled>Cancel</ColTitleCanceled>
+    <Upload>true</Upload>
+    <SubjectData>true</SubjectData>
+    <ColTitleUpload>Upload</ColTitleUpload>
+    <ColTitleSubjectData>SubjData</ColTitleSubjectData>
+    <ReviewTime>true</ReviewTime>
+    <ColTitleReviewTime>RvwTime</ColTitleReviewTime>
+    <ReviewerComment>true</ReviewerComment>
+    <ColTitleReviewerComment>RvwComment</ColTitleReviewerComment>
+    <ExceededQuota>true</ExceededQuota>
+    <ColTitleExceededQuota>ExceededQuota</ColTitleExceededQuota>
+    <SurveyorComment>true</SurveyorComment>
+    <ColTitleSurveyorComment>SrvyrComment</ColTitleSurveyorComment>
+    <DeleteResultsAfterExport>false</DeleteResultsAfterExport>
+    <DoNotExportTextQuestions>false</DoNotExportTextQuestions>
+    <DoNotExportOtherSpecify>false</DoNotExportOtherSpecify>
+    <ExportOnlyResultsWithAttachments>false</ExportOnlyResultsWithAttachments>
+    <ExportOnlyQAChapters>false</ExportOnlyQAChapters>
+    <DimensionsUseCustomCats>false</DimensionsUseCustomCats>
+    <DimensionsCustomTopFormat>$DN</DimensionsCustomTopFormat>
+    <DimensionsCustomChapterFormat>Chapter_$DN</DimensionsCustomChapterFormat>
+    <DimensionsDefaultLanguageName />
+    <DimensionsCustomAnsFormat>$DN</DimensionsCustomAnsFormat>
+    <QuantumExtSubjectID>false</QuantumExtSubjectID>
+    <QuantumMapExtData />
+    <QuantumMapExportMultiChoiceAsSeperate>true</QuantumMapExportMultiChoiceAsSeperate>
+    <QuantumMapExportAllowMultiTopicsCoding>true</QuantumMapExportAllowMultiTopicsCoding>
+    <QuantumNoMultiPunch>false</QuantumNoMultiPunch>
+    <QuantumMapUse1ToMax0ToMax>false</QuantumMapUse1ToMax0ToMax>
+    <QuantumUseSequentialID>false</QuantumUseSequentialID>
+    <QuantumMapFillWithDefaults>true</QuantumMapFillWithDefaults>
+    <QuantumMapCreatedFromPreviousMap>false</QuantumMapCreatedFromPreviousMap>
+    <QuantumMapPreviousMapPath />
+    <QuantumMapSingleCardExport>false</QuantumMapSingleCardExport>
+    <QuantumMapExportDateQuestions>false</QuantumMapExportDateQuestions>
+    <QuantumMapAssingColumnsListSource>false</QuantumMapAssingColumnsListSource>
+    <NeverExportAsText>false</NeverExportAsText>
+    <WordExportAllVariableData>false</WordExportAllVariableData>
+    <WordExportIncludeFullChapterTitle>false</WordExportIncludeFullChapterTitle>
+    <SPSSIncludeQuestionTextTopicLabel>false</SPSSIncludeQuestionTextTopicLabel>
+    <SPSSHugeStringLength>-1</SPSSHugeStringLength>
+    <SPSSCustomHugeStringLength>false</SPSSCustomHugeStringLength>
+    <SPSSIncludeQuestionTextAnswerLabel>true</SPSSIncludeQuestionTextAnswerLabel>
+    <SPSSReverseAnswerTopicLabel>false</SPSSReverseAnswerTopicLabel>
+    <SPSSExportDatesOldStyle>false</SPSSExportDatesOldStyle>
+    <SPSSReverseIterationLabel>false</SPSSReverseIterationLabel>
+    <SPSSDoNotUseCompression>false</SPSSDoNotUseCompression>
+    <SPSSUseMaxStringForOtherSpec>false</SPSSUseMaxStringForOtherSpec>
+    <SPSSDoNotUseNewWriteFormat>false</SPSSDoNotUseNewWriteFormat>
+    <SPSSUseDateTimeVarInExtraCol>true</SPSSUseDateTimeVarInExtraCol>
+    <SPSSDoNotAddFileAttributes>false</SPSSDoNotAddFileAttributes>
+    <SPSSRemoveIllegalChars>false</SPSSRemoveIllegalChars>
+    <DimensionsExportDefaultFields>true</DimensionsExportDefaultFields>
+    <DimensionsExportLegacyOtherSpec>false</DimensionsExportLegacyOtherSpec>
+    <DimensionsDurationsAsTotalMinutes>false</DimensionsDurationsAsTotalMinutes>
+    <DimensionsExportCreateBlocks>true</DimensionsExportCreateBlocks>
+    <DimensionsExportDoNotCreateMap>false</DimensionsExportDoNotCreateMap>
+    <DimensionsDoNotReferenceSharedLists>false</DimensionsDoNotReferenceSharedLists>
+    <DimensionsIgnoreScaleOtherSpec>false</DimensionsIgnoreScaleOtherSpec>
+    <DimensionsExportCodings>false</DimensionsExportCodings>
+    <DimensionsUseScaleDescAsName>false</DimensionsUseScaleDescAsName>
+    <TripleSMetaDataFormat>0</TripleSMetaDataFormat>
+    <TripleSDontExportCheckedUnchecked>false</TripleSDontExportCheckedUnchecked>
+    <FixedFileMapName />
+    <DimensionsExportContext>0</DimensionsExportContext>
+    <SPSSUseReportTextForCategorialLabels>false</SPSSUseReportTextForCategorialLabels>
+    <OverrideChapterMaxExportLimit>false</OverrideChapterMaxExportLimit>
+    <DontCreateEmptyColumns>false</DontCreateEmptyColumns>
+    <DimensionsMDDFile />
+    <DimensionsExportVdata>false</DimensionsExportVdata>
+    <DimensionsCreateMDD>true</DimensionsCreateMDD>
+    <UseSimpleIterationNames>false</UseSimpleIterationNames>
+    <NeverSeperateAmericans>false</NeverSeperateAmericans>
+    <AlwaysSeperateMultiSelect>false</AlwaysSeperateMultiSelect>
+    <TabulationExport>false</TabulationExport>
+    <AlwaysUseMultiSelectDefaultValues>false</AlwaysUseMultiSelectDefaultValues>
+    <ExportAsText>true</ExportAsText>
+    <SwapRowsCols>false</SwapRowsCols>
+    <OverrideAttachmentFiles>true</OverrideAttachmentFiles>
+    <IncludeNotCompleted>false</IncludeNotCompleted>
+    <FromStatus />
+    <SubjectIDs />
+    <SurveyVersions />
+    <IgnoreCorruptSubjects>false</IgnoreCorruptSubjects>
+    <ExportFixedFileMapToExcel>true</ExportFixedFileMapToExcel>
+    <ASCIIExpandSingleChoiceVars>true</ASCIIExpandSingleChoiceVars>
+    <ASCIIRemoveTopicAnswerPrefix>false</ASCIIRemoveTopicAnswerPrefix>
+    <FixedFileMapReplaceNewLine>true</FixedFileMapReplaceNewLine>
+    <CorruptSubjectsListPath />
+    <FilterExpression />
+    <MoveToStatus>0</MoveToStatus>
+    <ExportSubjectMode>0</ExportSubjectMode>
+    <XsltFileName />
+    <WordRTL>false</WordRTL>
+    <IncludeTitlePage>true</IncludeTitlePage>
+    <SeparateWordFiles>false</SeparateWordFiles>
+    <HideNullAnswers>false</HideNullAnswers>
+    <FromSubjectData />
+    <ToSubjectData />
+    <WithQAResponsibleList>true</WithQAResponsibleList>
+    <FlatChapterHierarchy>false</FlatChapterHierarchy>
+    <ShowOtherSpecSeparately>false</ShowOtherSpecSeparately>
+    <ExportFullAnswers>false</ExportFullAnswers>
+    <XMLExpandMultiSelect>false</XMLExpandMultiSelect>
+    <XMLNoAttachments>false</XMLNoAttachments>
+    <KeepFileName>false</KeepFileName>
+    <NoAnswerData>false</NoAnswerData>
+    <XMLShowMissingCode>false</XMLShowMissingCode>
+    <XMLShowOpenEnededFromList>false</XMLShowOpenEnededFromList>
+    <XMLDurationsAsTotalMinutes>true</XMLDurationsAsTotalMinutes>
+    <XMLIncludeQuestionDurationAndVisits>false</XMLIncludeQuestionDurationAndVisits>
+    <ExportComments>false</ExportComments>
+    <QuestionAttachmentsInAnswers>false</QuestionAttachmentsInAnswers>
+    <UseAttachmentNameAsLink>false</UseAttachmentNameAsLink>
+    <EmbbedImages>false</EmbbedImages>
+    <EmbbedImageHeight>300</EmbbedImageHeight>
+    <EmbbedImageWidth>350</EmbbedImageWidth>
+    <IsHebrew>false</IsHebrew>
+    <TextType>0</TextType>
+    <ResultsInFile>-1</ResultsInFile>
+    <ExportLandID>-1</ExportLandID>
+    <XMLSbjFieldNames>true</XMLSbjFieldNames>
+    <XMLSbjFieldsAsExtra>false</XMLSbjFieldsAsExtra>
+    <ExcelMapFileNameForQuantum />
+    <TripleSDataFormat />
+    <TripleSExistingMetadataFilename />
+    <AccessExportOtherSpec>0</AccessExportOtherSpec>
+    <ExcelTreatDecimalsAsNumbers>true</ExcelTreatDecimalsAsNumbers>
+    <ExcelTreatDecimalWithCommasAsNumbers>false</ExcelTreatDecimalWithCommasAsNumbers>
+    <ExcelSurveyExportAllEntranceRule>false</ExcelSurveyExportAllEntranceRule>
+    <ExportAnswerTimeStamp>false</ExportAnswerTimeStamp>
+    <ExportAnswerDuration>false</ExportAnswerDuration>
+    <ExportGDPRVars>false</ExportGDPRVars>
+    <ExportAnswerVisits>false</ExportAnswerVisits>
+    <OverrideMissingValue>false</OverrideMissingValue>
+    <MissingValue />
+    <OverrideMissingValueExtra>false</OverrideMissingValueExtra>
+    <MissingValueExtra />
+    <OverrideOptionsCountValue>0</OverrideOptionsCountValue>
+    <StatusNameLanguage />
+    <VariableNames />
+    <SimpleExportIncludeSurveyHeader>false</SimpleExportIncludeSurveyHeader>
+    <SimpleExportIncludeAnswerOptions>false</SimpleExportIncludeAnswerOptions>
+    <UsersIDs />
+    <GroupIDs />
+    <IncludeInterviewTimeZoneCols>false</IncludeInterviewTimeZoneCols>
+    <ExportUTF8WithBOM>true</ExportUTF8WithBOM>
+    <DateFilterEnabled>false</DateFilterEnabled>
+    <DateFilterLow>0001-01-01T00:00:00-06:00</DateFilterLow>
+    <DateFilterHigh>9999-12-31T00:00:00-06:00</DateFilterHigh>
+    <UploadDateFilterEnabled>false</UploadDateFilterEnabled>
+    <UploadDateFilterLow>0001-01-01T00:00:00-06:00</UploadDateFilterLow>
+    <UploadDateFilterHigh>9999-12-31T00:00:00-06:00</UploadDateFilterHigh>
+    <VisitStartDateFilterEnabled>false</VisitStartDateFilterEnabled>
+    <VisitStartDateFilterLow>2024-05-30T00:00:00-06:00</VisitStartDateFilterLow>
+    <VisitStartDateFilterHigh>2024-05-30T00:00:00-06:00</VisitStartDateFilterHigh>
+    <VisitEndDateFilterEnabled>false</VisitEndDateFilterEnabled>
+    <RoundsFilter />
+    <VisitEndDateFilterLow>0001-01-01T00:00:00-06:00</VisitEndDateFilterLow>
+    <VisitEndDateFilterHigh>9999-12-31T00:00:00-06:00</VisitEndDateFilterHigh>
+    <LastModifiedDateFilterEnabled>false</LastModifiedDateFilterEnabled>
+    <LastModifiedDateFilterLow>0001-01-01T00:00:00-06:00</LastModifiedDateFilterLow>
+    <LastModifiedDateFilterHigh>9999-12-31T00:00:00-06:00</LastModifiedDateFilterHigh>
+    <LastModifiedMediaDateFilterEnabled>false</LastModifiedMediaDateFilterEnabled>
+    <LastModifiedMediaDateFilterLow>0001-01-01T00:00:00-06:00</LastModifiedMediaDateFilterLow>
+    <LastModifiedMediaDateFilterHigh>9999-12-31T00:00:00-06:00</LastModifiedMediaDateFilterHigh>
+    <MediaUploadedDateFilterEnabled>false</MediaUploadedDateFilterEnabled>
+    <MediaUploadedDateFilterLow>0001-01-01T00:00:00-06:00</MediaUploadedDateFilterLow>
+    <MediaUploadedDateFilterHigh>9999-12-31T00:00:00-06:00</MediaUploadedDateFilterHigh>
+    <Completed>true</Completed>
+    <ColTitleCompleted>Complete</ColTitleCompleted>
+    <StopQuestion>true</StopQuestion>
+    <ColTitleStopQuestion>StopQ</ColTitleStopQuestion>
+    <SubjectMode>true</SubjectMode>
+    <ColTitleSubjectMode>Test</ColTitleSubjectMode>
+    <Longitude>true</Longitude>
+    <ColTitleLongitude>Longitude</ColTitleLongitude>
+    <Latitude>true</Latitude>
+    <ColTitleLatitude>Latitude</ColTitleLatitude>
+    <Status>true</Status>
+    <ColTitleStatus>Status</ColTitleStatus>
+    <ParentSubjectID>true</ParentSubjectID>
+    <ColTitleParentSubjectID>ParentID</ColTitleParentSubjectID>
+    <OrigUTCMins>false</OrigUTCMins>
+    <ColTitleOrigUTCMins>UTCDiff</ColTitleOrigUTCMins>
+    <QAScore>true</QAScore>
+    <ColTitleQAScore>QAScore</ColTitleQAScore>
+    <FreeScenarioName>true</FreeScenarioName>
+    <ColTitleFreeScenarioName>FrScName</ColTitleFreeScenarioName>
+    <RunBeforeAfterExport />
+    <ReplaceCodingsWithValue>true</ReplaceCodingsWithValue>
+    <ExtRefNum>true</ExtRefNum>
+    <ColTitleExtRefNum>ExReNum</ColTitleExtRefNum>
+    <VisitStart>true</VisitStart>
+    <ColTitleVisitStart>VStart</ColTitleVisitStart>
+    <VisitEnd>true</VisitEnd>
+    <ColTitleVisitEnd>VEnd</ColTitleVisitEnd>
+    <VisitStartInterviewTimezone>true</VisitStartInterviewTimezone>
+    <ColTitleVisitStartInterviewTimezone>InterviewTimeVStart</ColTitleVisitStartInterviewTimezone>
+    <VisitEndInterviewTimezone>true</VisitEndInterviewTimezone>
+    <ColTitleVisitEndInterviewTimezone>InterviewTimeVEnd</ColTitleVisitEndInterviewTimezone>
+    <UploadInterviewTimeZone>true</UploadInterviewTimeZone>
+    <ColTitleUploadInterviewTimeZone>InterviewTimeUpload</ColTitleUploadInterviewTimeZone>
+    <RunningIndex>false</RunningIndex>
+    <ColTitleRunningIndex>RunningIndex</ColTitleRunningIndex>
+    <SurveyDeviceIndex>false</SurveyDeviceIndex>
+    <ColTitleSurveyDeviceIndex>SurveyDeviceIndex</ColTitleSurveyDeviceIndex>
+    <DeviceIndex>false</DeviceIndex>
+    <ColTitleDeviceIndex>DeviceIndex</ColTitleDeviceIndex>
+    <TaskID>false</TaskID>
+    <ColTitleTaskID>TaskID</ColTitleTaskID>
+    <LocationID>false</LocationID>
+    <ColTitleLocationID>LocID</ColTitleLocationID>
+    <LocationName>false</LocationName>
+    <ColTitleLocationName>LocName</ColTitleLocationName>
+    <SurveyVersion>false</SurveyVersion>
+    <ColTitleSurveyVersion>SrvVer</ColTitleSurveyVersion>
+    <ClientSTGVersion>false</ClientSTGVersion>
+    <ColTitleClientSTGVersion>STGVer</ColTitleClientSTGVersion>
+    <SID>false</SID>
+    <ColTitleSID>SID</ColTitleSID>
+    <FlagsModifiedAfterCompleted>false</FlagsModifiedAfterCompleted>
+    <ColTitleFlagsModifiedAfterCompleted>ModifiedAfterCompleted</ColTitleFlagsModifiedAfterCompleted>
+    <FlagsStoppedAndContinued>false</FlagsStoppedAndContinued>
+    <ColTitleFlagsStoppedAndContinued>StoppedAndContinued</ColTitleFlagsStoppedAndContinued>
+    <FlagsStopWithoutSave>false</FlagsStopWithoutSave>
+    <ColTitleFlagsStopWithoutSave>StopWithoutSave</ColTitleFlagsStopWithoutSave>
+    <FlagsVersionChangedMidRun>false</FlagsVersionChangedMidRun>
+    <ColTitleFlagsVersionChangedMidRun>VersionChangedMidRun</ColTitleFlagsVersionChangedMidRun>
+    <FlagsWasSetAsComplete>false</FlagsWasSetAsComplete>
+    <ColTitleFlagsWasSetAsComplete>WasSetAsComplete</ColTitleFlagsWasSetAsComplete>
+    <FlagByScript>false</FlagByScript>
+    <ColTitleFlagsByScript>FlagsByScript</ColTitleFlagsByScript>
+    <FlagByDuration>false</FlagByDuration>
+    <ColTitleFlagsByDuration>FlagsByDuration</ColTitleFlagsByDuration>
+    <FlagByReview>false</FlagByReview>
+    <ColTitleFlagsByReview>FlagsByReview</ColTitleFlagsByReview>
+    <FlagByNoGps>false</FlagByNoGps>
+    <ColTitleFlagsByNoGps>FlagsByNoGps</ColTitleFlagsByNoGps>
+    <FlagByFakeGPS>false</FlagByFakeGPS>
+    <ColTitleFlagsByFakeGPS>FlagsByFakeGPS</ColTitleFlagsByFakeGPS>
+    <FlagStraightLining>false</FlagStraightLining>
+    <ColTitleFlagsStraightLining>FlagsStraightLining</ColTitleFlagsStraightLining>
+    <FlagShortOpenEnededAnswer>false</FlagShortOpenEnededAnswer>
+    <ColTitleFlagsShortOpenEnededAnswer>FlagsShortOpenEnededAnswer</ColTitleFlagsShortOpenEnededAnswer>
+    <FlagTooManySessions>false</FlagTooManySessions>
+    <ColTitleFlagsTooManySessions>FlagsTooManySessions</ColTitleFlagsTooManySessions>
+    <FlagOddHours>false</FlagOddHours>
+    <ColTitleFlagsOddHours>FlagsOddHours</ColTitleFlagsOddHours>
+    <FlaggedByRuntimeScriptError>false</FlaggedByRuntimeScriptError>
+    <ColTitleFlaggedByRuntimeScriptError>FlaggedByRuntimeScriptError</ColTitleFlaggedByRuntimeScriptError>
+    <FlaggedByRuntimeScriptErrorComment>false</FlaggedByRuntimeScriptErrorComment>
+    <ColTitleFlaggedByRuntimeScriptErrorComment>FlaggedByRuntimeScriptErrorComment</ColTitleFlaggedByRuntimeScriptErrorComment>
+    <FlaggedByGPSTimeDifferenceDate>false</FlaggedByGPSTimeDifferenceDate>
+    <ColTitleFlaggedByGPSTimeDifferenceDate>FlaggedByGPSTimeDifferenceDate</ColTitleFlaggedByGPSTimeDifferenceDate>
+    <FlaggedByGPSTimeDifferenceDateComment>false</FlaggedByGPSTimeDifferenceDateComment>
+    <ColTitleFlaggedByGPSTimeDifferenceDateComment>FlaggedByGPSTimeDifferenceDateComment</ColTitleFlaggedByGPSTimeDifferenceDateComment>
+    <FlaggedByGPSTimeDifferenceStale>false</FlaggedByGPSTimeDifferenceStale>
+    <ColTitleFlaggedByGPSTimeDifferenceStale>FlaggedByGPSTimeDifferenceStale</ColTitleFlaggedByGPSTimeDifferenceStale>
+    <FlaggedByGPSTimeDifferenceStaleComment>false</FlaggedByGPSTimeDifferenceStaleComment>
+    <ColTitleFlaggedByGPSTimeDifferenceStaleComment>FlaggedByGPSTimeDifferenceStaleComment</ColTitleFlaggedByGPSTimeDifferenceStaleComment>
+    <FlaggedByGPSServicesOff>false</FlaggedByGPSServicesOff>
+    <ColTitleFlaggedByGPSServicesOff>FlaggedByGPSServicesOff</ColTitleFlaggedByGPSServicesOff>
+    <FlaggedByNoSilentRecordings>false</FlaggedByNoSilentRecordings>
+    <ColTitleFlaggedByNoSilentRecordings>FlaggedByNoSilentRecordings</ColTitleFlaggedByNoSilentRecordings>
+    <FlaggedByDeviceRooted>false</FlaggedByDeviceRooted>
+    <FlaggedByDeviceRootedComment>false</FlaggedByDeviceRootedComment>
+    <ColTitleFlaggedByDeviceRooted>FlaggedByDeviceRooted</ColTitleFlaggedByDeviceRooted>
+    <ColTitleFlaggedByDeviceRootedComment>FlaggedByDeviceRootedComment</ColTitleFlaggedByDeviceRootedComment>
+    <FlaggedByBacktracking>false</FlaggedByBacktracking>
+    <ColTitleFlaggedByBacktracking>FlaggedByBacktracking</ColTitleFlaggedByBacktracking>
+    <FlaggedByBacktrackingComment>false</FlaggedByBacktrackingComment>
+    <ColTitleFlaggedByBacktrackingComment>FlaggedByBacktrackingComment</ColTitleFlaggedByBacktrackingComment>
+    <FlaggedByGPSCapturedAtEnd>false</FlaggedByGPSCapturedAtEnd>
+    <ColTitleFlaggedByGPSCapturedAtEnd>FlaggedByGPSCapturedAtEnd</ColTitleFlaggedByGPSCapturedAtEnd>
+    <FlaggedByGPSCapturedAtEndComment>false</FlaggedByGPSCapturedAtEndComment>
+    <ColTitleFlaggedByGPSCapturedAtEndComment>FlaggedByGPSCapturedAtEndComment</ColTitleFlaggedByGPSCapturedAtEndComment>
+    <FlaggedByPartialRacing>false</FlaggedByPartialRacing>
+    <ColTitleFlaggedByPartialRacing>FlaggedByPartialRacing</ColTitleFlaggedByPartialRacing>
+    <FlaggedByPartialRacingComment>false</FlaggedByPartialRacingComment>
+    <ColTitleFlaggedByPartialRacingComment>FlaggedByPartialRacingComment</ColTitleFlaggedByPartialRacingComment>
+    <FlaggedByQuestionTakingTooLong>false</FlaggedByQuestionTakingTooLong>
+    <ColTitleFlaggedByQuestionTakingTooLong>FlaggedByQuestionTakingTooLong</ColTitleFlaggedByQuestionTakingTooLong>
+    <FlaggedByQuestionTakingTooLongComment>false</FlaggedByQuestionTakingTooLongComment>
+    <ColTitleFlaggedByQuestionTakingTooLongComment>FlaggedByQuestionTakingTooLongComment</ColTitleFlaggedByQuestionTakingTooLongComment>
+    <FlaggedByClockChanged>false</FlaggedByClockChanged>
+    <ColTitleFlaggedByClockChanged>FlaggedByClockChanged</ColTitleFlaggedByClockChanged>
+    <FlaggedByClockChangedComment>False</FlaggedByClockChangedComment>
+    <ColTitleFlaggedByClockChangedComment>FlaggedByClockChangedComment</ColTitleFlaggedByClockChangedComment>
+    <FlagByAnswerCode>false</FlagByAnswerCode>
+    <ColTitleFlagsByAnswerCode>FlagsByAnswerCode</ColTitleFlagsByAnswerCode>
+    <FlaggedByScriptComment />
+    <ColTitleFlaggedByScriptComment>FlaggedByScriptComment</ColTitleFlaggedByScriptComment>
+    <FlaggedByReviewComment />
+    <ColTitleFlaggedByReviewComment>FlaggedByReviewComment</ColTitleFlaggedByReviewComment>
+    <FlaggedByFakeGPSComment />
+    <ColTitleFlaggedByFakeGPSComment>FlaggedByFakeGPSComment</ColTitleFlaggedByFakeGPSComment>
+    <FlaggedByShortOpenEnededAnswerComment />
+    <ColTitleFlaggedByShortOpenEnededAnswerComment>FlaggedByShortOpenEnededAnswerComment</ColTitleFlaggedByShortOpenEnededAnswerComment>
+    <FlaggedByStaightLiningComment />
+    <ColTitleFlaggedByStraightLiningComment>FlaggedByStraightLiningComment</ColTitleFlaggedByStraightLiningComment>
+    <Version>false</Version>
+    <ColTitleVersion>SbjVer</ColTitleVersion>
+    <FlagsWasUploadedByOtherSurveyor>false</FlagsWasUploadedByOtherSurveyor>
+    <ColTitleFlagsWasUploadedByOtherSurveyor>WasUploadedByOtherSurveyor</ColTitleFlagsWasUploadedByOtherSurveyor>
+    <FlagsAttachmentsFullyUploaded>false</FlagsAttachmentsFullyUploaded>
+    <ColTitleFlagsAttachmentsFullyUploaded>AttachmentsFullyUploaded</ColTitleFlagsAttachmentsFullyUploaded>
+    <ReviewerName>false</ReviewerName>
+    <ColTitleReviewerName>RvwName</ColTitleReviewerName>
+    <DeviceNewID>false</DeviceNewID>
+    <ColTitleDeviceNewID>DeviceID</ColTitleDeviceNewID>
+    <ClientDuration>false</ClientDuration>
+    <ColTitleClientDuration>NetDuration</ColTitleClientDuration>
+    <DeviceIMEI>false</DeviceIMEI>
+    <ColTitleDeviceIMEI>DeviceIMEI</ColTitleDeviceIMEI>
+    <SimID>false</SimID>
+    <ColTitleSimID>SimID</ColTitleSimID>
+    <QualityControlFlag>false</QualityControlFlag>
+    <ColTitleQualityControlFlag>QualityControlFlag</ColTitleQualityControlFlag>
+    <QualityControlComment>false</QualityControlComment>
+    <ColTitleQualityControlComment>QualityControlComment</ColTitleQualityControlComment>
+    <SurveyID>false</SurveyID>
+    <ColTitleSurveyID>SurveyID</ColTitleSurveyID>
+    <SurveyName>false</SurveyName>
+    <ColTitleSurveyName>SurveyName</ColTitleSurveyName>
+    <LastModifiedTime>false</LastModifiedTime>
+    <ColTitleLastModifiedTime>LastModifiedTime</ColTitleLastModifiedTime>
+    <LastModifiedMediaTime>false</LastModifiedMediaTime>
+    <ColTitleLastModifiedMediaTime>LastModifiedMediaTime</ColTitleLastModifiedMediaTime>
+    <MediaUploadedTime>false</MediaUploadedTime>
+    <ColTitleMediaUploadedTime>MediaUploadedTime</ColTitleMediaUploadedTime>
+    <SupervisorState>false</SupervisorState>
+    <ColTitleSupervisorState>SupervisorState</ColTitleSupervisorState>
+    <SupervisorComment>false</SupervisorComment>
+    <ColTitleSupervisorComment>SupervisorComment</ColTitleSupervisorComment>
+    <BatteryLevel>false</BatteryLevel>
+    <ColTitleBatteryLevel>BatteryLevel</ColTitleBatteryLevel>
+    <DeviceModel>false</DeviceModel>
+    <ColTitleDeviceModel>DeviceModel</ColTitleDeviceModel>
+    <HasSilentRecordingAudio>false</HasSilentRecordingAudio>
+    <ColTitleHasSilentRecordingAudio>HasSilentAttachments</ColTitleHasSilentRecordingAudio>
+    <ClockChangedMidRun>false</ClockChangedMidRun>
+    <ColTitleClockChangedMidRun>ClockChangedMidRun</ColTitleClockChangedMidRun>
+    <AttemptsPerCompletedInterview>false</AttemptsPerCompletedInterview>
+    <ColTitleAttemptsPerCompletedInterview>AttemptsPerCompletedInterview</ColTitleAttemptsPerCompletedInterview>
+    <AdherenceToMethodology>false</AdherenceToMethodology>
+    <ColTitleAdherenceToMethodology>AdherenceToMethodology</ColTitleAdherenceToMethodology>
+    <LastModifiedUserName>false</LastModifiedUserName>
+    <ColTitleLastModifiedUserName>LastModifiedUserName</ColTitleLastModifiedUserName>
+    <CustomData1>false</CustomData1>
+    <ColTitleCustomData1>CustomData1</ColTitleCustomData1>
+    <CustomData2>false</CustomData2>
+    <ColTitleCustomData2>CustomData2</ColTitleCustomData2>
+    <CustomData3>false</CustomData3>
+    <ColTitleCustomData3>CustomData3</ColTitleCustomData3>
+    <CustomData4>false</CustomData4>
+    <ColTitleCustomData4>CustomData4</ColTitleCustomData4>
+    <CustomData5>false</CustomData5>
+    <ColTitleCustomData5>CustomData5</ColTitleCustomData5>
+    <CustomData6>false</CustomData6>
+    <ColTitleCustomData6>CustomData6</ColTitleCustomData6>
+    <CustomDataInt1>false</CustomDataInt1>
+    <ColTitleCustomDataInt1>CustomDataInt1</ColTitleCustomDataInt1>
+    <CustomDataInt2>false</CustomDataInt2>
+    <ColTitleCustomDataInt2>CustomDataInt2</ColTitleCustomDataInt2>
+    <CustomDataInt3>false</CustomDataInt3>
+    <ColTitleCustomDataInt3>CustomDataInt3</ColTitleCustomDataInt3>
+    <CustomDataInt4>false</CustomDataInt4>
+    <ColTitleCustomDataInt4>CustomDataInt4</ColTitleCustomDataInt4>
+    <CustomDataInt5>false</CustomDataInt5>
+    <ColTitleCustomDataInt5>CustomDataInt5</ColTitleCustomDataInt5>
+    <CustomDataInt6>false</CustomDataInt6>
+    <ColTitleCustomDataInt6>CustomDataInt6</ColTitleCustomDataInt6>
+    <InterviewStopComment>false</InterviewStopComment>
+    <ColTitleInterviewStopComment>InterviewStopComment</ColTitleInterviewStopComment>
+    <TrackedAnswerCodeNum>-1</TrackedAnswerCodeNum>
+    <ColTitleTrackedAnswerCodeNum>TrackedAnswerCodeNum</ColTitleTrackedAnswerCodeNum>
+    <TrackedAnswerCodePercent>-1</TrackedAnswerCodePercent>
+    <ColTitleTrackedAnswerCodePercent>TrackedAnswerCodePercent</ColTitleTrackedAnswerCodePercent>
+    <OriginalUserName>false</OriginalUserName>
+    <ColTitleOriginalUserName>OriginalUserName</ColTitleOriginalUserName>
+    <ExternalUserID />
+    <ColTitleExternalUserID>ExternalUserID</ColTitleExternalUserID>
+    <Flags2IsUploadAfterStopped>false</Flags2IsUploadAfterStopped>
+    <ColTitleFlags2IsUploadAfterStopped>UploadAfterStopped</ColTitleFlags2IsUploadAfterStopped>
+    <Flags2WasCanceled>false</Flags2WasCanceled>
+    <ColTitleFlags2WasCanceled>WasCanceled</ColTitleFlags2WasCanceled>
+    <CustomDataPII1>false</CustomDataPII1>
+    <ColTitleCustomDataPII1>CustomDataPII1</ColTitleCustomDataPII1>
+    <CustomDataPII2>false</CustomDataPII2>
+    <ColTitleCustomDataPII2>CustomDataPII2</ColTitleCustomDataPII2>
+    <CustomDataPII3>false</CustomDataPII3>
+    <ColTitleCustomDataPII3>CustomDataPII3</ColTitleCustomDataPII3>
+    <CustomDataPIIInt1>false</CustomDataPIIInt1>
+    <ColTitleCustomDataPIIInt1>CustomDataPIIInt1</ColTitleCustomDataPIIInt1>
+    <CustomDataPIIInt2>false</CustomDataPIIInt2>
+    <ColTitleCustomDataPIIInt2>CustomDataPIIInt2</ColTitleCustomDataPIIInt2>
+    <CustomDataPIIInt3>false</CustomDataPIIInt3>
+    <ColTitleCustomDataPIIInt3>CustomDataPIIInt3</ColTitleCustomDataPIIInt3>
+    <CustomData7>false</CustomData7>
+    <ColTitleCustomData7>CustomData7</ColTitleCustomData7>
+    <CustomData8>false</CustomData8>
+    <ColTitleCustomData8>CustomData8</ColTitleCustomData8>
+    <CustomData9>false</CustomData9>
+    <ColTitleCustomData9>CustomData9</ColTitleCustomData9>
+    <CustomData10>false</CustomData10>
+    <ColTitleCustomData10>CustomData10</ColTitleCustomData10>
+    <CustomData11>false</CustomData11>
+    <ColTitleCustomData11>CustomData11</ColTitleCustomData11>
+    <CustomData12>false</CustomData12>
+    <ColTitleCustomData12>CustomData12</ColTitleCustomData12>
+    <CustomDataInt7>false</CustomDataInt7>
+    <ColTitleCustomDataInt7>CustomDataInt7</ColTitleCustomDataInt7>
+    <CustomDataInt8>false</CustomDataInt8>
+    <ColTitleCustomDataInt8>CustomDataInt8</ColTitleCustomDataInt8>
+    <CustomDataInt9>false</CustomDataInt9>
+    <ColTitleCustomDataInt9>CustomDataInt9</ColTitleCustomDataInt9>
+    <CustomDataInt10>false</CustomDataInt10>
+    <ColTitleCustomDataInt10>CustomDataInt10</ColTitleCustomDataInt10>
+    <CustomDataInt11>false</CustomDataInt11>
+    <ColTitleCustomDataInt11>CustomDataInt11</ColTitleCustomDataInt11>
+    <CustomDataInt12>false</CustomDataInt12>
+    <ColTitleCustomDataInt12>CustomDataInt12</ColTitleCustomDataInt12>
+    <SurveyorUserID>false</SurveyorUserID>
+    <ColTitleSurveyorUserID>SurveyorUserID</ColTitleSurveyorUserID>
+    <IdleDuration>false</IdleDuration>
+    <ColTitleIdleDuration>IdleDuration</ColTitleIdleDuration>
+    <NumberOfSessions>false</NumberOfSessions>
+    <ColTitleNumberOfSessions>NumberOfSessions</ColTitleNumberOfSessions>
+    <LastUsedLanguage>false</LastUsedLanguage>
+    <ColTitleLastUsedLanguage>LastUsedLanguage</ColTitleLastUsedLanguage>
+    <DeviceType>false</DeviceType>
+    <ColTitleDeviceType>DeviceType</ColTitleDeviceType>
+    <FlaggedByGpsAccuracy>false</FlaggedByGpsAccuracy>
+    <ColTitleFlaggedByGPSAccuracy>FlaggedByGPSAccuracy</ColTitleFlaggedByGPSAccuracy>
+    <FlaggedByGpsAccuracyComment>false</FlaggedByGpsAccuracyComment>
+    <ColTitleFlaggedByGPSAccuracyComment>FlaggedByGPSAccuracyComment</ColTitleFlaggedByGPSAccuracyComment>
+    <MetersFromLastInterview>false</MetersFromLastInterview>
+    <ColTitleMetersFromLastInterview>MetersFromLastInterview</ColTitleMetersFromLastInterview>
+    <SecondsFromLastInterview>false</SecondsFromLastInterview>
+    <ColTitleSecondsFromLastInterview>SecondsFromLastInterview</ColTitleSecondsFromLastInterview>
+    <ASCIIMapVariableMatchingMode>0</ASCIIMapVariableMatchingMode>
+    <XMLValidateData>false</XMLValidateData>
+    <ExcelExportAllDataAsText>true</ExcelExportAllDataAsText>
+    <ASCIIReplaceMTMSSeparatorWithUnderscore>false</ASCIIReplaceMTMSSeparatorWithUnderscore>
+    <ExcelSurveyExportIncludeAnswerCodings>false</ExcelSurveyExportIncludeAnswerCodings>
+  </Props>
+  <ColsArray>
+    <Idx>-10,-10</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-20,-20</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-30,-30</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-40,-40</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-50,-50</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-60,-60</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-70,-70</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-80,-80</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-90,-90</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-100,-100</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-110,-110</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-120,-120</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-130,-130</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-140,-140</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-150,-150</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-160,-160</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-170,-170</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-180,-180</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-190,-190</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-200,-200</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-210,-210</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-220,-220</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-230,-230</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-240,-240</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-250,-250</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-410,-410</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1410,-1410</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>10,10</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>11,11</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>12,12</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>13,13</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>5,5</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>6,6</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,8</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,9</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>8,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>9,*</Idx>
+  </ColsArray>
+  <AdvancedExportColumns>
+    <QID>-10</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-20</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-30</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-40</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-50</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-60</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-70</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-80</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-90</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-100</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-110</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-120</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-130</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-140</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-150</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-160</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-170</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-180</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-190</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-200</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-210</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-220</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-230</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-240</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-250</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-410</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>-1410</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>10</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>11</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>12</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>13</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>5</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>6</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>8</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>9</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+</ExportSettings_ColsOrderByID>
