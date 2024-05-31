@@ -59,12 +59,12 @@ inicio <- lubridate::ymd_hms(paste(fecha, "08:0:00"))
 fin <- lubridate::ymd_hms(paste(fecha, "19:00:00"))
 secuencia_tiempos <- seq(from = inicio, to = fin, by = "10 mins")
 
-bd_simulada_encuesta_salida <-
-  union_datos_x_muestra(datos_recibidos = bd_datos_recibiods,
-                        muestra_ori = bd_muestra) |>
-  mutate(status = "Reportada") |>
-  rename(geometria = geometry) |>
-  mutate(Date = sample(x = secuencia_tiempos, size = n(), replace = T))
+# bd_simulada_encuesta_salida <-
+#   union_datos_x_muestra(datos_recibidos = bd_datos_recibiods,
+#                         muestra_ori = bd_muestra) |>
+#   mutate(status = "Reportada") |>
+#   rename(geometria = geometry) |>
+#   mutate(Date = sample(x = secuencia_tiempos, size = n(), replace = T))
 
 # Estrucutra base final
 
@@ -72,8 +72,31 @@ bd_encuesta_salida_survey <-
   openxlsx2::read_xlsx(file = "data-raw/bd_encuesta_salida_surveytogo.xlsx", na.strings = "-1") |>
   as_tibble() |>
   mutate(id = paste0(seccion, tipo_casilla),
-         status = "Reportada") |>
-  # rename(voto_sen_candidato = voto_sen_candidato_O1)
+         status = "Reportada",
+         Date = sample(x = secuencia_tiempos, size = n(), replace = T),
+         across(.cols = starts_with("voto_sen_"), .fns = ~ as.character(.x)))
+
+n_simualciones <- 4000
+
+dummy_base_salida <-
+  tibble(Date = sample(x = secuencia_tiempos, size = n_simualciones, replace = T),
+         mun = sample(x = gsub(pattern = "[0-9]. ", replacement = "", x = unique(bd_muestra$municipio)),
+                      size = n_simualciones, replace = T),
+         id = sample(x = shp_casillas$id, size = n_simualciones, replace = T),
+         voto_sen_candidato_O1 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O2 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O3 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O4 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O5 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O6 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O7 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O8 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
+         voto_sen_candidato_O9 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T)) |>
+  mutate(status = "Reportada")
+
+bd_encuesta_salida_survey <-
+bd_encuesta_salida_survey |>
+  bind_rows(dummy_base_salida)
 
 bd_encuesta_salida <- bd_encuesta_salida_survey
 

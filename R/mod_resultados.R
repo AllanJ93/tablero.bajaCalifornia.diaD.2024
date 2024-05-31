@@ -40,21 +40,21 @@ mod_resultados_ui <- function(id){
         #                  pull())/5),
         total = 10000,
         status = "success"),
+      shinycssloaders::withSpinner(highchartOutput(ns("resultados_voto_candidato"))),
       bslib::layout_columns(
-        shinycssloaders::withSpinner(highchartOutput(ns("tendencia_resultados"))),
-        shinycssloaders::withSpinner(highchartOutput(ns("resultados_voto_candidato")))
       ),
     ),
     bslib::card(
       full_screen = F,
       bslib::layout_columns(
-        shinycssloaders::withSpinner(highchartOutput(ns("llegada_info"))),
-        bslib::value_box(
-          title = "Casillas no óptimas",
-          value = textOutput(outputId = ns("excedentes_totales")),
-          bsicons::bs_icon(name = "exclamation-triangle"),
-          showcase_layout = "top right",
-          theme = value_box_theme(bg = "orange"))
+        shinycssloaders::withSpinner(highchartOutput(ns("tendencia_resultados"))),
+        shinycssloaders::withSpinner(highchartOutput(ns("llegada_info")))
+        # bslib::value_box(
+        #   title = "Casillas no óptimas",
+        #   value = textOutput(outputId = ns("excedentes_totales")),
+        #   bsicons::bs_icon(name = "exclamation-triangle"),
+        #   showcase_layout = "top right",
+        #   theme = value_box_theme(bg = "orange"))
       ),
     ),
     icon = icon("line-chart")

@@ -22,6 +22,7 @@ attachment::att_amend_desc()
 ## Create a module infrastructure in R/
 golem::add_module(name = "mapa_principal", with_test = TRUE) # Name of the module
 golem::add_module(name = "resultados", with_test = FALSE)
+golem::add_module(name = "enc_salida", with_test = FALSE)
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
