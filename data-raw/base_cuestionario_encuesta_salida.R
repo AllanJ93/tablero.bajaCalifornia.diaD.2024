@@ -80,8 +80,6 @@ n_simualciones <- 4000
 
 dummy_base_salida <-
   tibble(Date = sample(x = secuencia_tiempos, size = n_simualciones, replace = T),
-         mun = sample(x = gsub(pattern = "[0-9]. ", replacement = "", x = unique(bd_muestra$municipio)),
-                      size = n_simualciones, replace = T),
          id = sample(x = shp_casillas$id, size = n_simualciones, replace = T),
          voto_sen_candidato_O1 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
          voto_sen_candidato_O2 = sample(x = c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_), size = n_simualciones, replace = T),
