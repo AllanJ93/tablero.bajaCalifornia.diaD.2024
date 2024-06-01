@@ -32,7 +32,7 @@ mod_mapa_principal_ui <- function(id){
                                          label = "Cuestionario",
                                          choices = c("Apertura", "Encuesta de salida", "Cierre", "Conteo rápido")
         ),
-        leafletOutput(ns("mapa_principal"))
+        shinycssloaders::withSpinner(leafletOutput(ns("mapa_principal")))
       )
     ),
     icon = icon("map")
@@ -107,18 +107,16 @@ mod_mapa_principal_server <- function(id){
         if(input$cuestionario_input == "Apertura") {
 
           pal_status_casillas <-
-            leaflet::colorFactor(palette = c("blue", "blue"),
+            leaflet::colorFactor(palette = c("blue", "gray"),
                                  domain = unique(shp_casillas_react()$status))
 
         } else {
 
           pal_status_casillas <-
-            leaflet::colorFactor(palette = c("green", "gray70"),
+            leaflet::colorFactor(palette = c("blue", "gray70"),
                                  domain = unique(shp_casillas_react()$status))
 
         }
-
-        # browser()
 
         mapa_principal <-
           mun_shp |>
@@ -139,8 +137,8 @@ mod_mapa_principal_server <- function(id){
             radius = 7,
             data = shp_casillas_react(),
             stroke = F,
-            # color = ~pal_status_casillas(status),
-            color = "blue",
+            color = ~pal_status_casillas(status),
+            # color = "blue",
             fillOpacity = 1,
             group = "Status de casillas",
             label = paste("Casilla: ", shp_casillas_react()$id),
@@ -169,21 +167,35 @@ mod_mapa_principal_server <- function(id){
 
           catalogos <-
             muestra_shp |>
-            tibble::rownames_to_column(var = "id_distancia") |>
+            tibble::rownames_to_column(var = "id_casilla") |>
             as_tibble() |>
-            select(id_distancia, id)
+            select(id_casilla, id)
 
           casillas_cercanas <-
             st_distance(ubicaciones_apertura,
-                        muestra_shp |>
-                          head(2)) %>%
+                        muestra_shp) %>%
             as_tibble %>%
             rowwise() %>%
-            mutate(id_casilla_cercana = which.min(c_across(everything()))) |>
+            mutate(id_casilla = which.min(c_across(everything()))) |>
             tibble::rownames_to_column(var = "id_entrevista") |>
             mutate(id_entrevista = as.character(id_entrevista),
-                   id_casilla_cercana = as.character(id_casilla_cercana)) |>
-            left_join(catalogos, by = c("id_casilla_cercana" = "id_distancia"))
+                   id_casilla = as.character(id_casilla)) |>
+            left_join(catalogos, by = c("id_casilla" = "id_casilla"))
+
+          base_correcciones <-
+            ubicaciones_apertura |>
+            # mutate(id_reportada = paste0(seccion, tipo_casilla)) |>
+            left_join(casillas_cercanas, by = "id_entrevista") |>
+            mutate(correccion = dplyr::if_else(condition = id.x == id.y,
+                                               true = "Registro correcto",
+                                               false = "Corregida")) |>
+            as_tibble() |>
+            filter(correccion == "Corregida") |>
+            select(SbjNum, Srvyr, casilla_reportada = id.x, casilla_mas_cercana = id.y)
+
+          ubicaciones_apertura <-
+          ubicaciones_apertura |>
+            left_join(base_correcciones, by = c("SbjNum", "Srvyr"))
 
           mapa_principal <-
             mapa_principal |>
@@ -194,13 +206,10 @@ mod_mapa_principal_server <- function(id){
               color = 'red',
               fillOpacity = 1,
               group = "Apertura",
-              label = paste("Usuario: ", ubicaciones_apertura$Srvyr)
-              # popup = paste(paste0("Municipio: ", gsub(pattern = "[0-9].", replacement = "", x = shp_casillas_react()$municip)),
-              #               paste("Sección: ", shp_casillas_react()$seccion),
-              #               paste("Tipo casilla: ", shp_casillas_react()$tp_csll),
-              #               paste("Status: ", shp_casillas_react()$status),
-              #               paste("Equipo: ", shp_casillas_react()$equipo),
-              #               sep = "<br>")
+              label = paste("Usuario: ", ubicaciones_apertura$Srvyr),
+              popup = paste(paste0("Casilla reportada: ", ubicaciones_apertura$casilla_reportada),
+                            paste("Casilla mas cercana: ", ubicaciones_apertura$casilla_mas_cercana),
+                            sep = "<br>")
             )
         }
 

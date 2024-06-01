@@ -20,7 +20,7 @@ bd_apertura_survey <-
          status = "Reportada")
 
 bd_apertura <- bd_apertura_survey |>
-  filter(Srvyr != "Katheryn Hernandez")
+  filter(!Srvyr %in% c("Katheryn Hernandez", "test"))
 
 usethis::use_data(bd_apertura, overwrite = TRUE)
 
