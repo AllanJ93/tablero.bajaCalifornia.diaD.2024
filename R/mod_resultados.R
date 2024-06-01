@@ -75,18 +75,59 @@ mod_resultados_server <- function(id){
           bd_encuesta_salida |>
           procesar_prop_voto_sen() |>
           mutate(respuesta = voto_sen_candidato,
-                 media = round(total*100))
+                 media = round(total*100))|>
+          mutate(color_res = case_when(
+            grepl('Morena',x = voto_sen_candidato)~"#A6032F",
+            grepl('PAN|PRD|PRI',x = voto_sen_candidato)~"#0339a6",
+            grepl('PVEM',x = voto_sen_candidato)~"#98BF5E",
+            grepl('Morena',x = voto_sen_candidato)~"#A6032F",
+            grepl('PT',x = voto_sen_candidato)~"#D91136",
+            grepl('MC',x = voto_sen_candidato)~"#F27405",
+            grepl('No respondió',x = voto_sen_candidato)~"gray60",
+            grepl('Nulo',x = voto_sen_candidato)~"black",
+            grepl('Voto nulo',x = voto_sen_candidato)~"black"
+          ))|>
+          mutate(color_res = ifelse(choque==T,"yellow",color_res))
+
+        colores_voto_sen_candiato<- bd_resultados|>
+          select(voto_sen_candidato,color_res)
+
+        colores_voto_sen_candiato<-
+          setNames(pull(colores_voto_sen_candiato[2]),
+                   pull(colores_voto_sen_candiato[1]))
+
 
         g <-
-        bd_resultados %>%
+       # bd_resultados %>%
+       #   ggplot(aes(x = reorder(voto_sen_candidato, total),
+       #              y = total,
+       #              color = voto_sen_candidato)) +
+       #   geom_point(size = 4) +
+       #   geom_linerange(aes(ymin = total_low, ymax = total_upp)) +
+       #   coord_flip() +
+       #   scale_y_continuous(labels = scales::percent) +
+       #   labs(x = "", y = "") +
+       #   theme_minimal() +
+       #   theme(legend.position = "none",
+       #         axis.text = element_text(size = 16))
+
+        bd_resultados|>
+          #mutate(total_upp = total_upp+.05)%>%
           ggplot(aes(x = reorder(voto_sen_candidato, total),
                      y = total,
                      color = voto_sen_candidato)) +
           geom_point(size = 4) +
-          geom_linerange(aes(ymin = total_low, ymax = total_upp)) +
+          geom_linerange(aes(ymin = total_low, ymax = total_upp),) +
           coord_flip() +
           scale_y_continuous(labels = scales::percent) +
           labs(x = "", y = "") +
+          scale_color_manual(values = colores_voto_sen_candiato)+
+          geom_text(aes(label = scales::percent(x = total, accuracy = 1.)),       #agregar
+                    nudge_y = 0,nudge_x = -0.3, size = 5, show.legend = F) +   #agregar
+          geom_text(aes( label =  scales::percent(x = total_upp, accuracy = 1.), x = voto_sen_candidato, y = total_upp),
+                    size = 3, colour = "green",nudge_x = 0.15)+
+          geom_text(aes( label =  scales::percent(x = total_low, accuracy = 1.), x = voto_sen_candidato, y = total_low),
+                    size = 3, colour = "red",nudge_x = 0.15)+
           theme_minimal() +
           theme(legend.position = "none",
                 axis.text = element_text(size = 16))
