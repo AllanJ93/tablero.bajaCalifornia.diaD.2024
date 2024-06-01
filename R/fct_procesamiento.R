@@ -124,7 +124,7 @@ procesar_prop_voto_sen_tod_op <-function(datos_recibidos){
 
   design|>
     group_by(voto_sen_candidato)|>
-    summarise(total = srvyr::survey_mean(vartype = 'ci', df = Inf ,level = 0.99))|>
+    summarise(total = srvyr::survey_mean(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
     mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
 }
 
@@ -140,7 +140,7 @@ procesar_tot_voto_sen_tod_op <-function(datos_recibidos){
 
   design|>
     group_by(voto_sen_candidato)|>
-    summarise(total = srvyr::survey_total(vartype = 'ci', df = Inf ,level = 0.99))|>
+    summarise(total = srvyr::survey_total(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
     mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
 }
 
@@ -162,8 +162,46 @@ procesar_prop_voto_sen <-function(datos_recibidos){
 
   design|>
     group_by(voto_sen_candidato)|>
-    summarise(total = srvyr::survey_mean(vartype = 'ci', df = Inf ,level = 0.99))|>
+    summarise(total = srvyr::survey_mean(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
     mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+
+  aux<-
+    res|>
+    select(voto_sen_candidato,total_low,total_upp)|>
+    mutate(choque = F)
+
+  lim<-nrow(aux)
+
+  indices<-1:lim
+
+  ctrol<-indices[!aux$choque]
+  while (length(ctrol)>1) {
+
+    i<-ctrol[1]
+
+    low<-aux[i,'total_low']|>pull()
+    upp<-aux[i,'total_upp']|>pull()
+
+
+    aux[-i,]<-
+      aux[-i,]|>
+      mutate(choque =ifelse(test=((low<total_upp)*((upp>total_upp)+(upp>total_low))),
+                            T,choque))
+
+
+    if(length(ctrol) > length(indices[!aux$choque])){
+      aux[i,'choque']<-T
+      ctrol<-indices[!aux$choque]
+    }else{
+      ctrol<-ctrol[-1]
+    }
+  }
+
+  rm(ctrol,indices)
+
+  res|>
+    left_join(aux|>
+                select(voto_sen_candidato,choque),by = 'voto_sen_candidato')
 }
 
 # Por votos totales
@@ -182,8 +220,46 @@ procesar_tot_voto_sen <-function(datos_recibidos){
 
   design|>
     group_by(voto_sen_candidato)|>
-    summarise(total = srvyr::survey_total(vartype = 'ci', df = Inf ,level = 0.99))|>
+    summarise(total = srvyr::survey_total(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
     mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+
+  aux<-
+    res|>
+    select(voto_sen_candidato,total_low,total_upp)|>
+    mutate(choque = F)
+
+  lim<-nrow(aux)
+
+  indices<-1:lim
+
+  ctrol<-indices[!aux$choque]
+  while (length(ctrol)>1) {
+
+    i<-ctrol[1]
+
+    low<-aux[i,'total_low']|>pull()
+    upp<-aux[i,'total_upp']|>pull()
+
+
+    aux[-i,]<-
+      aux[-i,]|>
+      mutate(choque =ifelse(test=((low<total_upp)*((upp>total_upp)+(upp>total_low))),
+                            T,choque))
+
+
+    if(length(ctrol) > length(indices[!aux$choque])){
+      aux[i,'choque']<-T
+      ctrol<-indices[!aux$choque]
+    }else{
+      ctrol<-ctrol[-1]
+    }
+  }
+
+  rm(ctrol,indices)
+
+  res|>
+    left_join(aux|>
+                select(voto_sen_candidato,choque),by = 'voto_sen_candidato')
 }
 
 
@@ -199,7 +275,7 @@ procesar_prop_ident_partido <-function(datos_recibidos){
 
   design|>
     group_by(ident_partido)|>
-    summarise(total = srvyr::survey_mean(vartype = 'ci', df = Inf ,level = 0.99))|>
+    summarise(total = srvyr::survey_mean(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
     mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
 }
 
@@ -214,7 +290,52 @@ procesar_tot_ident_partido <-function(datos_recibidos){
 
   design|>
     group_by(ident_partido)|>
-    summarise(total = srvyr::survey_total(vartype = 'ci', df = Inf ,level = 0.99))|>
+    summarise(total = srvyr::survey_total(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
     mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
 }
 
+# Base votos al senado por municipio----------------------------------------------
+# Por proprciones
+procesar_prop_voto_mun_sen <-function(datos_recibidos){
+  datos_recibidos<-datos_recibidos|>
+    mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
+                                       'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato) )
+
+
+  design <- survey::svydesign(id = ~1,
+                              data = datos_recibidos,
+                              strata = ~estrato,
+                              weights = ~peso_estra*peso_individuo)|>
+    srvyr::as_survey_design()
+
+
+
+  design|>
+    group_by(municipio,voto_sen_candidato)|>
+    cascade(total = srvyr::survey_mean(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+
+}
+
+
+# Por votos totales
+procesar_tot_voto_mun_sen <-function(datos_recibidos){
+  datos_recibidos<-datos_recibidos|>
+    mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
+                                       'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato) )
+
+
+  design <- survey::svydesign(id = ~1,
+                              data = datos_recibidos,
+                              strata = ~estrato,
+                              weights = ~peso_estra*peso_individuo)|>
+    srvyr::as_survey_design()
+
+
+
+  design|>
+    group_by(municipio,voto_sen_candidato)|>
+    cascade(total = srvyr::survey_total(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+
+}
