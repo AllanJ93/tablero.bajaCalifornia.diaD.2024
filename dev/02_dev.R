@@ -39,6 +39,7 @@ golem::add_sass_file("custom")
 ## Add internal datasets ----
 ## If you have data in your package
 usethis::use_data_raw(name = "cartografia", open = FALSE)
+usethis::use_data_raw(name = "credenciales", open = TRUE)
 usethis::use_data_raw(name = "muestra", open = FALSE)
 usethis::use_data_raw(name = "base_cuestionario_apertura", open = FALSE)
 usethis::use_data_raw(name = "base_cuestionario_encuesta_salida", open = FALSE)

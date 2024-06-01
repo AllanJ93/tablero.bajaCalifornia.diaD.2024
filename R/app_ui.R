@@ -8,15 +8,20 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    shinyauthr::loginUI(id = "login"),
+    div(
+      id = "dashboard",
+        bslib::page_navbar(
+          shinyjs::useShinyjs(),
+          title = "Elecciones 2024 - Baja California",
+          bslib::nav_spacer(),
+          mod_mapa_principal_ui("mapa_principal_1"),
+          mod_resultados_ui("resultados_1"),
+          mod_enc_salida_ui("enc_salida_1")
+        )
+    ) %>%
+      shinyjs::hidden()
     # Your application UI logic
-    bslib::page_navbar(
-      shinyjs::useShinyjs(),
-      title = "Elecciones 2024 - Baja California",
-      bslib::nav_spacer(),
-      mod_mapa_principal_ui("mapa_principal_1"),
-      mod_resultados_ui("resultados_1"),
-      mod_enc_salida_ui("enc_salida_1")
-    )
   )
 }
 
