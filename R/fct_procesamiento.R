@@ -69,7 +69,16 @@ homologacion_sen_cand<- function(datos_recibidos){
                                               voto_sen_candidato_9,sep = '_')
                                        ), voto_sen_candidato))|>
     mutate(voto_sen_candidato = ifelse(is.na(voto_sen_candidato),'Nulo',voto_sen_candidato))|>
-    select(-starts_with('bool'),-starts_with('is_gus'))
+    select(-starts_with('bool'),-starts_with('is_gus'))|>
+    mutate(voto_sen_candidato = case_when(
+      grepl('PRD PAN',voto_sen_candidato) ~  'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRD',
+      grepl('PRI PAN',voto_sen_candidato) ~  'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI',
+      grepl('PRD PRI',voto_sen_candidato) ~  'Gustavo Sánchez y Guadalupe Gutiérrez del PRI PRD',
+      .default = voto_sen_candidato
+    ) )|>
+    mutate(voto_sen_candidato=  ifelse(grepl('PRD',voto_sen_candidato)&grepl('PRI',voto_sen_candidato)&grepl('PAN',voto_sen_candidato),
+                                       'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato))
+
 
 }
 
@@ -83,7 +92,6 @@ homologacion_sen_cand<- function(datos_recibidos){
 
 union_datos_x_muestra <-function(datos_recibidos, muestra_ori){
   result<-datos_recibidos|>
-    as_tibble()|>
     mutate(seccion = paste0(sprintf('%04d',seccion)),
            id_casilla = paste0(seccion,tipo_casilla)) |>
     left_join(muestra_ori|>
@@ -95,6 +103,113 @@ union_datos_x_muestra <-function(datos_recibidos, muestra_ori){
     left_join(result|>
                 distinct(estrato,id)|>
                 count(estrato,sort = T), by='estrato')|>
-    mutate(peso_estra = N_ori/n)
+    mutate(peso_estra = N_ori/n)|>
+    mutate(peso_individuo = 5)
+}
+
+# Base procesada con objeto survey tomando todas las opciones de coalicion ----------------------------------------------
+# Por proprciones
+procesar_prop_voto_sen_tod_op <-function(datos_recibidos){
+  design <- svydesign(id = ~SubjNum,
+                      data = datos_recibidos,
+                      strata = ~estrato,
+                      weights = ~peso_estra*peso_individuo)|>
+    as_survey_design()
+
+
+  design|>
+    group_by(voto_sen_candidato)|>
+    summarise(total = survey_mean(vartype = 'ci', df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+}
+
+
+# Por totales de votos
+procesar_tot_voto_sen_tod_op <-function(datos_recibidos){
+  design <- svydesign(id = ~SubjNum,
+                      data = datos_recibidos,
+                      strata = ~estrato,
+                      weights = ~peso_estra*peso_individuo)|>
+    as_survey_design()
+
+
+  design|>
+    group_by(voto_sen_candidato)|>
+    summarise(total = survey_total(vartype = 'ci', df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+}
+
+
+# Base procesada con objeto survey solo por candidatos----------------------------------------------
+# Por proprciones
+procesar_prop_voto_sen <-function(datos_recibidos){
+  datos_recibidos<-datos_recibidos|>
+    mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
+                                       'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato) )
+
+
+  design <- svydesign(id = ~SubjNum,
+                      data = datos_recibidos,
+                      strata = ~estrato,
+                      weights = ~peso_estra*peso_individuo)|>
+    as_survey_design()
+
+
+  design|>
+    group_by(voto_sen_candidato)|>
+    summarise(total = survey_mean(vartype = 'ci', df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+}
+
+# Por votos totales
+procesar_tot_voto_sen <-function(datos_recibidos){
+  datos_recibidos<-datos_recibidos|>
+    mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
+                                       'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato) )
+
+
+  design <- svydesign(id = ~SubjNum,
+                      data = datos_recibidos,
+                      strata = ~estrato,
+                      weights = ~peso_estra*peso_individuo)|>
+    as_survey_design()
+
+
+  design|>
+    group_by(voto_sen_candidato)|>
+    summarise(total = survey_total(vartype = 'ci', df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+}
+
+
+# Base procesada con objeto survey para identificacion partidista ----------------------------------------------
+# Por proprciones
+procesar_prop_ident_partido <-function(datos_recibidos){
+  design <- svydesign(id = ~SubjNum,
+                      data = datos_recibidos,
+                      strata = ~estrato,
+                      weights = ~peso_estra*peso_individuo)|>
+    as_survey_design()
+
+
+  design|>
+    group_by(ident_partido)|>
+    summarise(total = survey_mean(vartype = 'ci', df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+}
+
+# Por cantidad de respuestas
+procesar_tot_ident_partido <-function(datos_recibidos){
+  design <- svydesign(id = ~SubjNum,
+                      data = datos_recibidos,
+                      strata = ~estrato,
+                      weights = ~peso_estra*peso_individuo)|>
+    as_survey_design()
+
+
+  design|>
+    group_by(ident_partido)|>
+    summarise(total = survey_total(vartype = 'ci', df = Inf ,level = 0.99))|>
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
 }
 
