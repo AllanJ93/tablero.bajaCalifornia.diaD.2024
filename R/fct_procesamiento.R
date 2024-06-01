@@ -159,7 +159,7 @@ procesar_prop_voto_sen <-function(datos_recibidos){
                       weights = ~peso_estra*peso_individuo)|>
     srvyr::as_survey_design()
 
-
+  res<-
   design|>
     group_by(voto_sen_candidato)|>
     summarise(total = srvyr::survey_mean(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
@@ -217,7 +217,7 @@ procesar_tot_voto_sen <-function(datos_recibidos){
                       weights = ~peso_estra*peso_individuo)|>
     srvyr::as_survey_design()
 
-
+  res<-
   design|>
     group_by(voto_sen_candidato)|>
     summarise(total = srvyr::survey_total(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
