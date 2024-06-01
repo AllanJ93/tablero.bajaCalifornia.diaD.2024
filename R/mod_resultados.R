@@ -45,7 +45,7 @@ mod_resultados_ui <- function(id){
     bslib::card(
       full_screen = F,
       bslib::layout_columns(
-        shinycssloaders::withSpinner(highchartOutput(ns("tendencia_resultados"))),
+        shinycssloaders::withSpinner(plotOutput(ns("tendencia_resultados"))),
         shinycssloaders::withSpinner(highchartOutput(ns("llegada_info")))
         # bslib::value_box(
         #   title = "Casillas no óptimas",
@@ -96,35 +96,41 @@ mod_resultados_server <- function(id){
       })
 
     output$tendencia_resultados <-
-      renderHighchart({
+      renderPlot({
 
-        bd_tendencia <-
-          bd_encuesta_salida |>
-          count(hora = lubridate::floor_date(Date, "hours"), voto_sen_candidato_O1) |>
+        bd_plot <-
+        bd_encuesta_salida |>
+          mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
+                                             'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato),
+                 peso = weights(survey::svydesign(id = ~1,
+                                                  data = bd_encuesta_salida,
+                                                  strata = ~estrato,
+                                                  weights = ~peso_estra*peso_individuo)|>
+                                  srvyr::as_survey_design()))
+
+        g <-
+        bd_plot |>
+        count(hora = lubridate::floor_date(Date, "minutes"), voto_sen_candidato) |>
           group_by(hora) |>
-          tidyr::complete(voto_sen_candidato = unique(bd_encuesta_salida$voto_sen_candidato),
-                          fill = list(n = 0)) |>
+          tidyr::complete(tidyr::nesting(voto_sen_candidato),
+                   fill = list(n = 0)) |>
           ungroup() |>
           mutate(tot = sum(n), .by = c(hora)) |>
           mutate(n_acum = cumsum(n),
-                 tot_acum = cumsum(tot), .by = c(voto_sen_candidato_O1),
+                 tot_acum = cumsum(tot), .by = c(voto_sen_candidato),
                  movil = n_acum/tot_acum) |>
-          filter(grepl(pattern = "Hank", x = voto_sen_candidato_O1)) |>
-          mutate(movil = round(movil*100)) |>
-          rename(fecha = hora,
-                 resultado = movil)
-
-        g <-
-          highchart() |>
-          hc_xAxis(categories = format(bd_tendencia$fecha, "%I %p"),
-                   labels = list(style = list(fontSize = "18px"))) |>
-          hc_yAxis(min = 0,
-                   max = 100,
-                   tickInterval = 10,
-                   labels = list(format = "{value}%"),
-                   style = list(fontSize = "18px")) |>
-          hc_add_series(name = "Intención de voto", data = bd_tendencia$resultado, type = "line", color = "green") |>
-          hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}%", style = list(fontSize = "24px"))), align = "right")
+          filter(voto_sen_candidato %in% c("Nulo")) |>
+          # tail()
+          ggplot(aes(x = hora, y = movil, color = voto_sen_candidato)) +
+          geom_point() +
+          geom_line() +
+          scale_y_continuous(labels = scales::percent) +
+          labs(color = "", y = "", subtitle = 'Media móvil intención de voto') +
+          theme_minimal() +
+          theme(axis.text = element_text(size = 18),
+                legend.position = "none",
+                axis.title = element_text(size = 24),
+                plot.subtitle = element_text(size = 20))
 
         return(g)
 
