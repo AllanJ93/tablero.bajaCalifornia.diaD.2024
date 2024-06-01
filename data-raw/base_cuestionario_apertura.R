@@ -19,6 +19,8 @@ bd_apertura_survey <-
   mutate(id = paste0(seccion, tipo_casilla),
          status = "Reportada")
 
-bd_apertura <- bd_apertura_survey
+bd_apertura <- bd_apertura_survey |>
+  filter(Srvyr != "Katheryn Hernandez")
 
 usethis::use_data(bd_apertura, overwrite = TRUE)
+

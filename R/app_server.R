@@ -8,6 +8,8 @@ app_server <- function(input, output, session) {
   # Your application server logic
   # bd_apertura
 
+  options(survey.lonely.psu = "remove")
+
   credentials <-
     shinyauthr::loginServer(
       id = "login",

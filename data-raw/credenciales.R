@@ -11,7 +11,7 @@ user_base <-
   name = c("Katheryn", "Soporte Técnico", "Vladimir"),
   stringsAsFactors = FALSE,
   row.names = NULL,
-  password = c("luna", "123456", "HongKong") %>%
+  password = c("luna", "1", "HongKong") %>%
     purrr::map_chr(~sodium::password_store(.x))
 )
 

@@ -78,25 +78,25 @@ bd_encuesta_salida_survey <-
          Date = sample(x = secuencia_tiempos, size = n(), replace = T),
          across(.cols = starts_with("voto_sen_"), .fns = ~ as.character(.x)))
 
-n_simualciones <- 4000
-
-dummy_base_salida <-
-  tibble(Date = sample(x = secuencia_tiempos, size = n_simualciones, replace = T),
-         id = sample(x = sample(x = muestra_shp$id, size = round(nrow(muestra_shp)*0.7) ) , size = n_simualciones, replace = T),
-         voto_sen_candidato_O1 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O2 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O3 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O4 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O5 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O6 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O7 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O8 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
-         voto_sen_candidato_O9 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T)) |>
-  mutate(status = "Reportada")
+# n_simualciones <- 4000
+#
+# dummy_base_salida <-
+#   tibble(Date = sample(x = secuencia_tiempos, size = n_simualciones, replace = T),
+#          id = sample(x = sample(x = muestra_shp$id, size = round(nrow(muestra_shp)*0.7) ) , size = n_simualciones, replace = T),
+#          voto_sen_candidato_O1 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O2 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O3 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O4 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O5 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O6 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O7 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O8 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T),
+#          voto_sen_candidato_O9 = sample(x = unique(c(bd_encuesta_salida_survey$voto_sen_candidato_O1, NA_character_, "Juan Carlos Hank Krauss y Mónica Vega por el Partido Verde")), size = n_simualciones, replace = T)) |>
+#   mutate(status = "Reportada")
 
 bd_encuesta_salida_simulada <-
-  bd_encuesta_salida_survey |>
-  bind_rows(dummy_base_salida)
+  bd_encuesta_salida_survey #|>
+  # bind_rows(dummy_base_salida)
 
 bd_encuesta_salida <-
   homologacion_sen_cand(datos_recibidos = bd_encuesta_salida_simulada) |>

@@ -7,7 +7,6 @@
 #' @noRd
 #' @import dplyr leaflet highcharter sf gt
 #' @importFrom shiny NS tagList
-
 mod_mapa_principal_ui <- function(id){
   ns <- NS(id)
   bslib::nav_panel(
@@ -75,28 +74,28 @@ mod_mapa_principal_server <- function(id){
 
     casillas_abiertas <-
       reactive({
-      input$equipo_input
+        input$equipo_input
 
-      if(input$equipo_input == "Todos") {
-        shp_casillas_react() |>
-          as_tibble() |>
-          filter(status != "Reportada") |>
-          count(equipo, status) |>
-          tidyr::pivot_wider(names_from = status, values_from = n) |>
-          arrange(desc(`Sin reportar`)) |>
-          rename(Equipo = equipo,
-                 'Casillas sin reportar' = 'Sin reportar')
-      }
-      else {
-        shp_casillas_react() |>
-          as_tibble() |>
-          filter(equipo == input$equipo_input) |>
-          filter(status == "Sin reportar") |>
-          select(Casilla = id,
-                 Status = status,
-                 Municipio = municipio)
-      }
-    })
+        if(input$equipo_input == "Todos") {
+          shp_casillas_react() |>
+            as_tibble() |>
+            filter(status != "Reportada") |>
+            count(equipo, status) |>
+            tidyr::pivot_wider(names_from = status, values_from = n) |>
+            arrange(desc(`Sin reportar`)) |>
+            rename(Equipo = equipo,
+                   'Casillas sin reportar' = 'Sin reportar')
+        }
+        else {
+          shp_casillas_react() |>
+            as_tibble() |>
+            filter(equipo == input$equipo_input) |>
+            filter(status == "Sin reportar") |>
+            select(Casilla = id,
+                   Status = status,
+                   Municipio = municipio)
+        }
+      })
 
     output$mapa_principal <-
       leaflet::renderLeaflet({
@@ -105,11 +104,24 @@ mod_mapa_principal_server <- function(id){
           leaflet::colorFactor(palette = topo.colors(n_distinct(bd_equipos$equipo)),
                                domain = unique(bd_equipos$equipo))
 
-        pal_status_casillas <-
-          leaflet::colorFactor(palette = c("green", "gray70"),
-                               domain = unique(shp_casillas_react()$status))
+        if(input$cuestionario_input == "Apertura") {
 
-        mun_shp |>
+          pal_status_casillas <-
+            leaflet::colorFactor(palette = c("blue", "blue"),
+                                 domain = unique(shp_casillas_react()$status))
+
+        } else {
+
+          pal_status_casillas <-
+            leaflet::colorFactor(palette = c("green", "gray70"),
+                                 domain = unique(shp_casillas_react()$status))
+
+        }
+
+        # browser()
+
+        mapa_principal <-
+          mun_shp |>
           left_join(bd_equipos, by = "NOMBRE") |>
           leaflet(options = leafletOptions(zoomControl = FALSE)) %>%
           addProviderTiles("CartoDB.Positron") %>%
@@ -122,11 +134,13 @@ mod_mapa_principal_server <- function(id){
           addLegend(title = "Equipos",
                     pal = pal_equipos,
                     values = ~equipo,
-                    position = "topright") |>
+                    position = "topright") %>%
           addCircleMarkers(
+            radius = 7,
             data = shp_casillas_react(),
             stroke = F,
-            color = ~pal_status_casillas(status),
+            # color = ~pal_status_casillas(status),
+            color = "blue",
             fillOpacity = 1,
             group = "Status de casillas",
             label = paste("Casilla: ", shp_casillas_react()$id),
@@ -142,6 +156,55 @@ mod_mapa_principal_server <- function(id){
                     pal = pal_status_casillas,
                     values = ~ status,
                     position = "bottomright")
+
+        if(input$cuestionario_input == "Apertura") {
+
+          # browser()
+
+          ubicaciones_apertura <-
+            bd_apertura |>
+            filter(!is.na(Longitude) | !is.na(Latitude)) |>
+            sf::st_as_sf(coords = c("Longitude", "Latitude"),crs = 4326) |>
+            tibble::rownames_to_column(var = "id_entrevista")
+
+          catalogos <-
+            muestra_shp |>
+            tibble::rownames_to_column(var = "id_distancia") |>
+            as_tibble() |>
+            select(id_distancia, id)
+
+          casillas_cercanas <-
+            st_distance(ubicaciones_apertura,
+                        muestra_shp |>
+                          head(2)) %>%
+            as_tibble %>%
+            rowwise() %>%
+            mutate(id_casilla_cercana = which.min(c_across(everything()))) |>
+            tibble::rownames_to_column(var = "id_entrevista") |>
+            mutate(id_entrevista = as.character(id_entrevista),
+                   id_casilla_cercana = as.character(id_casilla_cercana)) |>
+            left_join(catalogos, by = c("id_casilla_cercana" = "id_distancia"))
+
+          mapa_principal <-
+            mapa_principal |>
+            addCircleMarkers(
+              radius = 3,
+              data = ubicaciones_apertura,
+              stroke = F,
+              color = 'red',
+              fillOpacity = 1,
+              group = "Apertura",
+              label = paste("Usuario: ", ubicaciones_apertura$Srvyr)
+              # popup = paste(paste0("Municipio: ", gsub(pattern = "[0-9].", replacement = "", x = shp_casillas_react()$municip)),
+              #               paste("Sección: ", shp_casillas_react()$seccion),
+              #               paste("Tipo casilla: ", shp_casillas_react()$tp_csll),
+              #               paste("Status: ", shp_casillas_react()$status),
+              #               paste("Equipo: ", shp_casillas_react()$equipo),
+              #               sep = "<br>")
+            )
+        }
+
+        return(mapa_principal)
 
       })
 
