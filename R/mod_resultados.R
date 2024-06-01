@@ -14,7 +14,7 @@ mod_resultados_ui <- function(id){
     bslib::card(
       full_screen = F,
       card_header("Resultados de la encuesta de salida"),
-      max_height = "600px",
+      max_height = "800px",
       shinyWidgets::progressBar(
         title = "Presencia en casillas de la muestra",
         id = "enc_hechas",
@@ -41,8 +41,6 @@ mod_resultados_ui <- function(id){
         total = 10000,
         status = "success"),
       shinycssloaders::withSpinner(highchartOutput(ns("resultados_voto_candidato"))),
-      bslib::layout_columns(
-      ),
     ),
     bslib::card(
       full_screen = F,
@@ -75,9 +73,10 @@ mod_resultados_server <- function(id){
 
         bd_resultados <-
           bd_encuesta_salida |>
-          count(voto_sen_candidato) |>
+          count(voto_sen_candidato_O1) |>
           mutate(pct = round((n/sum(n))*100)) |>
-          rename(respuesta = voto_sen_candidato,
+          na.omit() |>
+          rename(respuesta = voto_sen_candidato_O1,
                  media = pct)
 
         g <-
@@ -108,16 +107,16 @@ mod_resultados_server <- function(id){
 
         bd_tendencia <-
           bd_encuesta_salida |>
-          count(hora = lubridate::floor_date(Date, "hours"), voto_sen_candidato) |>
+          count(hora = lubridate::floor_date(Date, "hours"), voto_sen_candidato_O1) |>
           group_by(hora) |>
           tidyr::complete(voto_sen_candidato = unique(bd_encuesta_salida$voto_sen_candidato),
                           fill = list(n = 0)) |>
           ungroup() |>
           mutate(tot = sum(n), .by = c(hora)) |>
           mutate(n_acum = cumsum(n),
-                 tot_acum = cumsum(tot), .by = c(voto_sen_candidato),
+                 tot_acum = cumsum(tot), .by = c(voto_sen_candidato_O1),
                  movil = n_acum/tot_acum) |>
-          filter(grepl(pattern = "Hank", x = voto_sen_candidato)) |>
+          filter(grepl(pattern = "Hank", x = voto_sen_candidato_O1)) |>
           mutate(movil = round(movil*100)) |>
           rename(fecha = hora,
                  resultado = movil)

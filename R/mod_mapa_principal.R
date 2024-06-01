@@ -52,18 +52,19 @@ mod_mapa_principal_server <- function(id){
         input$cuestionario_input
 
         muestra_shp %>%
+          select(!seccion) %>%
           {
             if(input$cuestionario_input == "Apertura"){
-              left_join(., bd_apertura)
+              left_join(., bd_apertura, by = "id")
             }
             else if(input$cuestionario_input == "Cierre") {
-              left_join(., bd_cierre)
+              left_join(., bd_cierre, by = "id")
             }
             else if(input$cuestionario_input == "Encuesta de salida") {
-              left_join(., bd_encuesta_salida)
+              left_join(., bd_encuesta_salida, by = "id")
             }
             else if(input$cuestionario_input == "Conteo rápido") {
-              left_join(., bd_conteo_rapido)
+              left_join(., bd_conteo_rapido, by = "id")
             }
           } %>%
           mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
@@ -150,9 +151,7 @@ mod_mapa_principal_server <- function(id){
       render_gt({
         casillas_abiertas() %>%
           gt()
-        # tab_header(title = md(glue::glue("**Cluster {isolate(input$cluster)}**")),
-        #            subtitle = glue::glue("Cuota: {balance_cluster()$cuota}   Hecho: {balance_cluster()$hecho}   Faltan: {balance_cluster()$faltan}")) |>
-        # tab_spanner(label = "Entrevistas faltanes por edad y sexo", columns = c(Edad, Hombre, Mujer))
+
       })
 
   })

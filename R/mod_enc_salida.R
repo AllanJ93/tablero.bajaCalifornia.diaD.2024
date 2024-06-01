@@ -27,7 +27,7 @@ mod_enc_salida_ui <- function(id){
                                   sort(unique(bd_equipos$equipo)))
           )
         ),
-        highchartOutput(ns("casillas_faltantes_equipo"))
+        plotOutput(ns("casillas_faltantes_equipo"))
       )
     ),
     icon = icon("square-poll-vertical")
@@ -43,7 +43,7 @@ mod_enc_salida_server <- function(id){
 
     shp_casillas <-
       muestra_shp %>%
-      inner_join(bd_encuesta_salida) %>%
+      inner_join(bd_encuesta_salida, by = "id") %>%
       mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
              municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
       left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
@@ -66,58 +66,53 @@ mod_enc_salida_server <- function(id){
         }
       })
 
-    output$casillas_faltantes_equipo <- renderHighchart({
+    output$casillas_faltantes_equipo <- renderPlot({
 
       if(input$equipo_input == "Todos"){
 
         bd_plot <-
-          casillas_reportadas() |>
-          tidyr::pivot_wider(id_cols = hora, names_from = equipo, values_from = n) |>
-          mutate(across(.cols = !hora, .fns = ~ tidyr::replace_na(data = .x, replace = 0)))
+          casillas_reportadas()
+        # tidyr::pivot_wider(id_cols = hora, names_from = equipo, values_from = n) |>
+        # mutate(across(.cols = !hora, .fns = ~ tidyr::replace_na(data = .x, replace = 0)))
 
         g <-
-          highchart() |>
-          hc_xAxis(categories = format(bd_plot$hora, "%I %p"),
-                   labels = list(style = list(fontSize = "18px"))) |>
-          hc_yAxis(labels = list(style = list(fontSize = "18px"))) |>
-          hc_add_series(name = "Equipo 1",
-                        data = bd_plot$`1-MEXICALI-SAN FELIPE`, type = "line",
-                        color = "red", zIndex = 1) |>
-          hc_add_series(name = "Equipo 2",
-                        data = bd_plot$`2-ENSENADA-SAN QUINTIN`, type = "line",
-                        color = "blue", zIndex = 1) |>
-          hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}", style = list(fontSize = "24px"))), align = "right")
+          bd_plot |>
+          ggplot(aes(x = hora, y = n, color = equipo)) +
+          geom_line(size = 1) +
+          geom_point(size = 3) +
+          geom_text(aes(label = scales::comma(n)),
+                    color = "black", vjust = -2, size = 8) +
+          theme_minimal() +
+          labs(color = "Equipo") +
+          theme(legend.position = "bottom",
+                legend.text = element_text(size = 18),
+                legend.title = element_text(size = 24))
+
       } else {
-
-        # browser()
-
-        # casillas_reportadas() |>
-        #   mutate(cuota = 6) |>
-        #   filter(n <= cuota) |>
-        #   tidyr::pivot_wider(id_cols = hora, names_from = equipo, values_from = n) |>
-        #   mutate(across(.cols = !hora, .fns = ~ tidyr::replace_na(data = .x, replace = 0)))
 
         bd_plot <-
           casillas_reportadas() |>
-          tidyr::pivot_wider(id_cols = hora, names_from = equipo, values_from = n) |>
-          mutate(across(.cols = !hora, .fns = ~ tidyr::replace_na(data = .x, replace = 0)))
+          tidyr::complete(hora = seq(from = min(casillas_reportadas()$hora),
+                                     to = max(casillas_reportadas()$hora),
+                                     by = "hours"),
+                          tidyr::nesting(id),
+                          fill = list(n = 0))
+
+        orden_casillas <-
+          bd_plot |>
+          filter(hora == max(hora)) |>
+          arrange(desc(n)) |>
+          pull(id)
 
         g <-
-          highchart() |>
-          hc_xAxis(categories = format(bd_plot$hora, "%I %p"),
-                   labels = list(style = list(fontSize = "18px"))) |>
-          hc_yAxis(labels = list(style = list(fontSize = "18px"))) |>
-          hc_add_series(name = "Equipo 1",
-                        data = bd_plot$`1-MEXICALI-SAN FELIPE`, type = "line",
-                        color = "red", zIndex = 1) |>
-          hc_add_series(name = "Equipo 2",
-                        data = bd_plot$`2-ENSENADA-SAN QUINTIN`, type = "line",
-                        color = "blue", zIndex = 1) |>
-          hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}", style = list(fontSize = "24px"))), align = "right")
+          bd_plot |>
+          ggplot(aes(x = hora,
+                     y = factor(id, levels = orden_casillas))) +
+          geom_tile(fill = "transparent") +
+          geom_text(aes(label = scales::comma(n))) +
+          theme_minimal()
 
       }
-
-
 
       return(g)
 
