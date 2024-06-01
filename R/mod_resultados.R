@@ -40,7 +40,7 @@ mod_resultados_ui <- function(id){
         #                  pull())/5),
         total = 10000,
         status = "success"),
-      shinycssloaders::withSpinner(highchartOutput(ns("resultados_voto_candidato"))),
+      shinycssloaders::withSpinner(plotOutput(ns("resultados_voto_candidato"))),
     ),
     bslib::card(
       full_screen = F,
@@ -67,7 +67,7 @@ mod_resultados_server <- function(id){
     ns <- session$ns
 
     output$resultados_voto_candidato <-
-      renderHighchart({
+      renderPlot({
 
         colores <- c("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f")
 
@@ -78,23 +78,18 @@ mod_resultados_server <- function(id){
                  media = round(total*100))
 
         g <-
-          highchart() |>
-          hc_xAxis(categories = bd_resultados$respuesta,
-                   labels = list(style = list(fontSize = "18px"))) |>
-          hc_yAxis(min = 0,
-                   max = 100,
-                   tickInterval = 10,
-                   labels = list(format = "{value}%"),
-                   style = list(fontSize = "18px")) |>
-          hc_add_series(name = "Porcentaje de votos estimados",
-                        data = bd_resultados$media,
-                        type = "bar",
-                        # color = colores,
-                        zIndex = 1,
-                        stacking = "normal") |>
-          hc_plotOptions(series = list(dataLabels = list(enabled = TRUE, inside = FALSE, format = "{point.y}%", style = list(fontSize = "18px"))),
-                         align = "right") |>
-          hc_legend(itemStyle = list(fontSize = "24px", reversed = TRUE))
+        bd_resultados %>%
+          ggplot(aes(x = reorder(voto_sen_candidato, total),
+                     y = total,
+                     color = voto_sen_candidato)) +
+          geom_point(size = 4) +
+          geom_linerange(aes(ymin = total_low, ymax = total_upp)) +
+          coord_flip() +
+          scale_y_continuous(labels = scales::percent) +
+          labs(x = "", y = "") +
+          theme_minimal() +
+          theme(legend.position = "none",
+                axis.text = element_text(size = 16))
 
         return(g)
 
