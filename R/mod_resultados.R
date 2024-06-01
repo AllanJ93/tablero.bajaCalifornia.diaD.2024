@@ -77,12 +77,6 @@ mod_resultados_server <- function(id){
           mutate(respuesta = voto_sen_candidato,
                  media = round(total*100))
 
-          # count(voto_sen_candidato_O1) |>
-          # mutate(pct = round((n/sum(n))*100)) |>
-          # na.omit() |>
-          # rename(respuesta = voto_sen_candidato_O1,
-          #        media = pct)
-
         g <-
           highchart() |>
           hc_xAxis(categories = bd_resultados$respuesta,

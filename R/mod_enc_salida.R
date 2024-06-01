@@ -25,7 +25,9 @@ mod_enc_salida_ui <- function(id){
                       label = "Equipo",
                       choices = c("Todos",
                                   sort(unique(bd_equipos$equipo)))
-          )
+          ),
+          actionButton(inputId = ns("siguiente_casillas"),
+                       label = "Siguiente tabla")
         ),
         plotOutput(ns("casillas_faltantes_equipo"))
       )
@@ -66,6 +68,12 @@ mod_enc_salida_server <- function(id){
         }
       })
 
+    indice_casillas <- reactiveVal(1)
+
+    observeEvent(input$siguiente_casillas,{
+      indice_casillas(indice_casillas() + 1)
+    })
+
     output$casillas_faltantes_equipo <- renderPlot({
 
       if(input$equipo_input == "Todos"){
@@ -90,7 +98,7 @@ mod_enc_salida_server <- function(id){
 
       } else {
 
-        bd_plot <-
+        bd_total <-
           casillas_reportadas() |>
           tidyr::complete(hora = seq(from = min(casillas_reportadas()$hora),
                                      to = max(casillas_reportadas()$hora),
@@ -98,26 +106,55 @@ mod_enc_salida_server <- function(id){
                           tidyr::nesting(id),
                           fill = list(n = 0))
 
-        orden_casillas <-
-          bd_plot |>
+        orden_grupos <-
+          bd_total |>
           filter(hora == max(hora)) |>
-          arrange(desc(n)) |>
+          arrange(n) |>
+          tibble::rownames_to_column("grupo") |>
+          mutate(grupo = ((as.numeric(grupo)-1) %/% 7)+1)
+
+        lista <-
+          bd_total |>
+          left_join(orden_grupos |>
+                      select(id, grupo), by = "id") %>%
+          split(.$grupo)
+
+        pag <- indice_casillas() %% (length(lista)+1)
+
+        if(pag == 0) {
+          indice_casillas(indice_casillas() + 1)
+          pag <- indice_casillas() %% (length(lista)+1)
+        }
+
+        bd_plot <-
+          lista %>%
+          purrr::pluck(pag) |>
+          select(!grupo)
+
+        orden_casillas <-
+          orden_grupos %>%
+          split(.$grupo) %>%
+          purrr::pluck(pag) |>
           pull(id)
 
         g <-
           bd_plot |>
-          ggplot(aes(x = hora,
-                     y = factor(id, levels = orden_casillas))) +
+          ggplot(aes(x = hora, y = factor(id, levels = rev(orden_casillas)))) +
           geom_tile(fill = "transparent") +
-          geom_text(aes(label = scales::comma(n))) +
-          theme_minimal()
+          geom_text(aes(label = scales::comma(n)), size = 12) +
+          labs(x = "", y = "") +
+          scale_x_datetime(date_breaks = "1 hour",
+                           labels = scales::date_format("%I\n%p"),
+                           expand = c(0.1, 0.1),
+                           position = "top") +
+          theme_minimal() +
+          theme(axis.text = element_text(size = 26))
 
       }
 
       return(g)
 
     })
-
 
   })
 }
