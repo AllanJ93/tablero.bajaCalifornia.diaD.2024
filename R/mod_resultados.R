@@ -123,11 +123,11 @@ mod_resultados_server <- function(id){
           labs(x = "", y = "") +
           scale_color_manual(values = colores_voto_sen_candiato)+
           geom_text(aes(label = scales::percent(x = total, accuracy = 1.)),       #agregar
-                    nudge_y = 0,nudge_x = -0.3, size = 5, show.legend = F) +   #agregar
+                    nudge_y = 0,nudge_x = -0.3, size = 8, show.legend = F) +   #agregar
           geom_text(aes( label =  scales::percent(x = total_upp, accuracy = 1.), x = voto_sen_candidato, y = total_upp),
-                    size = 3, colour = "green",nudge_x = 0.15)+
+                    size = 5, colour = "green",nudge_x = 0.15)+
           geom_text(aes( label =  scales::percent(x = total_low, accuracy = 1.), x = voto_sen_candidato, y = total_low),
-                    size = 3, colour = "red",nudge_x = 0.15)+
+                    size = 5, colour = "red",nudge_x = 0.15)+
           theme_minimal() +
           theme(legend.position = "none",
                 axis.text = element_text(size = 16))
