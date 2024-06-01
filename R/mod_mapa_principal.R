@@ -51,19 +51,22 @@ mod_mapa_principal_server <- function(id){
         input$cuestionario_input
 
         muestra_shp %>%
-          select(!seccion) %>%
           {
             if(input$cuestionario_input == "Apertura"){
-              left_join(., bd_apertura, by = "id")
+              left_join(., bd_apertura |>
+                          select(!seccion), by = "id")
             }
             else if(input$cuestionario_input == "Cierre") {
-              left_join(., bd_cierre, by = "id")
+              left_join(., bd_cierre |>
+                          select(!seccion), by = "id")
             }
             else if(input$cuestionario_input == "Encuesta de salida") {
-              left_join(., bd_encuesta_salida, by = "id")
+              left_join(., bd_encuesta_salida |>
+                          select(!seccion), by = "id")
             }
             else if(input$cuestionario_input == "Conteo rápido") {
-              left_join(., bd_conteo_rapido, by = "id")
+              left_join(., bd_conteo_rapido |>
+                          select(!seccion), by = "id")
             }
           } %>%
           mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
@@ -104,19 +107,10 @@ mod_mapa_principal_server <- function(id){
           leaflet::colorFactor(palette = topo.colors(n_distinct(bd_equipos$equipo)),
                                domain = unique(bd_equipos$equipo))
 
-        if(input$cuestionario_input == "Apertura") {
 
-          pal_status_casillas <-
-            leaflet::colorFactor(palette = c("blue", "gray"),
-                                 domain = unique(shp_casillas_react()$status))
-
-        } else {
-
-          pal_status_casillas <-
-            leaflet::colorFactor(palette = c("blue", "gray70"),
-                                 domain = unique(shp_casillas_react()$status))
-
-        }
+        pal_status_casillas <-
+          leaflet::colorFactor(palette = c("blue", "gray70"),
+                               domain = unique(shp_casillas_react()$status))
 
         mapa_principal <-
           mun_shp |>
@@ -138,7 +132,6 @@ mod_mapa_principal_server <- function(id){
             data = shp_casillas_react(),
             stroke = F,
             color = ~pal_status_casillas(status),
-            # color = "blue",
             fillOpacity = 1,
             group = "Status de casillas",
             label = paste("Casilla: ", shp_casillas_react()$id),
@@ -156,8 +149,6 @@ mod_mapa_principal_server <- function(id){
                     position = "bottomright")
 
         if(input$cuestionario_input == "Apertura") {
-
-          # browser()
 
           ubicaciones_apertura <-
             bd_apertura |>
@@ -184,17 +175,15 @@ mod_mapa_principal_server <- function(id){
 
           base_correcciones <-
             ubicaciones_apertura |>
-            # mutate(id_reportada = paste0(seccion, tipo_casilla)) |>
             left_join(casillas_cercanas, by = "id_entrevista") |>
             mutate(correccion = dplyr::if_else(condition = id.x == id.y,
                                                true = "Registro correcto",
                                                false = "Corregida")) |>
             as_tibble() |>
-            filter(correccion == "Corregida") |>
             select(SbjNum, Srvyr, casilla_reportada = id.x, casilla_mas_cercana = id.y)
 
           ubicaciones_apertura <-
-          ubicaciones_apertura |>
+            ubicaciones_apertura |>
             left_join(base_correcciones, by = c("SbjNum", "Srvyr"))
 
           mapa_principal <-
