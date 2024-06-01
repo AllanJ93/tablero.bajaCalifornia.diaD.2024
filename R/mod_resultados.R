@@ -5,7 +5,7 @@
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
 #' @noRd
-#'
+#' @import dplyr survey srvyr
 #' @importFrom shiny NS tagList
 mod_resultados_ui <- function(id){
   ns <- NS(id)
@@ -73,11 +73,15 @@ mod_resultados_server <- function(id){
 
         bd_resultados <-
           bd_encuesta_salida |>
-          count(voto_sen_candidato_O1) |>
-          mutate(pct = round((n/sum(n))*100)) |>
-          na.omit() |>
-          rename(respuesta = voto_sen_candidato_O1,
-                 media = pct)
+          procesar_prop_voto_sen() |>
+          mutate(respuesta = voto_sen_candidato,
+                 media = round(total*100))
+
+          # count(voto_sen_candidato_O1) |>
+          # mutate(pct = round((n/sum(n))*100)) |>
+          # na.omit() |>
+          # rename(respuesta = voto_sen_candidato_O1,
+          #        media = pct)
 
         g <-
           highchart() |>

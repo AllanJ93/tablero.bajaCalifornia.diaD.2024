@@ -47,8 +47,10 @@
 
 # Base simulada con diseno muestral
 
-bd_muestra <-
+bd_muestra_pesos <-
   readr::read_csv(file = "./data-raw/muestra_weigth.csv")
+
+usethis::use_data(bd_muestra_pesos, overwrite = TRUE)
 
 bd_datos_recibiods <-
   readr::read_csv(file = "./data-raw/sim_enc_sal_1.csv")
@@ -96,7 +98,9 @@ bd_encuesta_salida_simulada <-
   bd_encuesta_salida_survey |>
   bind_rows(dummy_base_salida)
 
-bd_encuesta_salida <- bd_encuesta_salida_simulada
+bd_encuesta_salida <-
+  homologacion_sen_cand(datos_recibidos = bd_encuesta_salida_simulada) |>
+  union_datos_x_muestra(muestra_ori = bd_muestra_pesos)
 
 usethis::use_data(bd_encuesta_salida, overwrite = TRUE)
 
