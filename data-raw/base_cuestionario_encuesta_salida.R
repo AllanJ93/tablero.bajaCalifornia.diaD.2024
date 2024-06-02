@@ -75,11 +75,9 @@ bd_encuesta_salida_survey <-
   as_tibble() |>
   mutate(id = paste0(seccion, tipo_casilla),
          status = "Reportada",
-         Date = sample(x = secuencia_tiempos, size = n(), replace = T),
          across(.cols = starts_with("voto_sen_"), .fns = ~ as.character(.x))) |>
-  # filter(!Srvyr %in% c("Katheryn Hernandez", "test"))
-  filter(!Srvyr %in% c("Katheryn Hernandez")) |>
-  filter(!(Srvyr == 'test' & lubridate::as_date(Date) != lubridate::as_date("2024-06-01")))
+  filter(lubridate::as_datetime("2024-06-02 08:00:00", "America/Tijuana") < lubridate::as_datetime(Date, "America/Tijuana")) |>
+  filter(!Srvyr %in% c("Katheryn Hernandez", 'test'))
 
 # n_simualciones <- 4000
 #
@@ -104,6 +102,7 @@ bd_encuesta_salida_simulada <-
 bd_encuesta_salida <-
   homologacion_sen_cand(datos_recibidos = bd_encuesta_salida_simulada) |>
   union_datos_x_muestra(muestra_ori = bd_muestra_pesos)
+  # head(1)
 
 usethis::use_data(bd_encuesta_salida, overwrite = TRUE)
 

@@ -177,27 +177,27 @@
                 <xs:element name="IncludeInterviewTimeZoneCols" type="xs:boolean" default="false" />
                 <xs:element name="ExportUTF8WithBOM" type="xs:boolean" default="true" />
                 <xs:element name="DateFilterEnabled" type="xs:boolean" default="false" />
-                <xs:element name="DateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
-                <xs:element name="DateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="DateFilterLow" type="xs:dateTime" default="2024-06-02T00:41:43.1451115-06:00" />
+                <xs:element name="DateFilterHigh" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
                 <xs:element name="UploadDateFilterEnabled" type="xs:boolean" default="false" />
-                <xs:element name="UploadDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
-                <xs:element name="UploadDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="UploadDateFilterLow" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
+                <xs:element name="UploadDateFilterHigh" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
                 <xs:element name="VisitStartDateFilterEnabled" type="xs:boolean" default="false" />
-                <xs:element name="VisitStartDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
-                <xs:element name="VisitStartDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="VisitStartDateFilterLow" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
+                <xs:element name="VisitStartDateFilterHigh" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
                 <xs:element name="VisitEndDateFilterEnabled" type="xs:boolean" default="false" />
                 <xs:element name="RoundsFilter" type="xs:string" default="False" />
-                <xs:element name="VisitEndDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
-                <xs:element name="VisitEndDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="VisitEndDateFilterLow" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
+                <xs:element name="VisitEndDateFilterHigh" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
                 <xs:element name="LastModifiedDateFilterEnabled" type="xs:boolean" default="false" />
-                <xs:element name="LastModifiedDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
-                <xs:element name="LastModifiedDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="LastModifiedDateFilterLow" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
+                <xs:element name="LastModifiedDateFilterHigh" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
                 <xs:element name="LastModifiedMediaDateFilterEnabled" type="xs:boolean" default="false" />
-                <xs:element name="LastModifiedMediaDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
-                <xs:element name="LastModifiedMediaDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="LastModifiedMediaDateFilterLow" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
+                <xs:element name="LastModifiedMediaDateFilterHigh" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
                 <xs:element name="MediaUploadedDateFilterEnabled" type="xs:boolean" default="false" />
-                <xs:element name="MediaUploadedDateFilterLow" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
-                <xs:element name="MediaUploadedDateFilterHigh" type="xs:dateTime" default="2024-05-30T14:48:18.4546305-06:00" />
+                <xs:element name="MediaUploadedDateFilterLow" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
+                <xs:element name="MediaUploadedDateFilterHigh" type="xs:dateTime" default="2024-06-02T00:41:43.1461062-06:00" />
                 <xs:element name="Completed" type="xs:boolean" default="true" />
                 <xs:element name="ColTitleCompleted" type="xs:string" default="ColTitleCompleted" />
                 <xs:element name="StopQuestion" type="xs:boolean" default="true" />
@@ -618,7 +618,7 @@
     <SwapRowsCols>false</SwapRowsCols>
     <OverrideAttachmentFiles>true</OverrideAttachmentFiles>
     <IncludeNotCompleted>false</IncludeNotCompleted>
-    <FromStatus />
+    <FromStatus>1,4,5,6,8,9,10,11,12,13,24</FromStatus>
     <SubjectIDs />
     <SurveyVersions />
     <IgnoreCorruptSubjects>false</IgnoreCorruptSubjects>
@@ -629,7 +629,7 @@
     <CorruptSubjectsListPath />
     <FilterExpression />
     <MoveToStatus>0</MoveToStatus>
-    <ExportSubjectMode>0</ExportSubjectMode>
+    <ExportSubjectMode>2</ExportSubjectMode>
     <XsltFileName />
     <WordRTL>false</WordRTL>
     <IncludeTitlePage>true</IncludeTitlePage>
@@ -989,106 +989,208 @@
     <Idx>-10,-10</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-20,-20</Idx>
+    <Idx>17,17</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-30,-30</Idx>
+    <Idx>-1,18</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-40,-40</Idx>
+    <Idx>-1,-20</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-50,-50</Idx>
+    <Idx>-1,-30</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-60,-60</Idx>
+    <Idx>-1,-40</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-70,-70</Idx>
+    <Idx>-1,-50</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-80,-80</Idx>
+    <Idx>-1,-60</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-90,-90</Idx>
+    <Idx>-1,-70</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-100,-100</Idx>
+    <Idx>-1,-80</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-110,-110</Idx>
+    <Idx>-1,-90</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-120,-120</Idx>
+    <Idx>-1,-100</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-130,-130</Idx>
+    <Idx>-1,-110</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-140,-140</Idx>
+    <Idx>-1,-120</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-150,-150</Idx>
+    <Idx>-1,-130</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-160,-160</Idx>
+    <Idx>-1,-140</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-170,-170</Idx>
+    <Idx>-1,-150</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-180,-180</Idx>
+    <Idx>-1,-160</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-190,-190</Idx>
+    <Idx>18,-170</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-200,-200</Idx>
+    <Idx>-1,-180</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-210,-210</Idx>
+    <Idx>-1,-190</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-220,-220</Idx>
+    <Idx>-1,-200</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-230,-230</Idx>
+    <Idx>-1,-210</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-240,-240</Idx>
+    <Idx>-1,-220</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-250,-250</Idx>
+    <Idx>-1,-230</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-410,-410</Idx>
+    <Idx>-1,-240</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-1410,-1410</Idx>
+    <Idx>-1,-250</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>10,10</Idx>
+    <Idx>-1,-410</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>11,11</Idx>
+    <Idx>-1,-1410</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>12,12</Idx>
+    <Idx>-1,10</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>13,13</Idx>
+    <Idx>-1,11</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>5,5</Idx>
+    <Idx>-1,12</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>6,6</Idx>
+    <Idx>-1,13</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-1,8</Idx>
+    <Idx>-1,5</Idx>
   </ColsArray>
   <ColsArray>
-    <Idx>-1,9</Idx>
+    <Idx>-1,6</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-20,8</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-30,9</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-40,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-50,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-60,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-70,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-80,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-90,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-100,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-110,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-120,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-130,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-140,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-150,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-160,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-170,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-180,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-190,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-200,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-210,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-220,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-230,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-240,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-250,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-410,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1410,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>10,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>11,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>12,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>13,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>5,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>6,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
+  </ColsArray>
+  <ColsArray>
+    <Idx>-1,*</Idx>
   </ColsArray>
   <ColsArray>
     <Idx>-1,*</Idx>
@@ -1182,6 +1284,18 @@
   </ColsArray>
   <AdvancedExportColumns>
     <QID>-10</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>17</QID>
+    <TID>-1</TID>
+    <AID>-1</AID>
+    <ASV>false</ASV>
+  </AdvancedExportColumns>
+  <AdvancedExportColumns>
+    <QID>18</QID>
     <TID>-1</TID>
     <AID>-1</AID>
     <ASV>false</ASV>

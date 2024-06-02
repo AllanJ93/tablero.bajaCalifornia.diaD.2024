@@ -53,7 +53,7 @@ mod_resultados_ui <- function(id){
     bslib::card(
       full_screen = F,
       bslib::layout_columns(
-        shinycssloaders::withSpinner(plotOutput(ns("tendencia_resultados"))),
+        # shinycssloaders::withSpinner(plotOutput(ns("tendencia_resultados"))),
         shinycssloaders::withSpinner(highchartOutput(ns("llegada_info")))
         # bslib::value_box(
         #   title = "Casillas no óptimas",
@@ -84,32 +84,10 @@ mod_resultados_server <- function(id){
               procesar_prop_voto_sen()
           }
           else {
-            browser()
-            out <-
             bd_encuesta_salida |>
-              mutate(peso = weights(survey::svydesign(id = ~1,
-                                                      data = bd_encuesta_salida,
-                                                      strata = ~estrato,
-                                                      weights = ~peso_estra*peso_individuo)|>
-                                      srvyr::as_survey_design()))
-
-
-            # out |>
-            #   count(hora = lubridate::floor_date(Date, "minutes"), mun, voto_sen_candidato) |>
-            #   group_by(hora) |>
-            #   complete(elecc_partido = c("MORENA", "PAN"),
-            #            fill = list(n = 0)) |>
-            #   ungroup() |>
-            #   mutate(tot = sum(n), .by = c(hora)) |>
-            #   mutate(n_acum = cumsum(n),
-            #          tot_acum = cumsum(tot), .by = c(elecc_partido),
-            #          movil = n_acum/tot_acum)
-            #
-            #
-            #
-            #   procesar_prop_voto_mun_sen() |>
-            #   filter(mun == input$municipio_input) |>
-            #   mutate(choque = F)
+            procesar_prop_voto_mun_sen() |>
+              filter(mun == input$municipio_input) |>
+              mutate(choque = F)
           }
           }
 
@@ -121,13 +99,6 @@ mod_resultados_server <- function(id){
       renderPlot({
 
         colores <- c("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f")
-
-        # base_resultados()
-
-        # browser()
-
-        # bd_encuesta_salida |>
-        #   procesar_prop_voto_mun_sen()
 
         bd_resultados <-
           base_resultados() |>
@@ -200,28 +171,63 @@ mod_resultados_server <- function(id){
     output$tendencia_resultados <-
       renderPlot({
 
-        bd_plot <-
-          bd_encuesta_salida_reac() |>
-          mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
-                                             'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato),
-                 peso = weights(survey::svydesign(id = ~1,
-                                                  data = bd_encuesta_salida_reac(),
-                                                  strata = ~estrato,
-                                                  weights = ~peso_estra*peso_individuo)|>
-                                  srvyr::as_survey_design()))
+        bd_plot <- {
+          if(input$municipio_input == "Todos"){
+
+            out <-
+              bd_encuesta_salida |>
+              mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
+                                                 'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato),
+                     peso = weights(survey::svydesign(id = ~1,
+                                                      data = bd_encuesta_salida,
+                                                      strata = ~estrato,
+                                                      weights = ~peso_estra*peso_individuo)|>
+                                      srvyr::as_survey_design()))
+
+            out |>
+              count(hora = lubridate::floor_date(Date, "minutes"), voto_sen_candidato) |>
+              group_by(hora) |>
+              tidyr::complete(tidyr::nesting(voto_sen_candidato),
+                              fill = list(n = 0)) |>
+              ungroup() |>
+              mutate(tot = sum(n), .by = c(hora)) |>
+              mutate(n_acum = cumsum(n),
+                     tot_acum = cumsum(tot), .by = c(voto_sen_candidato),
+                     movil = n_acum/tot_acum) |>
+              filter(grepl(pattern = "Hank", x = voto_sen_candidato))
+
+          }
+          else {
+            out <-
+              bd_encuesta_salida |>
+              mutate(peso = weights(survey::svydesign(id = ~1,
+                                                      data = bd_encuesta_salida,
+                                                      strata = ~estrato,
+                                                      weights = ~peso_estra*peso_individuo)|>
+                                      srvyr::as_survey_design()))
+
+
+            out |>
+              count(hora = lubridate::floor_date(Date, "minutes"), mun, voto_sen_candidato) |>
+              filter(mun == input$municipio_input) |>
+              group_by(hora) |>
+              tidyr::complete(tidyr::nesting(voto_sen_candidato),
+                              fill = list(n = 0)) |>
+              ungroup() |>
+              mutate(tot = sum(n), .by = c(hora)) |>
+              mutate(n_acum = cumsum(n),
+                     tot_acum = cumsum(tot), .by = c(voto_sen_candidato),
+                     movil = n_acum/tot_acum) |>
+              filter(grepl(pattern = "Hank", x = voto_sen_candidato))
+          }
+        }
+
+
+
+
 
         g <-
-        bd_plot |>
-        count(hora = lubridate::floor_date(Date, "minutes"), voto_sen_candidato) |>
-          group_by(hora) |>
-          tidyr::complete(tidyr::nesting(voto_sen_candidato),
-                   fill = list(n = 0)) |>
-          ungroup() |>
-          mutate(tot = sum(n), .by = c(hora)) |>
-          mutate(n_acum = cumsum(n),
-                 tot_acum = cumsum(tot), .by = c(voto_sen_candidato),
-                 movil = n_acum/tot_acum) |>
-          filter(voto_sen_candidato %in% c("Nulo")) |>
+          bd_plot |>
           # tail()
           ggplot(aes(x = hora, y = movil, color = voto_sen_candidato)) +
           geom_point() +

@@ -21,9 +21,9 @@ bd_apertura_survey <-
 
 bd_apertura <-
   bd_apertura_survey |>
-  # filter(!Srvyr %in% c("Katheryn Hernandez", 'test')) |>
-  filter(!Srvyr %in% c("Katheryn Hernandez")) |>
-  filter(!(Srvyr == 'test' & lubridate::as_date(Date) != lubridate::as_date("2024-06-01")))
+  filter(!Srvyr %in% c("Katheryn Hernandez", 'test')) |>
+  filter(lubridate::as_date(lubridate::today()) == lubridate::floor_date(Date, "days")) |>
+  filter(lubridate::as_datetime("2024-06-02 07:00:00", "America/Tijuana") < lubridate::as_datetime(Date, "America/Tijuana"))
 
 usethis::use_data(bd_apertura, overwrite = TRUE)
 
