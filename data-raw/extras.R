@@ -15,6 +15,11 @@ shp_casillas |>
   openxlsx2::write_xlsx(file = "data-raw/entrevistas_casilla_hora.xlsx")
 
 temporal |>
+  group_by(casilla) |>
+  summarise(n = sum(entrevistas)) |>
+  arrange(n)
+
+temporal |>
   filter(casilla == "1073B1")
 
 
