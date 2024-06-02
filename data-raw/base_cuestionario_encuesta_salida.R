@@ -87,6 +87,9 @@ bd_encuesta_salida_survey <-
 
 
 # bd_encuesta_salida |>
+#   filter(Srvyr %in% catalogo_correcciones$Srvyr)
+#
+#
 #   left_join(catalogo_correcciones, by = "Srvyr") |>
 #   mutate(id = case_when(is.na(casilla_mas_cercana) ~ id,
 #                         T ~ casilla_mas_cercana)) |>
