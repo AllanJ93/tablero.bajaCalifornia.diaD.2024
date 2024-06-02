@@ -73,7 +73,9 @@ bd_result_ident_partido<-
     grepl('Ninguno',x = ident_partido)~"black",
     grepl('No sabe',x = ident_partido)~"gray60",
   ))|>
-  mutate(choque = F)
+  mutate(choque = F)|>
+  mutate(ident_partido=gsub('\\(NO LEER\\)','',ident_partido))
+
 
 colores_ident_partido<- bd_result_ident_partido|>
   select(ident_partido,color_res)
