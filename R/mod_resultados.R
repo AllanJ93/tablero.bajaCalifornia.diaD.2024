@@ -40,6 +40,13 @@ mod_resultados_ui <- function(id){
         #                  pull())/5),
         total = 10000,
         status = "success"),
+      selectInput(inputId = ns("municipio_input"),
+                  label = "Equipo",
+                  choices = c("Todos",
+                              sort(gsub(pattern = "[0-9]. ",
+                                        replacement = "",
+                                        x = unique(muestra_shp$municip))))
+      ),
       shinycssloaders::withSpinner(plotOutput(ns("resultados_voto_candidato"))),
     ),
     bslib::card(
@@ -66,14 +73,41 @@ mod_resultados_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
 
+    base_resultados <-
+      reactive({
+        input$municipio_input
+
+        bd_resultados <- {
+          if(input$municipio_input == "Todos"){
+            bd_encuesta_salida |>
+              procesar_prop_voto_sen()
+          }
+          else {
+            bd_encuesta_salida |>
+              procesar_prop_voto_mun_sen() |>
+              filter(mun == input$municipio_input) |>
+              mutate(choque = F)
+          }
+          }
+
+        return(bd_resultados)
+
+      })
+
     output$resultados_voto_candidato <-
       renderPlot({
 
         colores <- c("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f")
 
+        # base_resultados()
+
+        # browser()
+
+        # bd_encuesta_salida |>
+        #   procesar_prop_voto_mun_sen()
+
         bd_resultados <-
-          bd_encuesta_salida |>
-          procesar_prop_voto_sen() |>
+          base_resultados() |>
           mutate(respuesta = voto_sen_candidato,
                  media = round(total*100))|>
           mutate(color_res = case_when(
@@ -98,21 +132,7 @@ mod_resultados_server <- function(id){
 
 
         g <-
-       # bd_resultados %>%
-       #   ggplot(aes(x = reorder(voto_sen_candidato, total),
-       #              y = total,
-       #              color = voto_sen_candidato)) +
-       #   geom_point(size = 4) +
-       #   geom_linerange(aes(ymin = total_low, ymax = total_upp)) +
-       #   coord_flip() +
-       #   scale_y_continuous(labels = scales::percent) +
-       #   labs(x = "", y = "") +
-       #   theme_minimal() +
-       #   theme(legend.position = "none",
-       #         axis.text = element_text(size = 16))
-
         bd_resultados|>
-          #mutate(total_upp = total_upp+.05)%>%
           ggplot(aes(x = reorder(voto_sen_candidato, total),
                      y = total,
                      color = voto_sen_candidato)) +
@@ -136,15 +156,33 @@ mod_resultados_server <- function(id){
 
       })
 
+    bd_encuesta_salida_reac <-
+      reactive({
+        input$municipio_input
+
+        bd_resultados <- {
+          if(input$municipio_input == "Todos"){
+            bd_encuesta_salida
+          }
+          else {
+            bd_encuesta_salida |>
+              filter(mun == input$municipio_input)
+          }
+        }
+
+        return(bd_resultados)
+
+      })
+
     output$tendencia_resultados <-
       renderPlot({
 
         bd_plot <-
-        bd_encuesta_salida |>
+          bd_encuesta_salida_reac() |>
           mutate(voto_sen_candidato = ifelse(grepl('Gustavo Sánchez y Guadalupe Gutiérrez', voto_sen_candidato),
                                              'Gustavo Sánchez y Guadalupe Gutiérrez del PAN PRI PRD',voto_sen_candidato),
                  peso = weights(survey::svydesign(id = ~1,
-                                                  data = bd_encuesta_salida,
+                                                  data = bd_encuesta_salida_reac(),
                                                   strata = ~estrato,
                                                   weights = ~peso_estra*peso_individuo)|>
                                   srvyr::as_survey_design()))
@@ -181,7 +219,7 @@ mod_resultados_server <- function(id){
       renderHighchart({
 
         bd_informacion <-
-          bd_encuesta_salida |>
+          bd_encuesta_salida_reac() |>
           count(hora = lubridate::floor_date(Date, "hours")) |>
           mutate(acum = cumsum(n))
 
