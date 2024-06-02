@@ -42,10 +42,10 @@ mod_resultados_ui <- function(id){
         status = "success"),
       selectInput(inputId = ns("municipio_input"),
                   label = "Seleccionar ...",
-                  choices = c("Todos"
-                              # sort(gsub(pattern = "[0-9]. ",
-                              #           replacement = "",
-                              #           x = unique(muestra_shp$municip)))
+                  choices = c("Todos",
+                              sort(gsub(pattern = "[0-9]. ",
+                                        replacement = "",
+                                        x = unique(muestra_shp$municip)))
                               )
       ),
       shinycssloaders::withSpinner(plotOutput(ns("resultados_voto_candidato"))),
@@ -84,10 +84,32 @@ mod_resultados_server <- function(id){
               procesar_prop_voto_sen()
           }
           else {
+            browser()
+            out <-
             bd_encuesta_salida |>
-              procesar_prop_voto_mun_sen() |>
-              filter(mun == input$municipio_input) |>
-              mutate(choque = F)
+              mutate(peso = weights(survey::svydesign(id = ~1,
+                                                      data = bd_encuesta_salida,
+                                                      strata = ~estrato,
+                                                      weights = ~peso_estra*peso_individuo)|>
+                                      srvyr::as_survey_design()))
+
+
+            # out |>
+            #   count(hora = lubridate::floor_date(Date, "minutes"), mun, voto_sen_candidato) |>
+            #   group_by(hora) |>
+            #   complete(elecc_partido = c("MORENA", "PAN"),
+            #            fill = list(n = 0)) |>
+            #   ungroup() |>
+            #   mutate(tot = sum(n), .by = c(hora)) |>
+            #   mutate(n_acum = cumsum(n),
+            #          tot_acum = cumsum(tot), .by = c(elecc_partido),
+            #          movil = n_acum/tot_acum)
+            #
+            #
+            #
+            #   procesar_prop_voto_mun_sen() |>
+            #   filter(mun == input$municipio_input) |>
+            #   mutate(choque = F)
           }
           }
 
