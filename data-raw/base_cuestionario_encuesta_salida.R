@@ -86,6 +86,11 @@ bd_encuesta_salida_survey <-
                              T ~ tipo_casilla))
 
 # bd_encuesta_salida_survey |>
+#   semi_join(catalogo_correcciones, by = "Srvyr") |>
+#   filter(!is.na(casilla_mas_cercana))
+#   naniar::vis_miss()
+
+# bd_encuesta_salida_survey |>
 #   filter(grepl(pattern = "2065", x = id)) |>
 #   select(seccion, tipo_casilla, id, Srvyr)
 
