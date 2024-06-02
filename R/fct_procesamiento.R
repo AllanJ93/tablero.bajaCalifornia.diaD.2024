@@ -313,7 +313,8 @@ procesar_prop_voto_mun_sen <-function(datos_recibidos){
   design|>
     group_by(mun,voto_sen_candidato)|>
     cascade(total = srvyr::survey_mean(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
-    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )|>
+    filter(!is.na(voto_sen_candidato))
 
 }
 
@@ -336,6 +337,7 @@ procesar_tot_voto_mun_sen <-function(datos_recibidos){
   design|>
     group_by(mun,voto_sen_candidato)|>
     cascade(total = srvyr::survey_total(vartype = c('ci','var','cv'), df = Inf ,level = 0.99))|>
-    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )
+    mutate(total_low = ifelse(total_low<0,0.0001,total_low ) )|>
+    filter(!is.na(voto_sen_candidato))
 
 }
