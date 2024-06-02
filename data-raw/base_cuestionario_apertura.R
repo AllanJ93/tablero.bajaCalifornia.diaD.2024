@@ -26,4 +26,3 @@ bd_apertura <-
   filter(lubridate::as_datetime("2024-06-02 07:00:00", "America/Tijuana") < lubridate::as_datetime(Date, "America/Tijuana"))
 
 usethis::use_data(bd_apertura, overwrite = TRUE)
-
