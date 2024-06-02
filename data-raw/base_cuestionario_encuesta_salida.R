@@ -78,6 +78,8 @@ bd_encuesta_salida_survey <-
          Date = sample(x = secuencia_tiempos, size = n(), replace = T),
          across(.cols = starts_with("voto_sen_"), .fns = ~ as.character(.x))) |>
   filter(!Srvyr %in% c("Katheryn Hernandez", "test"))
+  # filter(!Srvyr %in% c("Katheryn Hernandez")) |>
+  # filter(!(Srvyr == 'test' & lubridate::as_date(Date) != lubridate::as_date("2024-06-01")))
 
 # n_simualciones <- 4000
 #

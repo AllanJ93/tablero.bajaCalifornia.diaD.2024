@@ -17,7 +17,10 @@ bd_cierre_survey <-
   openxlsx2::read_xlsx(file = "data-raw/bd_cierre_surveytogo.xlsx") |>
   as_tibble() |>
   mutate(id = paste0(seccion, tipo_casilla),
-         status = "Reportada")
+         status = "Reportada") |>
+  filter(!Srvyr %in% c("Katheryn Hernandez", 'test'))
+  # filter(!Srvyr %in% c("Katheryn Hernandez")) |>
+  # filter(!(Srvyr == 'test' & lubridate::as_date(Date) != lubridate::as_date("2024-06-01")))
 
 bd_cierre <- bd_cierre_survey
 

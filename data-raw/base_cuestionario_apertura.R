@@ -19,8 +19,10 @@ bd_apertura_survey <-
   mutate(id = paste0(seccion, tipo_casilla),
          status = "Reportada")
 
-bd_apertura <- bd_apertura_survey |>
-  filter(!Srvyr %in% c("Katheryn Hernandez", "test"))
+bd_apertura <-
+  bd_apertura_survey |>
+  filter(!Srvyr %in% c("Katheryn Hernandez", 'test')) #|>
+  # filter(!(Srvyr == 'test' & lubridate::as_date(Date) != lubridate::as_date("2024-06-01")))
 
 usethis::use_data(bd_apertura, overwrite = TRUE)
 
