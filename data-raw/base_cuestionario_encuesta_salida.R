@@ -85,20 +85,30 @@ bd_encuesta_salida_survey <-
          tipo_casilla = case_when(condtion = Srvyr == "PARTIDA RICARDO " ~ "C2",
                              T ~ tipo_casilla))
 
-# usuarios_corregidos <-
+# bd_encuesta_salida_survey <-
 #   bd_encuesta_salida_survey |>
-#   mutate(Srvyr = stringr::str_trim(stringr::str_to_upper(Srvyr), "both"))
-#
-# ubicaciones_corregidar <-
+#   mutate(Srvyr = stringr::str_trim(stringr::str_to_upper(Srvyr), "both")) |>
+#     left_join(catalogo_correcciones |>
+#                 mutate(Srvyr = stringr::str_trim(stringr::str_to_upper(Srvyr), "both")) |>
+#                 group_by(Srvyr) |>
+#                 slice(1) |>
+#                 ungroup(), by = "Srvyr") |>
+#     mutate(id = dplyr::if_else(condition = is.na(casilla_mas_cercana),
+#                                true = id,
+#                                false = casilla_mas_cercana))
+
+# correcciones <-
 #   catalogo_correcciones |>
 #               mutate(Srvyr = stringr::str_trim(stringr::str_to_upper(Srvyr), "both"))
 #
 # usuarios_corregidos |>
 #   distinct(Srvyr) |>
-#   anti_join(ubicaciones_corregidar)
+#   anti_join(correcciones)
 #
-# ubicaciones_corregidar |>
-#   anti_join(usuarios_corregidos, by = "Srvyr")
+# correcciones |>
+#   anti_join(usuarios_corregidos |>
+#               distinct(Srvyr))
+
 
 
 
