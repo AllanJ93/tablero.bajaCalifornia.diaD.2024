@@ -220,16 +220,6 @@ mod_mapa_principal_server <- function(id){
 
         }
 
-        # browser()
-
-        # shp_casillas_react() <-
-        # shp_casillas_react() |>
-        #   left_join(base_correcciones, by = c("SbjNum", "Srvyr")) |>
-        #   # filter(id != casilla_mas_cercana) |>
-        #   # select(id, casilla_reportada,  casilla_mas_cercana, status) |>
-        #   mutate(status = dplyr::case_when(id == casilla_mas_cercana ~ "Reportada",
-        #                                    T ~ "Sin reportar"))
-
         pal_status_casillas <-
           leaflet::colorFactor(palette = c("blue", "gray70"),
                                domain = unique(shp_casillas_react()$status))
