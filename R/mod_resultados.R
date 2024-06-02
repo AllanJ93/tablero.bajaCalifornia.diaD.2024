@@ -150,8 +150,8 @@ mod_resultados_server <- function(id){
           select(voto_sen_candidato,color_res)
 
         colores_voto_sen_candiato<-
-          setNames(pull(colores_voto_sen_candiato[2]),
-                   pull(colores_voto_sen_candiato[1]))
+          setNames(pull(colores_voto_sen_candiato['color_res']),
+                   pull(colores_voto_sen_candiato['voto_sen_candidato']))
 
 
         g <-
