@@ -77,11 +77,17 @@ bd_encuesta_salida_survey <-
          status = "Reportada",
          across(.cols = starts_with("voto_sen_"), .fns = ~ as.character(.x))) |>
   filter(lubridate::as_datetime("2024-06-02 08:00:00", "America/Tijuana") < lubridate::as_datetime(Date, "America/Tijuana")) |>
-  filter(!Srvyr %in% c("Katheryn Hernandez", 'test'))
+  filter(!Srvyr %in% c("Katheryn Hernandez", 'test')) |>
+  mutate(id = case_when(condtion = Srvyr == "PARTIDA RICARDO " ~ "2065C2",
+                        T ~ id),
+         seccion = case_when(condtion = Srvyr == "PARTIDA RICARDO " ~ "2065",
+                        T ~ seccion),
+         tipo_casilla = case_when(condtion = Srvyr == "PARTIDA RICARDO " ~ "C2",
+                             T ~ tipo_casilla))
 
 # bd_encuesta_salida_survey |>
 #   filter(grepl(pattern = "2065", x = id)) |>
-#   select(seccion, tipo_casilla)
+#   select(seccion, tipo_casilla, id, Srvyr)
 
 # n_simualciones <- 4000
 #
