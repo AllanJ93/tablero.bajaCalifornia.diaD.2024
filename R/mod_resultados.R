@@ -38,7 +38,7 @@ mod_resultados_ui <- function(id){
         #                  filter(status == "Reportada") |>
         #                  summarise(sum(lstd_nm)) |>
         #                  pull())/5),
-        total = 10000,
+        total = pmax(nrow(bd_encuesta_salida), 10000),
         status = "success"),
       selectInput(inputId = ns("municipio_input"),
                   label = "Seleccionar ...",
