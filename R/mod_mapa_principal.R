@@ -30,7 +30,8 @@ mod_mapa_principal_ui <- function(id){
         shinyWidgets::prettyRadioButtons(inline = T,
                                          inputId = ns("cuestionario_input"),
                                          label = "Cuestionario",
-                                         choices = c("Apertura", "Encuesta de salida", "Cierre", "Conteo rápido")
+                                         choices = c("Apertura", "Encuesta de salida", "Cierre", "Conteo rápido"),
+                                         selected = "Encuesta de salida",
         ),
         shinycssloaders::withSpinner(leafletOutput(ns("mapa_principal")))
       )
@@ -49,8 +50,6 @@ mod_mapa_principal_server <- function(id){
     shp_casillas_react <-
       reactive({
         input$cuestionario_input
-
-        # browser()
 
         res <-
         muestra_shp %>%
@@ -122,8 +121,6 @@ mod_mapa_principal_server <- function(id){
               ubicaciones_apertura <-
                 ubicaciones_apertura |>
                 left_join(base_correcciones, by = c("SbjNum", "Srvyr"))
-
-              # browser()
 
               res <-
               res |>
