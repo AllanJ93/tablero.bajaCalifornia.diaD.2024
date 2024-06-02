@@ -79,6 +79,10 @@ bd_encuesta_salida_survey <-
   filter(lubridate::as_datetime("2024-06-02 08:00:00", "America/Tijuana") < lubridate::as_datetime(Date, "America/Tijuana")) |>
   filter(!Srvyr %in% c("Katheryn Hernandez", 'test'))
 
+# bd_encuesta_salida_survey |>
+#   filter(grepl(pattern = "2065", x = id)) |>
+#   select(seccion, tipo_casilla)
+
 # n_simualciones <- 4000
 #
 # dummy_base_salida <-
