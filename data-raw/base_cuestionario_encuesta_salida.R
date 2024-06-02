@@ -85,14 +85,13 @@ bd_encuesta_salida_survey <-
          tipo_casilla = case_when(condtion = Srvyr == "PARTIDA RICARDO " ~ "C2",
                              T ~ tipo_casilla))
 
-# bd_encuesta_salida_survey |>
-#   semi_join(catalogo_correcciones, by = "Srvyr") |>
-#   filter(!is.na(casilla_mas_cercana))
-#   naniar::vis_miss()
 
-# bd_encuesta_salida_survey |>
-#   filter(grepl(pattern = "2065", x = id)) |>
-#   select(seccion, tipo_casilla, id, Srvyr)
+# bd_encuesta_salida |>
+#   left_join(catalogo_correcciones, by = "Srvyr") |>
+#   mutate(id = case_when(is.na(casilla_mas_cercana) ~ id,
+#                         T ~ casilla_mas_cercana)) |>
+#   count(Sb)
+
 
 # n_simualciones <- 4000
 #
