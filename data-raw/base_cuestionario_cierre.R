@@ -18,9 +18,9 @@ bd_cierre_survey <-
   as_tibble() |>
   mutate(id = paste0(seccion, tipo_casilla),
          status = "Reportada") |>
-  filter(!Srvyr %in% c("Katheryn Hernandez", 'test'))
-  # filter(!Srvyr %in% c("Katheryn Hernandez")) |>
-  # filter(!(Srvyr == 'test' & lubridate::as_date(Date) != lubridate::as_date("2024-06-01")))
+  # filter(!Srvyr %in% c("Katheryn Hernandez", 'test'))
+  filter(!Srvyr %in% c("Katheryn Hernandez")) |>
+  filter(!(Srvyr == 'test' & lubridate::as_date(Date) != lubridate::as_date("2024-06-01")))
 
 bd_cierre <- bd_cierre_survey
 
