@@ -15,7 +15,7 @@ app_ui <- function(request) {
           shinyjs::useShinyjs(),
           title = "Elecciones 2024 - Baja California",
           bslib::nav_spacer(),
-          # mod_mapa_principal_ui("mapa_principal_1"),
+          mod_mapa_principal_ui("mapa_principal_1"),
           mod_resultados_ui("resultados_1"),
           mod_enc_salida_ui("enc_salida_1")
         )

@@ -250,6 +250,7 @@ mod_resultados_server <- function(id){
         bd_informacion <-
           bd_encuesta_salida_reac() |>
           count(hora = lubridate::floor_date(Date, "hours")) |>
+          mutate(hora = lubridate::as_datetime(hora, "America/Tijuana")) |>
           mutate(acum = cumsum(n))
 
         g <-

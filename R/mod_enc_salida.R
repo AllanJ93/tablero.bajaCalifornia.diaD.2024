@@ -79,7 +79,8 @@ mod_enc_salida_server <- function(id){
       if(input$equipo_input == "Todos"){
 
         bd_plot <-
-          casillas_reportadas()
+          casillas_reportadas() |>
+          mutate(hora = lubridate::as_datetime(hora, "America/Tijuana"))
         # tidyr::pivot_wider(id_cols = hora, names_from = equipo, values_from = n) |>
         # mutate(across(.cols = !hora, .fns = ~ tidyr::replace_na(data = .x, replace = 0)))
 
@@ -100,6 +101,7 @@ mod_enc_salida_server <- function(id){
 
         bd_total <-
           casillas_reportadas() |>
+          mutate(hora = lubridate::as_datetime(hora, "America/Tijuana")) |>
           tidyr::complete(hora = seq(from = min(casillas_reportadas()$hora),
                                      to = max(casillas_reportadas()$hora),
                                      by = "hours"),
