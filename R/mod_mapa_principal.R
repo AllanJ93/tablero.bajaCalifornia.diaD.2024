@@ -50,28 +50,99 @@ mod_mapa_principal_server <- function(id){
       reactive({
         input$cuestionario_input
 
+        # browser()
+
+        res <-
         muestra_shp %>%
           {
             if(input$cuestionario_input == "Apertura"){
               left_join(., bd_apertura |>
-                          select(!seccion), by = "id")
+                          select(!seccion), by = "id") %>%
+                mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
+                       municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
+                left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
             }
             else if(input$cuestionario_input == "Cierre") {
               left_join(., bd_cierre |>
-                          select(!seccion), by = "id")
+                          select(!seccion), by = "id")%>%
+                mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
+                       municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
+                left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
             }
             else if(input$cuestionario_input == "Encuesta de salida") {
               left_join(., bd_encuesta_salida |>
-                          select(!seccion), by = "id")
+                          select(!seccion), by = "id")%>%
+                mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
+                       municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
+                left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
             }
             else if(input$cuestionario_input == "Conteo rápido") {
               left_join(., bd_conteo_rapido |>
-                          select(!seccion), by = "id")
+                          select(!seccion), by = "id")%>%
+                mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
+                       municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
+                left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
             }
-          } %>%
-          mutate(status = tidyr::replace_na(replace = "Sin reportar", status),
-                 municipio = gsub(pattern = "[0-9]. ", replacement = "", x = municip)) |>
-          left_join(bd_equipos, by = c("municipio" = "NOMBRE"))
+          }
+
+            if(input$cuestionario_input == "Apertura") {
+
+              ubicaciones_apertura <-
+                bd_apertura |>
+                filter(!is.na(Longitude) | !is.na(Latitude)) |>
+                sf::st_as_sf(coords = c("Longitude", "Latitude"),crs = 4326) |>
+                tibble::rownames_to_column(var = "id_entrevista")
+
+              catalogos <-
+                muestra_shp |>
+                tibble::rownames_to_column(var = "id_casilla") |>
+                as_tibble() |>
+                select(id_casilla, id)
+
+              casillas_cercanas <-
+                st_distance(ubicaciones_apertura,
+                            muestra_shp) %>%
+                as_tibble %>%
+                rowwise() %>%
+                mutate(id_casilla = which.min(c_across(everything()))) |>
+                tibble::rownames_to_column(var = "id_entrevista") |>
+                mutate(id_entrevista = as.character(id_entrevista),
+                       id_casilla = as.character(id_casilla)) |>
+                left_join(catalogos, by = c("id_casilla" = "id_casilla"))
+
+              base_correcciones <-
+                ubicaciones_apertura |>
+                left_join(casillas_cercanas, by = "id_entrevista") |>
+                mutate(correccion = dplyr::if_else(condition = id.x == id.y,
+                                                   true = "Registro correcto",
+                                                   false = "Corregida")) |>
+                as_tibble() |>
+                select(SbjNum, Srvyr, casilla_reportada = id.x, casilla_mas_cercana = id.y)
+
+              ubicaciones_apertura <-
+                ubicaciones_apertura |>
+                left_join(base_correcciones, by = c("SbjNum", "Srvyr"))
+
+              # browser()
+
+              res <-
+              res |>
+                left_join(base_correcciones, by = c("SbjNum", "Srvyr")) |>
+                # filter(id != casilla_mas_cercana) |>
+                # filter(casilla_mas_cercana == "1605B1") |>
+                # select(id, casilla_reportada,  casilla_mas_cercana, status) |>
+                mutate(id = dplyr::if_else(condition = !is.na(casilla_mas_cercana),
+                                           true = casilla_mas_cercana,
+                                           false = id)) |>
+                mutate(status = dplyr::if_else(condition = id == casilla_mas_cercana,
+                                               true = "Reportada",
+                                               false = "Sin reportar")) |>
+                # filter(id == "1219C1")
+                # print(n = Inf)
+                mutate(status = tidyr::replace_na(replace = "Sin reportar", status))
+            }
+
+        return(res)
 
       })
 
@@ -107,6 +178,57 @@ mod_mapa_principal_server <- function(id){
           leaflet::colorFactor(palette = topo.colors(n_distinct(bd_equipos$equipo)),
                                domain = unique(bd_equipos$equipo))
 
+        # browser()
+
+        if(input$cuestionario_input == "Apertura") {
+
+          ubicaciones_apertura <-
+            bd_apertura |>
+            filter(!is.na(Longitude) | !is.na(Latitude)) |>
+            sf::st_as_sf(coords = c("Longitude", "Latitude"),crs = 4326) |>
+            tibble::rownames_to_column(var = "id_entrevista")
+
+          catalogos <-
+            muestra_shp |>
+            tibble::rownames_to_column(var = "id_casilla") |>
+            as_tibble() |>
+            select(id_casilla, id)
+
+          casillas_cercanas <-
+            st_distance(ubicaciones_apertura,
+                        muestra_shp) %>%
+            as_tibble %>%
+            rowwise() %>%
+            mutate(id_casilla = which.min(c_across(everything()))) |>
+            tibble::rownames_to_column(var = "id_entrevista") |>
+            mutate(id_entrevista = as.character(id_entrevista),
+                   id_casilla = as.character(id_casilla)) |>
+            left_join(catalogos, by = c("id_casilla" = "id_casilla"))
+
+          base_correcciones <-
+            ubicaciones_apertura |>
+            left_join(casillas_cercanas, by = "id_entrevista") |>
+            mutate(correccion = dplyr::if_else(condition = id.x == id.y,
+                                               true = "Registro correcto",
+                                               false = "Corregida")) |>
+            as_tibble() |>
+            select(SbjNum, Srvyr, casilla_reportada = id.x, casilla_mas_cercana = id.y)
+
+          ubicaciones_apertura <-
+            ubicaciones_apertura |>
+            left_join(base_correcciones, by = c("SbjNum", "Srvyr"))
+
+        }
+
+        # browser()
+
+        # shp_casillas_react() <-
+        # shp_casillas_react() |>
+        #   left_join(base_correcciones, by = c("SbjNum", "Srvyr")) |>
+        #   # filter(id != casilla_mas_cercana) |>
+        #   # select(id, casilla_reportada,  casilla_mas_cercana, status) |>
+        #   mutate(status = dplyr::case_when(id == casilla_mas_cercana ~ "Reportada",
+        #                                    T ~ "Sin reportar"))
 
         pal_status_casillas <-
           leaflet::colorFactor(palette = c("blue", "gray70"),
@@ -150,42 +272,6 @@ mod_mapa_principal_server <- function(id){
 
         if(input$cuestionario_input == "Apertura") {
 
-          ubicaciones_apertura <-
-            bd_apertura |>
-            filter(!is.na(Longitude) | !is.na(Latitude)) |>
-            sf::st_as_sf(coords = c("Longitude", "Latitude"),crs = 4326) |>
-            tibble::rownames_to_column(var = "id_entrevista")
-
-          catalogos <-
-            muestra_shp |>
-            tibble::rownames_to_column(var = "id_casilla") |>
-            as_tibble() |>
-            select(id_casilla, id)
-
-          casillas_cercanas <-
-            st_distance(ubicaciones_apertura,
-                        muestra_shp) %>%
-            as_tibble %>%
-            rowwise() %>%
-            mutate(id_casilla = which.min(c_across(everything()))) |>
-            tibble::rownames_to_column(var = "id_entrevista") |>
-            mutate(id_entrevista = as.character(id_entrevista),
-                   id_casilla = as.character(id_casilla)) |>
-            left_join(catalogos, by = c("id_casilla" = "id_casilla"))
-
-          base_correcciones <-
-            ubicaciones_apertura |>
-            left_join(casillas_cercanas, by = "id_entrevista") |>
-            mutate(correccion = dplyr::if_else(condition = id.x == id.y,
-                                               true = "Registro correcto",
-                                               false = "Corregida")) |>
-            as_tibble() |>
-            select(SbjNum, Srvyr, casilla_reportada = id.x, casilla_mas_cercana = id.y)
-
-          ubicaciones_apertura <-
-            ubicaciones_apertura |>
-            left_join(base_correcciones, by = c("SbjNum", "Srvyr"))
-
           mapa_principal <-
             mapa_principal |>
             addCircleMarkers(
@@ -198,12 +284,11 @@ mod_mapa_principal_server <- function(id){
               label = paste("Usuario: ", ubicaciones_apertura$Srvyr),
               popup = paste(paste0("Casilla reportada: ", ubicaciones_apertura$casilla_reportada),
                             paste("Casilla mas cercana: ", ubicaciones_apertura$casilla_mas_cercana),
-                            sep = "<br>")
-            )
+                            sep = "<br>"))
+
         }
 
         return(mapa_principal)
-
       })
 
     proxy_mapa_principal <- leafletProxy("mapa_principal")

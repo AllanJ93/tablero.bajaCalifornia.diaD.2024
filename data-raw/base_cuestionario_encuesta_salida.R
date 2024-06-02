@@ -76,7 +76,8 @@ bd_encuesta_salida_survey <-
   mutate(id = paste0(seccion, tipo_casilla),
          status = "Reportada",
          Date = sample(x = secuencia_tiempos, size = n(), replace = T),
-         across(.cols = starts_with("voto_sen_"), .fns = ~ as.character(.x)))
+         across(.cols = starts_with("voto_sen_"), .fns = ~ as.character(.x))) |>
+  filter(!Srvyr %in% c("Katheryn Hernandez", "test"))
 
 # n_simualciones <- 4000
 #

@@ -15,8 +15,10 @@ bd_conteo_rapido_survey <-
   openxlsx2::read_xlsx(file = "data-raw/bd_conteo_rapido_surveytogo.xlsx") |>
   as_tibble() |>
   mutate(id = paste0(seccion, tipo_casilla),
-         status = "Reportada")
+         status = "Reportada") |>
+  filter(!Srvyr %in% c("Katheryn Hernandez", "test"))
 
 bd_conteo_rapido <- bd_conteo_rapido_survey
 
 usethis::use_data(bd_conteo_rapido, overwrite = TRUE)
+
