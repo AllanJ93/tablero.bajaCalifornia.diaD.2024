@@ -99,10 +99,10 @@ press_pptx_path <- paste0("entregable/",
                           ".pptx")
 
 
-pptx <- read_pptx(path = "./Insumos/plantilla_vladimir.pptx")
+pptx <- read_pptx(path = "./data-raw/plantilla_vladimir.pptx")
 
 add_slide(pptx, layout = "portada", master = "Office Theme") |>
-  ph_with(value = "Encuesta Estatal de Baja California", location = ph_location_label(ph_label = "titulo"))
+  ph_with(value = "Encuesta de salida para Baja California", location = ph_location_label(ph_label = "titulo"))
 
 #######################################################################
 #######################################################################
