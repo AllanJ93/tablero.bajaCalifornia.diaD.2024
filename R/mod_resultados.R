@@ -41,11 +41,12 @@ mod_resultados_ui <- function(id){
         total = 10000,
         status = "success"),
       selectInput(inputId = ns("municipio_input"),
-                  label = "Equipo",
-                  choices = c("Todos",
-                              sort(gsub(pattern = "[0-9]. ",
-                                        replacement = "",
-                                        x = unique(muestra_shp$municip))))
+                  label = "Seleccionar ...",
+                  choices = c("Todos"
+                              # sort(gsub(pattern = "[0-9]. ",
+                              #           replacement = "",
+                              #           x = unique(muestra_shp$municip)))
+                              )
       ),
       shinycssloaders::withSpinner(plotOutput(ns("resultados_voto_candidato"))),
     ),
