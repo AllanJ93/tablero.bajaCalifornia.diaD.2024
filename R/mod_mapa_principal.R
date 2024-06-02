@@ -296,7 +296,9 @@ mod_mapa_principal_server <- function(id){
               color = 'red',
               fillOpacity = 1,
               group = "Apertura",
-              label = paste("Usuario: ", ubicaciones_apertura$Srvyr)
+              label = paste(paste("Usuario: ", ubicaciones_apertura$Srvyr),
+                            paste("SbjNum: ", ubicaciones_apertura$SbjNum),
+                            sep = "<br>")
               )
 
         }
