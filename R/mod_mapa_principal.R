@@ -217,6 +217,16 @@ mod_mapa_principal_server <- function(id){
 
         }
 
+        if(input$cuestionario_input == "Encuesta de salida") {
+
+          ubicaciones_apertura <-
+            bd_encuesta_salida |>
+            filter(!is.na(Longitude) | !is.na(Latitude)) |>
+            sf::st_as_sf(coords = c("Longitude", "Latitude"),crs = 4326) |>
+            tibble::rownames_to_column(var = "id_entrevista")
+
+        }
+
         pal_status_casillas <-
           leaflet::colorFactor(palette = c("blue", "gray70"),
                                domain = unique(shp_casillas_react()$status))
@@ -257,7 +267,7 @@ mod_mapa_principal_server <- function(id){
                     values = ~ status,
                     position = "bottomright")
 
-        if(input$cuestionario_input == "Apertura") {
+        if(input$cuestionario_input %in% c("Apertura")) {
 
           mapa_principal <-
             mapa_principal |>
@@ -272,6 +282,22 @@ mod_mapa_principal_server <- function(id){
               popup = paste(paste0("Casilla reportada: ", ubicaciones_apertura$casilla_reportada),
                             paste("Casilla mas cercana: ", ubicaciones_apertura$casilla_mas_cercana),
                             sep = "<br>"))
+
+        }
+
+        if(input$cuestionario_input %in% c("Encuesta de salida")) {
+
+          mapa_principal <-
+            mapa_principal |>
+            addCircleMarkers(
+              radius = 3,
+              data = ubicaciones_apertura,
+              stroke = F,
+              color = 'red',
+              fillOpacity = 1,
+              group = "Apertura",
+              label = paste("Usuario: ", ubicaciones_apertura$Srvyr)
+              )
 
         }
 

@@ -85,6 +85,11 @@ bd_encuesta_salida_survey <-
          tipo_casilla = case_when(condtion = Srvyr == "PARTIDA RICARDO " ~ "C2",
                              T ~ tipo_casilla))
 
+# bd_encuesta_salida_survey |>
+#   mutate(Srvyr = stringr::str_trim(stringr::str_to_upper(Srvyr), "both")) |>
+#   left_join(catalogo_correcciones |>
+#               mutate(Srvyr = stringr::str_trim(stringr::str_to_upper(Srvyr), "both")), by = "Srvyr")
+
 
 # bd_encuesta_salida |>
 #   filter(Srvyr %in% catalogo_correcciones$Srvyr)
