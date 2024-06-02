@@ -93,6 +93,7 @@ mod_enc_salida_server <- function(id){
                     color = "black", vjust = -2, size = 8) +
           theme_minimal() +
           labs(color = "Equipo") +
+          scale_y_continuous(expand = c(1,0)) +
           theme(legend.position = "bottom",
                 legend.text = element_text(size = 18),
                 legend.title = element_text(size = 24))
@@ -146,7 +147,7 @@ mod_enc_salida_server <- function(id){
           geom_text(aes(label = scales::comma(n)), size = 12) +
           labs(x = "", y = "") +
           scale_x_datetime(date_breaks = "1 hour",
-                           labels = scales::date_format("%I\n%p"),
+                           labels = scales::date_format("%I\n%p", tz = "America/Tijuana"),
                            expand = c(0.1, 0.1),
                            position = "top") +
           theme_minimal() +
