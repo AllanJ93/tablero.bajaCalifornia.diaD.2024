@@ -31,7 +31,7 @@ mod_mapa_principal_ui <- function(id){
                                          inputId = ns("cuestionario_input"),
                                          label = "Cuestionario",
                                          choices = c("Apertura", "Encuesta de salida", "Cierre", "Conteo rápido"),
-                                         selected = "Cierre",
+                                         selected = "Conteo rápido",
         ),
         shinycssloaders::withSpinner(leafletOutput(ns("mapa_principal")))
       )
