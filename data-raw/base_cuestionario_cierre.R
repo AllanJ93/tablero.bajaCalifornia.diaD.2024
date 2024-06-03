@@ -21,6 +21,9 @@ bd_cierre_survey <-
   filter(lubridate::as_datetime("2024-06-02 08:00:00", "America/Tijuana") < lubridate::as_datetime(Date, "America/Tijuana")) |>
   filter(!Srvyr %in% c("Katheryn Hernandez", 'test'))
 
+bd_cierre_survey |>
+  couint
+
 bd_cierre <- bd_cierre_survey
 
 usethis::use_data(bd_cierre, overwrite = TRUE)
